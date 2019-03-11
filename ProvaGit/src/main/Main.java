@@ -6,6 +6,7 @@ public class Main
 	public static void main(String[] args)
 	{
 		System.out.println("Ciao Gianluca, riesci a modificare questo messaggio?");
+		System.out.println("Si");
 		System.out.println("Prova merge delle modifiche");
 	}
 
