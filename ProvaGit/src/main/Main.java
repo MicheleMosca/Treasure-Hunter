@@ -7,7 +7,7 @@ public class Main
 	{
 		System.out.println("Ciao Gianluca, riesci a modificare questo messaggio?");
 		System.out.println("Si");
-		System.out.println("Prova merge delle modifiche");
+		System.out.println("Prova merge delle modifiche");	//Merge riuscito
 	}
 
 }
