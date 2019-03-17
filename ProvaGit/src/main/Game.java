@@ -39,19 +39,30 @@ public class Game implements Runnable
 		double deltaTime = 0;
 		long nowTime;
 		long lastTime = System.nanoTime();	//Tempo attuale in clock
+		int timer = 0;
+		int ticks = 0;
 
 		while(isRunning)
 		{
 			nowTime = System.nanoTime();
 			deltaTime += (nowTime - lastTime) / timePerTick;	//Differenza di tempo
+			timer += nowTime - lastTime;
 			lastTime = nowTime;
 
 			if (deltaTime >= 1)
 			{
 				tick();
 				render();
-
+				
+				ticks++;
 				deltaTime--;
+			}
+			
+			if (timer >= 1000000000)	//Se sono arrivato a un secondo mostro quanti tick ho effettuato
+			{
+				System.out.println("" + ticks + " fps");
+				ticks = 0;
+				timer = 0;
 			}
 		}
 
@@ -68,7 +79,7 @@ public class Game implements Runnable
 
 	private void tick()		//Fase di aggiornamento delle variabili
 	{
-		xPlayerPos++;
+		//xPlayerPos++;
 	}
 
 	private void render()	//Fase di disegno degli oggetti
