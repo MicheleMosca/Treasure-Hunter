@@ -3,8 +3,10 @@ package main;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 import graphics.Display;
+import graphics.SpriteLoader;
 
 public class Game implements Runnable
 {
@@ -18,6 +20,8 @@ public class Game implements Runnable
 
 	private BufferStrategy bs;
 	private Graphics g;
+	
+	private BufferedImage idle;
 
 	public Game(int width, int height, String title)
 	{
@@ -42,6 +46,7 @@ public class Game implements Runnable
 	private void init()
 	{
 		window = new Display(width, height, title);		//Creo una finestra per il gioco
+		idle = SpriteLoader.loadSprite("/textures/idle.gif");
 	}
 
 	private void tick()
@@ -65,13 +70,15 @@ public class Game implements Runnable
 		
 		//Inizio del rendering
 		
-		g.fillRect(0, 0, width, height);
+		/*g.fillRect(0, 0, width, height);
 		g.setColor(Color.blue);
 		g.fillRect(50, 50, width/4, height/4);
 		g.setColor(Color.white);
 		g.fillOval(100, 100, width/4, height/4);
 		g.setColor(Color.yellow);
-		g.fillRect(200, 200, width/4, height/4);
+		g.fillRect(200, 200, width/4, height/4);*/
+		
+		g.drawImage(idle, 0, 0, null);
 		
 		//Fine del rendering
 		bs.show();	//Mostro il buffer disegnato
@@ -102,6 +109,7 @@ public class Game implements Runnable
 		catch (Exception e)
 		{
 			e.printStackTrace();
+			System.exit(1);
 		}
 	}
 }
