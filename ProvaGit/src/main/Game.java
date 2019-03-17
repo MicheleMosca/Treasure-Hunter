@@ -3,6 +3,7 @@ package main;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import Characters.Player;
 import graphics.Assets;
 import graphics.Display;
 
@@ -20,7 +21,7 @@ public class Game implements Runnable
 	private BufferStrategy bs;
 	private Graphics g;
 
-	private int xPlayerPos;
+	private Player player;
 	private int numTerrain;
 
 	public Game(int width, int height, String title)
@@ -73,13 +74,13 @@ public class Game implements Runnable
 	{
 		window = new Display(width, height, title);		//Creo una finestra per il gioco
 		Assets.init();
-		xPlayerPos = 0;
+		player = new Player(0, 0);
 		numTerrain = 0;
 	}
 
 	private void tick()		//Fase di aggiornamento delle variabili
 	{
-		//xPlayerPos++;
+		player.run();
 	}
 
 	private void render()	//Fase di disegno degli oggetti
@@ -100,7 +101,7 @@ public class Game implements Runnable
 		
 		g.setColor(java.awt.Color.black);
 		g.fillRect(0, 0, window.getWidth(), window.getWidth());
-		g.drawImage(Assets.playerIdle, xPlayerPos-1, window.getHeight() - Assets.terrain.getHeight(null) * scale - Assets.playerIdle.getHeight(null) * scale + (2 * scale), Assets.playerIdle.getWidth(null) * scale, Assets.playerIdle.getHeight(null) * scale, null);
+		g.drawImage(player.render(), player.getxPosition()-1, window.getHeight() - Assets.terrain.getHeight(null) * scale - player.render().getHeight(null) * scale + (2 * scale), player.render().getWidth(null) * scale, player.render().getHeight(null) * scale, null);
 		while ( numTerrain <= ( window.getWidth()) / Assets.terrain.getWidth(null) )
 		{
 			g.drawImage(Assets.terrain, numTerrain * Assets.terrain.getWidth(null), window.getHeight() - Assets.terrain.getHeight(null) * scale, Assets.terrain.getWidth(null) * scale, Assets.terrain.getHeight(null) * scale, null);
