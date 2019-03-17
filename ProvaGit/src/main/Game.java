@@ -1,18 +1,17 @@
 package main;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
+import graphics.Assets;
 import graphics.Display;
-import graphics.SpriteLoader;
 
 public class Game implements Runnable
 {
 	private int height;
 	private int width;
 	private String title;
+	private final int scale = 2;
 
 	private Display window;
 	private Thread thread;
@@ -20,8 +19,8 @@ public class Game implements Runnable
 
 	private BufferStrategy bs;
 	private Graphics g;
-	
-	private BufferedImage idle;
+
+	private int xPlayerPos;
 
 	public Game(int width, int height, String title)
 	{
@@ -34,27 +33,43 @@ public class Game implements Runnable
 	{
 		init();
 
+		int fps = 60;	//Frame per Second
+		double timePerTick = 1000000000 / fps;		//Un bilione di nanosecondi (un secondo) / frame per second
+		double deltaTime = 0;
+		long nowTime;
+		long lastTime = System.nanoTime();	//Tempo attuale in clock
+
 		while(isRunning)
 		{
-			tick();
-			render();
+			nowTime = System.nanoTime();
+			deltaTime += (nowTime - lastTime) / timePerTick;	//Differenza di tempo
+			lastTime = nowTime;
+
+			if (deltaTime >= 1)
+			{
+				tick();
+				render();
+				
+				deltaTime--;
+			}
 		}
-		
+
 		stop();
 	}
 
 	private void init()
 	{
 		window = new Display(width, height, title);		//Creo una finestra per il gioco
-		idle = SpriteLoader.loadSprite("/textures/idle.gif");
+		Assets.init();
+		xPlayerPos = 0;
 	}
 
-	private void tick()
+	private void tick()		//Fase di aggiornamento delle variabili
 	{
-
+		xPlayerPos++;
 	}
 
-	private void render()
+	private void render()	//Fase di disegno degli oggetti
 	{
 		bs = window.getCanvas().getBufferStrategy();	//Estrazione dei livelli di buffer definiti
 		if (bs == null)
@@ -63,27 +78,20 @@ public class Game implements Runnable
 			return;
 		}
 		g = bs.getDrawGraphics();	//Prelevo il buffer per disegnare
-		
+
 		//Puliamo lo schermo
-		
+
 		g.clearRect(0, 0, width, height);	//Posizione (0,0) e grandezza (width, height)
-		
+
 		//Inizio del rendering
-		
-		/*g.fillRect(0, 0, width, height);
-		g.setColor(Color.blue);
-		g.fillRect(50, 50, width/4, height/4);
-		g.setColor(Color.white);
-		g.fillOval(100, 100, width/4, height/4);
-		g.setColor(Color.yellow);
-		g.fillRect(200, 200, width/4, height/4);*/
-		
-		g.drawImage(idle, 0, 0, null);
-		
+
+		g.drawImage(Assets.playerIdle, xPlayerPos-1, window.getHeight() - Assets.terrain.getHeight() * scale - Assets.playerIdle.getHeight() * scale + (2 * scale), Assets.playerIdle.getWidth() * scale, Assets.playerIdle.getHeight() * scale, null);
+		g.drawImage(Assets.terrain, 0, window.getHeight() - Assets.terrain.getHeight() * scale, Assets.terrain.getWidth() * scale, Assets.terrain.getHeight() * scale, null);
+
 		//Fine del rendering
 		bs.show();	//Mostro il buffer disegnato
 		g.dispose();	//Elimino il buffer da disegno
-		
+
 	}
 
 	public synchronized void start()

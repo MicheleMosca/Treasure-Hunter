@@ -10,7 +10,7 @@ public class SpriteLoader
 	{
 		try
 		{
-			return ImageIO.read(SpriteLoader.class.getResource(path));
+			return ImageIO.read(SpriteLoader.class.getResource(path));	//Caricamento della texture dalla cartella di risorse
 		}
 		catch (Exception e)
 		{
