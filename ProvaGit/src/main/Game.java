@@ -21,6 +21,7 @@ public class Game implements Runnable
 	private Graphics g;
 
 	private int xPlayerPos;
+	private int numTerrain;
 
 	public Game(int width, int height, String title)
 	{
@@ -49,7 +50,7 @@ public class Game implements Runnable
 			{
 				tick();
 				render();
-				
+
 				deltaTime--;
 			}
 		}
@@ -62,6 +63,7 @@ public class Game implements Runnable
 		window = new Display(width, height, title);		//Creo una finestra per il gioco
 		Assets.init();
 		xPlayerPos = 0;
+		numTerrain = 0;
 	}
 
 	private void tick()		//Fase di aggiornamento delle variabili
@@ -84,9 +86,17 @@ public class Game implements Runnable
 		g.clearRect(0, 0, width, height);	//Posizione (0,0) e grandezza (width, height)
 
 		//Inizio del rendering
-
-		g.drawImage(Assets.playerIdle, xPlayerPos-1, window.getHeight() - Assets.terrain.getHeight() * scale - Assets.playerIdle.getHeight() * scale + (2 * scale), Assets.playerIdle.getWidth() * scale, Assets.playerIdle.getHeight() * scale, null);
-		g.drawImage(Assets.terrain, 0, window.getHeight() - Assets.terrain.getHeight() * scale, Assets.terrain.getWidth() * scale, Assets.terrain.getHeight() * scale, null);
+		
+		g.setColor(java.awt.Color.black);
+		g.fillRect(0, 0, window.getWidth(), window.getWidth());
+		g.drawImage(Assets.playerIdle, xPlayerPos-1, window.getHeight() - Assets.terrain.getHeight(null) * scale - Assets.playerIdle.getHeight(null) * scale + (2 * scale), Assets.playerIdle.getWidth(null) * scale, Assets.playerIdle.getHeight(null) * scale, null);
+		while ( numTerrain <= ( window.getWidth()) / Assets.terrain.getWidth(null) )
+		{
+			g.drawImage(Assets.terrain, numTerrain * Assets.terrain.getWidth(null), window.getHeight() - Assets.terrain.getHeight(null) * scale, Assets.terrain.getWidth(null) * scale, Assets.terrain.getHeight(null) * scale, null);
+			numTerrain++;
+		}
+		
+		numTerrain = 0;
 
 		//Fine del rendering
 		bs.show();	//Mostro il buffer disegnato
