@@ -99,14 +99,14 @@ public class Game implements Runnable
 
 		//Inizio del rendering
 		
-		g.setColor(java.awt.Color.black);
-		g.fillRect(0, 0, window.getWidth(), window.getWidth());
-		g.drawImage(player.render(), player.getxPosition()-1, window.getHeight() - Assets.terrain.getHeight(null) * scale - player.render().getHeight(null) * scale + (2 * scale), player.render().getWidth(null) * scale, player.render().getHeight(null) * scale, null);
+		g.drawImage(Assets.background, 0, 0, Assets.background.getWidth(null) * (scale + 2), Assets.background.getHeight(null) * (scale + 2), null);
+		
 		while ( numTerrain <= ( window.getWidth()) / Assets.terrain.getWidth(null) )
 		{
 			g.drawImage(Assets.terrain, numTerrain * Assets.terrain.getWidth(null), window.getHeight() - Assets.terrain.getHeight(null) * scale, Assets.terrain.getWidth(null) * scale, Assets.terrain.getHeight(null) * scale, null);
 			numTerrain++;
 		}
+		g.drawImage(player.render(), player.getxPosition()-1, window.getHeight() - Assets.terrain.getHeight(null) * scale - player.render().getHeight(null) * scale + (5 * scale), player.render().getWidth(null) * scale, player.render().getHeight(null) * scale, null);
 		
 		numTerrain = 0;
 

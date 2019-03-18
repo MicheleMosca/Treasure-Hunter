@@ -18,8 +18,8 @@ public class Player
 		spriteIndex = 0;
 
 		sprite = new Image[2];
-		sprite[0] = Assets.playerIdle;
-		sprite[1] = Assets.playerRun;
+		sprite[0] = Assets.playerIdleRight;
+		sprite[1] = Assets.playerRunRight;
 	}
 
 	public void idle()
