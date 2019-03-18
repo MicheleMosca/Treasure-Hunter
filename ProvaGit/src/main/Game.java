@@ -109,10 +109,13 @@ public class Game implements Runnable
 		g.drawImage(player.render(), player.getxPosition()-1, window.getHeight() - Assets.terrain.getHeight(null) * scale - player.render().getHeight(null) * scale + (5 * scale), player.render().getWidth(null) * scale, player.render().getHeight(null) * scale, null);
 		
 		numTerrain = 0;
-
+		
 		//Fine del rendering
 		bs.show();	//Mostro il buffer disegnato
 		g.dispose();	//Elimino il buffer da disegno
+		
+		if (player.getxPosition() > window.getWidth())	//Loop del personaggio all'interno della window
+			player.setxPosition(0 - player.render().getWidth(null) * scale);
 
 	}
 
