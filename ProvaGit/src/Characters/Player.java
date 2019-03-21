@@ -10,27 +10,41 @@ public class Player
 	private int spriteIndex;
 	private int xPosition;
 	private int yPosition;
+	private boolean isRight;
 
 	public Player(int xPosition, int yPosition)
 	{
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
-		spriteIndex = 0;
+		isRight = true;
 
-		sprite = new Image[2];
+		sprite = new Image[4];
 		sprite[0] = Assets.playerIdleRight;
-		sprite[1] = Assets.playerRunRight;
+		sprite[1] = Assets.playerIdleLeft;
+		sprite[2] = Assets.playerRunRight;
+		sprite[3] = Assets.playerRunLeft;
 	}
 
 	public void idle()
 	{
-		setSpriteIndex(0);
+		if (isRight)
+			setSpriteIndex(0);
+		else
+			setSpriteIndex(1);
 	}
 
-	public void run()
+	public void runRight()
 	{
-		setSpriteIndex(1);
+		setSpriteIndex(2);
 		setxPosition(getxPosition() + 1);
+		isRight = true;
+	}
+	
+	public void runLeft()
+	{
+		setSpriteIndex(3);
+		setxPosition(getxPosition() - 1);
+		isRight = false;
 	}
 	
 	public Image render()

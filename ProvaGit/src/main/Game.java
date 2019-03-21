@@ -80,7 +80,7 @@ public class Game implements Runnable
 
 	private void tick()		//Fase di aggiornamento delle variabili
 	{
-		player.run();
+		player.runRight();
 	}
 
 	private void render()	//Fase di disegno degli oggetti
