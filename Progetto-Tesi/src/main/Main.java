@@ -17,6 +17,7 @@ public class Main
 			Game game = new AdventureGame("Adventure Game");
 			frameContainer = new AppGameContainer(game);
 			frameContainer.setDisplayMode(800, 600, false);
+			frameContainer.setTargetFrameRate(59);
 			frameContainer.start();
 			
 			game.init(frameContainer);
