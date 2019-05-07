@@ -8,6 +8,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.tiled.TiledMap;
 
 /**
  * 
@@ -17,6 +18,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class PlayGame extends BasicGameState
 {
+	private TiledMap map;
 	HashMap<String, Image> objects;
 	int x,y,scale;
 
@@ -27,6 +29,14 @@ public class PlayGame extends BasicGameState
 		x=0;
 		y=0;
 		scale = 3;
+		try
+		{
+			map = new TiledMap("res/mappa.tmx");
+		} catch (SlickException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -41,6 +51,7 @@ public class PlayGame extends BasicGameState
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException
 	{
 		objects.get("Player").draw(x, y,3);
+		map.render(0, 0);
 	}
 
 	@Override
