@@ -12,7 +12,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
-public class TiledTest extends ApplicationAdapter implements InputProcessor {
+public class TiledTest extends ApplicationAdapter implements InputProcessor 
+{
     Texture img;
     TiledMap tiledMap;
     OrthographicCamera camera;
@@ -20,7 +21,8 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor {
     boolean keyLeftPressed, keyRightPressed;
     
     @Override
-    public void create () {
+    public void create () 
+    {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
         keyLeftPressed = false;
@@ -35,7 +37,8 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor {
     }
 
     @Override
-    public void render () {
+    public void render () 
+    {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -51,7 +54,8 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor {
     }
 
     @Override
-    public boolean keyDown(int keycode) {
+    public boolean keyDown(int keycode) 
+    {
     	if(keycode == Input.Keys.LEFT)
             keyLeftPressed = true;
         if(keycode == Input.Keys.RIGHT)
@@ -68,7 +72,8 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor {
     }
 
     @Override
-    public boolean keyUp(int keycode) {
+    public boolean keyUp(int keycode) 
+    {
     	if(keycode == Input.Keys.LEFT)
     		keyLeftPressed = false;
     	if(keycode == Input.Keys.RIGHT)
@@ -78,7 +83,8 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor {
     }
 
     @Override
-    public boolean keyTyped(char character) {
+    public boolean keyTyped(char character) 
+    {
         return false;
     }
 

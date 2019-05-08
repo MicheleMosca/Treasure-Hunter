@@ -4,30 +4,37 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Game extends ApplicationAdapter {
+public class Game extends ApplicationAdapter 
+{
 	SpriteBatch batch;
-	Texture img;
+	Sprite sprite;
 	
 	@Override
-	public void create () {
+	public void create () 
+	{
 		batch = new SpriteBatch();
-		img = new Texture("assets/badlogic.jpg");
+		sprite = new Sprite (new Texture("assets/badlogic.jpg"));
 	}
 
 	@Override
-	public void render () {
+	public void render () 
+	{
 		Gdx.gl.glClearColor(0, 0, 0, 1);	//Red, gree, blue, alpha(full transparancy) 
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);	//pulisco lo schermo
+		
 		batch.begin();
-		batch.draw(img, 0, 0);
+		
+		batch.draw(sprite, sprite.getX(), sprite.getY());
+		
 		batch.end();
 	}
 	
 	@Override
-	public void dispose () {
+	public void dispose () 
+	{
 		batch.dispose();
-		img.dispose();
 	}
 }
