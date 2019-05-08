@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="7">
+ <tileset firstgid="1" name="jungleSheet" tilewidth="16" tileheight="16" tilecount="741" columns="39">
+  <image source="jungleSheet.png" width="624" height="304"/>
+ </tileset>
+ <layer id="1" name="background" width="20" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3KuxGAMBDE0L0D+q+OP7gSbFAJDglWMy+T5Jxz7o/NIS1YsWHHgRMXbpTo/x5UNLxQSoHEgBFT9n8fCQw8V0AGAAA=
+  </data>
+ </layer>
+ <objectgroup id="3" name="start" width="20" height="20">
+  <object id="6" x="48" y="288" width="20" height="20">
+   <point/>
+  </object>
+ </objectgroup>
+</map>
