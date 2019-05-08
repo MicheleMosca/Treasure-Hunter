@@ -1,4 +1,4 @@
-package com.game;
+package com.prove;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;

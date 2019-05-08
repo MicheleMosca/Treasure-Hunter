@@ -2,7 +2,8 @@ package com.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.game.TiledTest;
+import com.game.Game;
+import com.prove.TiledTest;
 
 /**
  * 
@@ -21,6 +22,6 @@ public class DesktopLauncher
 		configuration.width = 1280;
 		configuration.height = 720;
 		
-		new LwjglApplication(new TiledTest(), configuration);
+		new LwjglApplication(new Game(), configuration);
 	}
 }
