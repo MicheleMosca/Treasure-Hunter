@@ -21,6 +21,7 @@ public class DesktopLauncher
 		configuration.title = "Adventure Game";
 		configuration.width = 1280;
 		configuration.height = 720;
+		configuration.foregroundFPS = 60;
 		
 		new LwjglApplication(new TiledTest(), configuration);
 	}

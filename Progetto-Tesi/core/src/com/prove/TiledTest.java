@@ -57,6 +57,13 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor
     }
 
     @Override
+	public void resize(int width, int height)
+	{
+		super.resize(width, height);
+		cameraObject.resize();
+	}
+
+	@Override
     public boolean keyDown(int keycode) 
     {
     	if(keycode == Input.Keys.LEFT)

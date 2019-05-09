@@ -22,8 +22,8 @@ public class Game extends ApplicationAdapter
 	@Override
 	public void render () 
 	{
-		Gdx.gl.glClearColor(0, 0, 0, 1);	//Red, gree, blue, alpha(full transparancy) 
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);	//pulisco lo schermo
+		Gdx.gl.glClearColor(0, 0, 0, 1);	//Red, gree, blue, alpha(0 = trasparete, 1 = opaco) 
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);	//pulisco il buffer dello schermo
 		
 		batch.begin();
 		

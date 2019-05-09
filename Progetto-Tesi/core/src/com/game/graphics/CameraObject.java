@@ -43,6 +43,15 @@ public class CameraObject implements Movable
         calculateMaxAndMinPosition();
 	}
 	
+	public void resize()
+	{
+		frameWidth = Gdx.graphics.getWidth();
+		frameHeight = Gdx.graphics.getHeight();
+		camera.setToOrtho(false, frameWidth, frameHeight);
+        camera.update();
+        calculateMaxAndMinPosition();
+	}
+	
 	private void calculateMaxAndMinPosition()
 	{
 		int mapWidth = tiledMap.getProperties().get("width", Integer.class);
