@@ -22,6 +22,6 @@ public class DesktopLauncher
 		configuration.width = 1280;
 		configuration.height = 720;
 		
-		new LwjglApplication(new Game(), configuration);
+		new LwjglApplication(new TiledTest(), configuration);
 	}
 }
