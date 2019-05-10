@@ -1,5 +1,7 @@
 package com.prove;
 
+import java.util.HashMap;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -15,6 +17,12 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
+import com.game.entities.AnimatedEntity;
+import com.game.entities.Entity;
 import com.game.graphics.CameraObject;
 
 /**
@@ -28,8 +36,7 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor
 	SpriteBatch batch;
 	Sprite sprite;
 	
-	Rectangle spawnPoint, ground;
-	float position;
+	AnimatedEntity pupo;
 	
     TiledMap tiledMap;
     CameraObject cameraObject;
@@ -37,61 +44,66 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor
     
     boolean keyLeftPressed, keyRightPressed;
     
+    private World world;
+    private Box2DDebugRenderer debugRender;
+    private HashMap<String,Entity> entities;
+    
     @Override
-    public void create () 
+    public void create() 
     {
         tiledMap = new TmxMapLoader().load("assets/mappa.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         cameraObject = new CameraObject(tiledMap);
         batch = new SpriteBatch();
         sprite = new Sprite(new Texture("assets/idle_right.gif"));
+        world = new World(new Vector2(0,0), true);	// Graviti position, sleeping
+        debugRender = new Box2DDebugRenderer();
+        entities = new HashMap<String, Entity>();
         
         keyLeftPressed = false;
         keyRightPressed = false;
         
+        for (MapObject mapObject : tiledMap.getLayers().get("Ground").getObjects())
+        	entities.put(mapObject.getName(), (new Entity(world, mapObject, BodyType.StaticBody)));
+        
+        for (MapObject spawnPoint : tiledMap.getLayers().get("Spawn").getObjects())
+        	entities.put(spawnPoint.getName(), (new Entity(world, spawnPoint, BodyType.DynamicBody)));
+        	//pupo = new AnimatedEntity(world, spawnPoint, BodyType.DynamicBody);
+        
+        //pupo.set(sprite);
+        
         Gdx.input.setInputProcessor(this);
-        
-        for (MapObject obj : tiledMap.getLayers().get(1).getObjects().getByType(RectangleMapObject.class))
-        {
-        	spawnPoint = ((RectangleMapObject) obj).getRectangle();
-        }
-        
-        for (MapObject obj : tiledMap.getLayers().get(2).getObjects().getByType(RectangleMapObject.class))
-        {
-        	ground = ((RectangleMapObject) obj).getRectangle();
-        }
-        
-        position = spawnPoint.y;
-        System.out.println(position + " | " + ground.y);
-    }
-
-    public void update()
-    {
-    	if (position > ground.y + ground.height)
-    		position -= 2;			//Fa ancora schifo adesso sistemo tutto
     }
     
-    @Override
-    public void render () 
+    public void update()
     {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        
-        if (keyLeftPressed == true)
+    	if (keyLeftPressed == true)
         	cameraObject.moveLeft();
         if (keyRightPressed == true)
         	cameraObject.moveRight();
         
+        world.step(1 / 60f, 6, 2);
+        
         cameraObject.update();
         tiledMapRenderer.setView(cameraObject.getCamera());
+    }
+    
+    @Override
+    public void render () 
+    {	
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+     
+        update();
+        
         tiledMapRenderer.render();
         
-        update();
+        debugRender.render(world, cameraObject.getCamera().combined);
         
         batch.begin();
         
-        batch.draw(sprite, spawnPoint.x, position);
+        //batch.draw(pupo, pupo.getPosition().x, pupo.getPosition().y);
         
         batch.end();
     }

@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.game.interfaces.Follower;
 import com.game.interfaces.Movable;
 
 /**
@@ -13,7 +15,7 @@ import com.game.interfaces.Movable;
  *
  */
 
-public class CameraObject implements Movable
+public class CameraObject implements Movable, Follower<Movable>
 {
 	private OrthographicCamera camera;
 	private TiledMap tiledMap;
@@ -128,5 +130,17 @@ public class CameraObject implements Movable
 	{
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void followThisTarget(Movable target)
+	{
+		camera.position.set(target.position());
+	}
+
+	@Override
+	public Vector3 position()
+	{
+		return camera.position;
 	}
 }
