@@ -51,11 +51,11 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor
     @Override
     public void create() 
     {
-        tiledMap = new TmxMapLoader().load("assets/mappa.tmx");
+        tiledMap = new TmxMapLoader().load("mappa.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         cameraObject = new CameraObject(tiledMap);
         batch = new SpriteBatch();
-        sprite = new Sprite(new Texture("assets/idle_right.gif"));
+        sprite = new Sprite(new Texture("idle_right.gif"));
         world = new World(new Vector2(0,0), true);	// Graviti position, sleeping
         debugRender = new Box2DDebugRenderer();
         entities = new HashMap<String, Entity>();

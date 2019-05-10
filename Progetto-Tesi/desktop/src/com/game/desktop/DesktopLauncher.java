@@ -2,7 +2,7 @@ package com.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.game.Game;
+import com.game.AdventureGame;
 import com.prove.TiledTest;
 
 /**
@@ -23,6 +23,6 @@ public class DesktopLauncher
 		configuration.height = 720;
 		configuration.foregroundFPS = 60;
 		
-		new LwjglApplication(new TiledTest(), configuration);
+		new LwjglApplication(new AdventureGame(), configuration);
 	}
 }
