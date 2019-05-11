@@ -1,6 +1,7 @@
 package com.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.game.screens.PlayScreen;
 
@@ -12,6 +13,8 @@ import com.game.screens.PlayScreen;
 
 public class AdventureGame extends Game
 {
+	public static final int worldWidth = 1280;
+	public static final int worldHeight = 720;
 	public SpriteBatch batch;
 	
 	@Override
