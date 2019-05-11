@@ -159,8 +159,10 @@ public class PlayScreen implements Screen
 	@Override
 	public void dispose()
 	{
-		// TODO Auto-generated method stub
-		
+		world.dispose();
+		mapRender.dispose();
+		tiledMap.dispose();
+		debugRender.dispose();
 	}
 
 }
