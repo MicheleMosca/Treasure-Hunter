@@ -13,8 +13,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.game.AdventureGame;
-import com.game.entities.Entity;
 import com.game.graphics.CameraObject;
+import com.game.graphics.entities.Entity;
 
 /**
  * 
@@ -44,7 +44,7 @@ public class PlayScreen implements Screen
 		// Carico la mappa
 		mapLoader = new TmxMapLoader();
 		tiledMap = mapLoader.load("maps/level1/level1.tmx");
-		mapRender = new OrthogonalTiledMapRenderer(tiledMap, 1/AdventureGame.pixelPerMeter);
+		mapRender = new OrthogonalTiledMapRenderer(tiledMap, 1 / AdventureGame.pixelPerMeter);
 		
 		// creazione di una camera che seguirà il player
 		camera = new CameraObject(tiledMap);

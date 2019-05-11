@@ -1,4 +1,4 @@
-package com.game.entities;
+package com.game.graphics.entities;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapObject;

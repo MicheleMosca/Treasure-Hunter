@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.game.AdventureGame;
-import com.game.entities.Entity;
+import com.game.graphics.entities.Entity;
 import com.game.interfaces.Follower;
 import com.game.interfaces.Movable;
 
