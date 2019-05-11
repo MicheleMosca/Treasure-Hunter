@@ -7,9 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.game.AdventureGame;
 
@@ -37,16 +35,16 @@ public class PlayScreen implements Screen
 		// creazione di una camera che seguirà il player
 		camera = new OrthographicCamera();
 		
-		// creazione di un FillViewport per mantenere le dimensioni dell'aspect ratio in base alla dimensione dello schermo
-		viewport = new FillViewport(game.virtualWidth, game.virtualHeight, camera);
-		
 		// Carico la mappa
 		mapLoader = new TmxMapLoader();
 		tiledMap = mapLoader.load("mappa.tmx");
 		mapRender = new OrthogonalTiledMapRenderer(tiledMap);
 		
+		// creazione di un FillViewport per mantenere le dimensioni dell'aspect ratio in base alla dimensione dello schermo
+		viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+		
 		// Posiziono la camera al centro della mia viewport
-		camera.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() /2, 0);
+		camera.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
 	}
 	
 	@Override
@@ -58,7 +56,10 @@ public class PlayScreen implements Screen
 	
 	public void handleInput()
 	{
-		
+		if (Gdx.input.isTouched())
+		{
+			Gdx.graphics.setWindowedMode(Gdx.graphics.getDisplayMode().width, Gdx.graphics.getDisplayMode().height);
+		}
 	}
 	
 	public void update(float delta)
@@ -94,7 +95,7 @@ public class PlayScreen implements Screen
 	public void resize(int width, int height)
 	{
 		// Aggiorno il viewport con le nuove dimensioni dello schermo
-		viewport.update(width, width);
+		viewport.update(width, height);
 	}
 
 	@Override
