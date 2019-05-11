@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="200" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="12">
  <tileset firstgid="1" name="jungleSheet" tilewidth="16" tileheight="16" tilecount="741" columns="39">
-  <image source="jungleSheet.png" width="624" height="304"/>
+  <image source="titlesets/jungleSheet.png" width="624" height="304"/>
  </tileset>
  <tileset firstgid="742" name="Cartoon_Forest_BG_720p" tilewidth="1280" tileheight="720" tilecount="1" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>

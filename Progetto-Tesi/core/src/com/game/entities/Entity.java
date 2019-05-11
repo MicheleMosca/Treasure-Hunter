@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.game.AdventureGame;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -27,11 +28,11 @@ public class Entity extends Sprite
 			Rectangle rectangle = ((RectangleMapObject) mapObject).getRectangle();
 			
 			bodyDef.type = bodyType;
-			bodyDef.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() /2);
+			bodyDef.position.set((rectangle.getX() + rectangle.getWidth() / 2) / AdventureGame.pixelPerMeter, (rectangle.getY() + rectangle.getHeight() /2) / AdventureGame.pixelPerMeter);
 			
 			body = world.createBody(bodyDef);
 			
-			shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
+			shape.setAsBox((rectangle.getWidth() / 2) / AdventureGame.pixelPerMeter, (rectangle.getHeight() / 2) / AdventureGame.pixelPerMeter);
 			fixtureDef.shape = shape;
 			body.createFixture(fixtureDef);
 		}

@@ -1,6 +1,7 @@
 package com.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -46,13 +47,13 @@ public class PlayScreen implements Screen
 		// creazione di una camera che seguirà il player
 		camera = new OrthographicCamera();
 		
+		// creazione di un FillViewport per mantenere le dimensioni dell'aspect ratio in base alla dimensione dello schermo
+		viewport = new FitViewport(AdventureGame.worldWidth / AdventureGame.pixelPerMeter, AdventureGame.worldHeight / AdventureGame.pixelPerMeter, camera);//Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+		
 		// Carico la mappa
 		mapLoader = new TmxMapLoader();
 		tiledMap = mapLoader.load("maps/level1/level1.tmx");
-		mapRender = new OrthogonalTiledMapRenderer(tiledMap);
-		
-		// creazione di un FillViewport per mantenere le dimensioni dell'aspect ratio in base alla dimensione dello schermo
-		viewport = new FitViewport(AdventureGame.worldWidth, AdventureGame.worldHeight, camera);//Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+		mapRender = new OrthogonalTiledMapRenderer(tiledMap, 1/AdventureGame.pixelPerMeter);
 		
 		// Posiziono la camera al centro della mia viewport
 		camera.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
@@ -77,6 +78,21 @@ public class PlayScreen implements Screen
 	
 	public void handleInput()
 	{
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
+		{
+			player.getBody().applyLinearImpulse(new Vector2(0, 4f), player.getBody().getWorldCenter(), true);
+		}
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.D) && (player.getBody().getLinearVelocity().x <= 2))
+		{
+			player.getBody().applyLinearImpulse(new Vector2(0.1f, 0), player.getBody().getWorldCenter(), true);
+		}
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.A) && (player.getBody().getLinearVelocity().x >= -2))
+		{
+			player.getBody().applyLinearImpulse(new Vector2(-0.1f, 0), player.getBody().getWorldCenter(), true);
+		}
+		
 		/*if (Gdx.input.isTouched())
 		{
 			Gdx.graphics.setWindowedMode(Gdx.graphics.getDisplayMode().width, Gdx.graphics.getDisplayMode().height);
@@ -87,7 +103,9 @@ public class PlayScreen implements Screen
 	{
 		handleInput();
 		
-		world.step(1 / 60f,  4, 2);
+		world.step(1 / 60f,  6, 2);
+		
+		camera.position.x = player.getBody().getPosition().x;
 		
 		camera.update();
 		mapRender.setView(camera);
