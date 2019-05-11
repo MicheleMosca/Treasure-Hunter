@@ -1,10 +1,12 @@
 package com.game.graphics;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.game.AdventureGame;
+import com.game.entities.Entity;
 import com.game.interfaces.Follower;
 import com.game.interfaces.Movable;
 
@@ -15,58 +17,62 @@ import com.game.interfaces.Movable;
  *
  */
 
-public class CameraObject implements Movable, Follower<Movable>
+public class CameraObject extends OrthographicCamera implements Movable, Follower<Entity>
 {
-	private OrthographicCamera camera;
 	private TiledMap tiledMap;
+	private Viewport viewport;
 	
 	private Vector2 cameraMinPosition;
     private Vector2 cameraMaxPosition;
-	
-	private float frameWidth;
-    private float frameHeight;
     
     private float shift;
 
 	public CameraObject(TiledMap tiledMap)
 	{
+		super();
 		this.tiledMap = tiledMap;
 		
-		camera = new OrthographicCamera();
+		// definisco i vettori corrispondendi alla minima e massima posizione che la camera può avere
 		cameraMinPosition = new Vector2();
 		cameraMaxPosition = new Vector2();
-		frameWidth = Gdx.graphics.getWidth();
-		frameHeight = Gdx.graphics.getHeight();
-		shift = 3.0f;
 		
-        camera.setToOrtho(false, frameWidth, frameHeight);
-        camera.update();
+		// creazione di un FitViewport per mantenere le dimensioni dell'aspect ratio in base alla dimensione dello schermo
+		viewport = new FitViewport(AdventureGame.worldWidth / AdventureGame.pixelPerMeter, AdventureGame.worldHeight / AdventureGame.pixelPerMeter, this);
+		
+		// Posiziono la camera al centro della mia viewport
+		position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
+		
+		// decido di quanto si può spostare la camera da sola
+		shift = 3;
         
         calculateMaxAndMinPosition();
 	}
 	
-	public void resize()
+	public void resize(int width, int height)
 	{
-		frameWidth = Gdx.graphics.getWidth();
-		frameHeight = Gdx.graphics.getHeight();
-		camera.setToOrtho(false, frameWidth, frameHeight);
-        camera.update();
-        calculateMaxAndMinPosition();
+		viewport.update(width, height);
 	}
 	
+	/**
+	 * Metodo per calcolare la minima e massima posizione che la camera può avere in base alla tiledmap
+	 */
 	private void calculateMaxAndMinPosition()
 	{
+		// Prelevo le dimensioni della mappa in tile
 		int mapWidth = tiledMap.getProperties().get("width", Integer.class);
 		int mapHeight = tiledMap.getProperties().get("height", Integer.class);
 		
+		// Prelevo la dimensione di un singolo tile
 		int tilePixelWidth = tiledMap.getProperties().get("tilewidth", Integer.class);
 		int tilePixelHeight = tiledMap.getProperties().get("tileheight", Integer.class);
 		
+		// Ricavo la dimensione della mappa da tile in pixel
 		int mapPixelWidth = mapWidth * tilePixelWidth;
 		int mapPixelHeight = mapHeight * tilePixelHeight;
 		
-		cameraMinPosition.set(camera.position.x, camera.position.y);
-		cameraMaxPosition.set((camera.position.x + mapPixelWidth) - frameWidth, (camera.position.y + mapPixelHeight) - frameHeight);
+		// Definisco i confini della mappa
+		cameraMinPosition.set(position.x, position.y);
+		cameraMaxPosition.set(((position.x + mapPixelWidth) - AdventureGame.worldWidth) / AdventureGame.pixelPerMeter, ((position.y + mapPixelHeight) - AdventureGame.worldHeight) / AdventureGame.pixelPerMeter);
 	}
 
 	public TiledMap getTiledMap()
@@ -84,63 +90,51 @@ public class CameraObject implements Movable, Follower<Movable>
 		return shift;
 	}
 
+	/**
+	 * Metodo che serve per definire di quanto la camera si può spostare autonomamente
+	 * @param shift spostamento
+	 */
 	public void setShift(float shift)
 	{
 		this.shift = shift;
 	}
 
-	public void update()
-	{
-		camera.update();
-	}
-
-	public OrthographicCamera getCamera()
-	{
-		return camera;
-	}
-
-	public void setCamera(OrthographicCamera camera)
-	{
-		this.camera = camera;
-	}
-
 	@Override
 	public void moveRight()
 	{
-		if (camera.position.x < cameraMaxPosition.x)
-			camera.translate(shift, 0);
+		if (position.x < cameraMaxPosition.x)
+			translate(shift, 0);
 	}
 
 	@Override
 	public void moveLeft()
 	{
-		if (camera.position.x > cameraMinPosition.x)
-			camera.translate(shift * (-1), 0);
+		if (position.x > cameraMinPosition.x)
+			translate(shift * (-1), 0);
 	}
 	
 	@Override
 	public void moveUp()
 	{
-		// TODO Auto-generated method stub
+		if (position.y < cameraMaxPosition.y)
+			translate(0, shift);
 		
 	}
 
 	@Override
 	public void moveDown()
 	{
-		// TODO Auto-generated method stub
-		
+		if (position.y > cameraMinPosition.y)
+			translate(0, shift * (-1));
 	}
 
+	/**
+	 * Metodo che permette alla camera di seguire un target Entity passato come parametro
+	 */
 	@Override
-	public void followThisTarget(Movable target)
+	public void followThisTarget(Entity target)
 	{
-		camera.position.set(target.position());
-	}
-
-	@Override
-	public Vector3 position()
-	{
-		return camera.position;
+		if (target.getBody().getPosition().x > cameraMinPosition.x && target.getBody().getPosition().x < cameraMaxPosition.x)
+			position.x = target.getBody().getPosition().x;
 	}
 }

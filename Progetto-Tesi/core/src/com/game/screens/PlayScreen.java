@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -13,10 +12,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.game.AdventureGame;
 import com.game.entities.Entity;
+import com.game.graphics.CameraObject;
 
 /**
  * 
@@ -28,8 +26,7 @@ public class PlayScreen implements Screen
 {
 	private AdventureGame game;
 	
-	private OrthographicCamera camera;
-	private Viewport viewport;
+	private CameraObject camera;
 	
 	private TmxMapLoader mapLoader;
 	private TiledMap tiledMap;
@@ -44,19 +41,13 @@ public class PlayScreen implements Screen
 	{
 		this.game = game;
 		
-		// creazione di una camera che seguirà il player
-		camera = new OrthographicCamera();
-		
-		// creazione di un FillViewport per mantenere le dimensioni dell'aspect ratio in base alla dimensione dello schermo
-		viewport = new FitViewport(AdventureGame.worldWidth / AdventureGame.pixelPerMeter, AdventureGame.worldHeight / AdventureGame.pixelPerMeter, camera);//Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
-		
 		// Carico la mappa
 		mapLoader = new TmxMapLoader();
 		tiledMap = mapLoader.load("maps/level1/level1.tmx");
 		mapRender = new OrthogonalTiledMapRenderer(tiledMap, 1/AdventureGame.pixelPerMeter);
 		
-		// Posiziono la camera al centro della mia viewport
-		camera.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
+		// creazione di una camera che seguirà il player
+		camera = new CameraObject(tiledMap);
 		
 		// Inizializzo il mondo e il debug render
 		world = new World(new Vector2 (0,-10), true);
@@ -67,13 +58,6 @@ public class PlayScreen implements Screen
         	new Entity(world, mapObject, BodyType.StaticBody);
 		
 		player = new Entity(world, tiledMap.getLayers().get("Spawn").getObjects().get(0), BodyType.DynamicBody);
-	}
-	
-	@Override
-	public void show()
-	{
-		// TODO Auto-generated method stub
-		
 	}
 	
 	public void handleInput()
@@ -93,10 +77,13 @@ public class PlayScreen implements Screen
 			player.getBody().applyLinearImpulse(new Vector2(-0.1f, 0), player.getBody().getWorldCenter(), true);
 		}
 		
-		/*if (Gdx.input.isTouched())
+		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1))
 		{
-			Gdx.graphics.setWindowedMode(Gdx.graphics.getDisplayMode().width, Gdx.graphics.getDisplayMode().height);
-		}*/
+			if (Gdx.graphics.isFullscreen())
+				Gdx.graphics.setWindowedMode(Gdx.graphics.getDisplayMode().width, Gdx.graphics.getDisplayMode().height);
+			else
+				Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+		}
 	}
 	
 	public void update(float delta)
@@ -105,7 +92,7 @@ public class PlayScreen implements Screen
 		
 		world.step(1 / 60f,  6, 2);
 		
-		camera.position.x = player.getBody().getPosition().x;
+		camera.followThisTarget(player);
 		
 		camera.update();
 		mapRender.setView(camera);
@@ -138,8 +125,7 @@ public class PlayScreen implements Screen
 	@Override
 	public void resize(int width, int height)
 	{
-		// Aggiorno il viewport con le nuove dimensioni dello schermo
-		viewport.update(width, height);
+		camera.resize(width, height);
 	}
 
 	@Override
@@ -158,6 +144,13 @@ public class PlayScreen implements Screen
 
 	@Override
 	public void hide()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void show()
 	{
 		// TODO Auto-generated method stub
 		
