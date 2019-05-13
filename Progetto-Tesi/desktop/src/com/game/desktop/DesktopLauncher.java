@@ -21,7 +21,7 @@ public class DesktopLauncher
 		configuration.width = AdventureGame.worldWidth;
 		configuration.height = AdventureGame.worldHeight;
 		configuration.foregroundFPS = 60;
-		configuration.fullscreen = true;
+		configuration.fullscreen = AdventureGame.fullScreenOnStart;
 		
 		new LwjglApplication(new AdventureGame(), configuration);
 	}

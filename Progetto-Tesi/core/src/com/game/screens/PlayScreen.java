@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.game.AdventureGame;
 import com.game.graphics.CameraObject;
 import com.game.graphics.entities.Entity;
+import com.game.graphics.entities.Player;
 
 /**
  * 
@@ -35,7 +36,7 @@ public class PlayScreen implements Screen
 	private World world;
 	private Box2DDebugRenderer debugRender;
 	
-	private Entity player;
+	private Player player;
 	
 	public PlayScreen(AdventureGame game)
 	{
@@ -57,7 +58,7 @@ public class PlayScreen implements Screen
 		for (MapObject mapObject : tiledMap.getLayers().get("Collision").getObjects())
         	new Entity(world, mapObject, BodyType.StaticBody);
 		
-		player = new Entity(world, tiledMap.getLayers().get("Spawn").getObjects().get(0), BodyType.DynamicBody);
+		player = new Player(world, tiledMap.getLayers().get("Spawn").getObjects().get(0), BodyType.DynamicBody);
 	}
 	
 	public void handleInput()
@@ -94,6 +95,8 @@ public class PlayScreen implements Screen
 		
 		camera.followThisTarget(player);
 		
+		player.update();
+		
 		camera.update();
 		mapRender.setView(camera);
 	}
@@ -118,6 +121,8 @@ public class PlayScreen implements Screen
 		
 		// Inizio i desegni sulla camera
 		game.batch.begin();
+		
+		player.draw(game.batch);
 		
 		game.batch.end();
 	}

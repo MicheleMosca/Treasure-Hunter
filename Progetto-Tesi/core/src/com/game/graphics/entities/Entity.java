@@ -1,6 +1,5 @@
 package com.game.graphics.entities;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
@@ -12,13 +11,28 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class Entity extends Sprite
+/**
+ * 
+ * Classe che definisce un entità del gioco con corpo, il quale è affetto da collisioni da parte di altri elementi di gioco
+ *
+ */
+
+public class Entity
 {
-	private Body body;
+	protected Body body;
+	
+	public Entity(Body body)
+	{
+		this.body = body;
+	}
 
 	public Entity(World world, MapObject mapObject, BodyType bodyType)
 	{
-		super();
+		initBody(world, mapObject, bodyType);
+	}
+	
+	private void initBody(World world, MapObject mapObject, BodyType bodyType)
+	{
 		BodyDef bodyDef = new BodyDef();
 		PolygonShape shape = new PolygonShape();
 		FixtureDef fixtureDef = new FixtureDef();		
