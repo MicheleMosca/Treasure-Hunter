@@ -51,14 +51,4 @@ public class Entity
 			body.createFixture(fixtureDef);
 		}
 	}
-	
-	public Body getBody()
-	{
-		return body;
-	}
-
-	public void setBody(Body body)
-	{
-		this.body = body;
-	}
 }

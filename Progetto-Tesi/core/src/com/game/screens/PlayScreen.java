@@ -28,8 +28,7 @@ public class PlayScreen implements Screen
 	private AdventureGame game;
 	
 	private CameraObject camera;
-	
-	private TmxMapLoader mapLoader;
+
 	private TiledMap tiledMap;
 	private OrthogonalTiledMapRenderer mapRender;
 	
@@ -43,7 +42,7 @@ public class PlayScreen implements Screen
 		this.game = game;
 		
 		// Carico la mappa
-		mapLoader = new TmxMapLoader();
+		TmxMapLoader mapLoader = new TmxMapLoader();
 		tiledMap = mapLoader.load("maps/level1/level1.tmx");
 		mapRender = new OrthogonalTiledMapRenderer(tiledMap, 1 / AdventureGame.pixelPerMeter);
 		
@@ -61,7 +60,7 @@ public class PlayScreen implements Screen
 		player = new Player(world, tiledMap.getLayers().get("Spawn").getObjects().get(0), BodyType.DynamicBody);
 	}
 	
-	public void handleInput()
+	private void handleInput()
 	{
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
 		{
@@ -87,13 +86,13 @@ public class PlayScreen implements Screen
 		}
 	}
 	
-	public void update(float delta)
+	private void update(float delta)
 	{
 		handleInput();
 		
 		world.step(1 / 60f,  6, 2);
 		
-		camera.followThisTarget(player);
+		camera.followThisTarget(player.getBody());
 		
 		player.update();
 		

@@ -33,7 +33,7 @@ public class TexturedEntity extends Entity
 	private void initSprite(String textureAtlasPath, String textureRegionName, Vector2 textureDimension)
 	{
 		textureAtlas = new TextureAtlas(textureAtlasPath);
-		sprite.setTexture(textureAtlas.findRegion(textureRegionName).getTexture());
+		sprite.setTexture(textureAtlas.findRegion("Idle0").getTexture());
 		textureRegions.put(textureRegionName, new TextureRegion(sprite.getTexture(), 0, 0, textureDimension.x, textureDimension.y));
 		sprite.setBounds(0, 0, textureDimension.x / AdventureGame.pixelPerMeter, textureDimension.y / AdventureGame.pixelPerMeter);
 		sprite.setRegion(textureRegions.get(textureRegionName));
@@ -44,6 +44,11 @@ public class TexturedEntity extends Entity
 	public void update()
 	{
 		sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2 , body.getPosition(). y - sprite.getHeight() / 2);
+	}
+
+	public Sprite getSprite()
+	{
+		return sprite;
 	}
 
 }
