@@ -12,13 +12,13 @@ import com.game.graphics.entities.MovableAnimatedEntity;
  *
  */
 
-public class Pippo extends MovableAnimatedEntity
+public class Carl extends MovableAnimatedEntity
 {
-    private static final String textureAtlasPath = "sprites/PlayerIdle.pack";
+    private static final String textureAtlasPath = "sprites/Carl/Idle/Idle.atlas";
     private static final String textureRegionName = "Idle0";
-    private static final Vector2 textureDimension = new Vector2(319, 486);
+    private static final Vector2 textureDimension = new Vector2(64, 98);
 
-    public Pippo(World world, MapObject spawnPoint)
+    public Carl(World world, MapObject spawnPoint)
     {
         super(world, spawnPoint, BodyDef.BodyType.DynamicBody, textureAtlasPath, textureRegionName, textureDimension);
     }
