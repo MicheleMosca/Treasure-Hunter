@@ -3,6 +3,7 @@ package com.game.graphics.entities;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -30,6 +31,11 @@ public class Entity
 	{
 		initBody(world, mapObject, bodyType);
 	}
+
+	public Entity(World world, MapObject mapObject, BodyType bodyType, Vector2 bodyDimension)
+	{
+		initBodyWithDimension(world, mapObject, bodyType, bodyDimension);
+	}
 	
 	private void initBody(World world, MapObject mapObject, BodyType bodyType)
 	{
@@ -50,5 +56,33 @@ public class Entity
 			fixtureDef.shape = shape;
 			body.createFixture(fixtureDef);
 		}
+	}
+
+	private void initBodyWithDimension(World world, MapObject mapObject, BodyType bodyType, Vector2 bodyDimension)
+	{
+		BodyDef bodyDef = new BodyDef();
+		PolygonShape shape = new PolygonShape();
+		FixtureDef fixtureDef = new FixtureDef();
+
+		if (mapObject instanceof RectangleMapObject)
+		{
+			Rectangle rectangle = ((RectangleMapObject) mapObject).getRectangle();
+
+			bodyDef.type = bodyType;
+			bodyDef.position.set((rectangle.getX() + bodyDimension.x / 2) / AdventureGame.pixelPerMeter,
+					(rectangle.getY() + bodyDimension.y /2) / AdventureGame.pixelPerMeter);;
+
+			body = world.createBody(bodyDef);
+
+			shape.setAsBox((bodyDimension.x / 2) / AdventureGame.pixelPerMeter,
+					(bodyDimension.y / 2 ) / AdventureGame.pixelPerMeter);
+			fixtureDef.shape = shape;
+			body.createFixture(fixtureDef);
+		}
+	}
+
+	public Body getBody()
+	{
+		return body;
 	}
 }

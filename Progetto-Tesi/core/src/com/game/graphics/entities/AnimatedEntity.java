@@ -26,14 +26,16 @@ public class AnimatedEntity extends Entity
 	public AnimatedEntity(World world, MapObject mapObject, BodyType bodyType, String textureAtlasPath,
 						  String textureRegionName, Vector2 textureDimension)
 	{
-		super(world, mapObject, bodyType);
+		super(world, mapObject, bodyType, textureDimension);
 		textureRegions = new HashMap<String, TextureRegion>();
-		initSprite(textureAtlasPath, textureRegionName, textureDimension);
+		sprite = new Sprite();
+		textureAtlas = new TextureAtlas(textureAtlasPath);
+
+		initSprite(textureRegionName, textureDimension);
 	}
 
-	private void initSprite(String textureAtlasPath, String textureRegionName, Vector2 textureDimension)
+	private void initSprite(String textureRegionName, Vector2 textureDimension)
 	{
-		textureAtlas = new TextureAtlas(textureAtlasPath);
 		sprite.setTexture(textureAtlas.findRegion(textureRegionName).getTexture());
 		textureRegions.put(textureRegionName, new TextureRegion(sprite.getTexture(),
 				0, 0, textureDimension.x, textureDimension.y));
@@ -48,5 +50,9 @@ public class AnimatedEntity extends Entity
 	{
 		sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2 , body.getPosition(). y - sprite.getHeight() / 2);
 	}
-	
+
+	public Sprite getSprite()
+	{
+		return sprite;
+	}
 }
