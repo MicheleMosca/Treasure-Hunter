@@ -92,7 +92,7 @@ public class PlayScreen implements Screen
 		
 		world.step(1 / 60f,  6, 2);
 		
-		camera.followThisTarget(player.getBody());
+		camera.followThisTarget(player);
 		
 		player.update();
 		

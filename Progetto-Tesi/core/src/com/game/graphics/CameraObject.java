@@ -3,11 +3,9 @@ package com.game.graphics;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.game.AdventureGame;
-import com.game.graphics.entities.Entity;
 import com.game.graphics.entities.Player;
 import com.game.interfaces.Follower;
 import com.game.interfaces.Movable;
@@ -19,7 +17,7 @@ import com.game.interfaces.Movable;
  *
  */
 
-public class CameraObject extends OrthographicCamera implements Movable, Follower<Body>
+public class CameraObject extends OrthographicCamera implements Movable, Follower<Player>
 {
 	private TiledMap tiledMap;
 	private Viewport viewport;
@@ -134,9 +132,9 @@ public class CameraObject extends OrthographicCamera implements Movable, Followe
 	 * Metodo che permette alla camera di seguire un target Entity passato come parametro
 	 */
 	@Override
-	public void followThisTarget(Body target)
+	public void followThisTarget(Player target)
 	{
-		if (target.getPosition().x > cameraMinPosition.x && target.getPosition().x < cameraMaxPosition.x)
-			position.x = target.getPosition().x;
+		if (target.getBody().getPosition().x > cameraMinPosition.x && target.getBody().getPosition().x < cameraMaxPosition.x)
+			position.x = target.getBody().getPosition().x;
 	}
 }
