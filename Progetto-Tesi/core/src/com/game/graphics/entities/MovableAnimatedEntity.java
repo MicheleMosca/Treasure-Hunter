@@ -12,7 +12,7 @@ import com.game.interfaces.Movable;
  *
  */
 
-public class MovableAnimatedEntity extends TexturedEntity implements Movable
+public class MovableAnimatedEntity extends AnimatedEntity implements Movable
 {
 
 	public MovableAnimatedEntity(World world, MapObject mapObject, BodyType bodyType, String textureAtlasPath,
@@ -22,24 +22,33 @@ public class MovableAnimatedEntity extends TexturedEntity implements Movable
 	}
 
 	@Override
+	public Vector2 getPosition()
+	{
+		return body.getPosition();
+	}
+
+	@Override
+	public float getVelocity()
+	{
+		return body.getLinearVelocity().x;
+	}
+
+	@Override
 	public void moveRight()
 	{
-		// TODO Auto-generated method stub
-		
+		body.applyLinearImpulse(new Vector2(0.1f, 0), body.getWorldCenter(), true);
 	}
 
 	@Override
 	public void moveLeft()
 	{
-		// TODO Auto-generated method stub
-		
+		body.applyLinearImpulse(new Vector2(-0.1f, 0), body.getWorldCenter(), true);
 	}
 
 	@Override
 	public void moveUp()
 	{
-		// TODO Auto-generated method stub
-		
+		body.applyLinearImpulse(new Vector2(0, 4f), body.getWorldCenter(), true);
 	}
 
 	@Override

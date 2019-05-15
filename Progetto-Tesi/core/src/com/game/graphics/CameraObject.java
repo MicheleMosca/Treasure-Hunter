@@ -6,8 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.game.AdventureGame;
-import com.game.graphics.entities.Entity;
-import com.game.graphics.entities.Player;
 import com.game.interfaces.Follower;
 import com.game.interfaces.Movable;
 
@@ -18,7 +16,7 @@ import com.game.interfaces.Movable;
  *
  */
 
-public class CameraObject extends OrthographicCamera implements Movable, Follower<Entity>
+public class CameraObject extends OrthographicCamera implements Movable, Follower<Movable>
 {
 	private TiledMap tiledMap;
 	private Viewport viewport;
@@ -86,18 +84,25 @@ public class CameraObject extends OrthographicCamera implements Movable, Followe
 		this.tiledMap = tiledMap;
 	}
 
-	public float getShift()
-	{
-		return shift;
-	}
-
 	/**
 	 * Metodo che serve per definire di quanto la camera si può spostare autonomamente
 	 * @param shift spostamento
 	 */
-	public void setShift(float shift)
+	public void setVelocity(float shift)
 	{
 		this.shift = shift;
+	}
+
+	@Override
+	public Vector2 getPosition()
+	{
+		return new Vector2(position.x, position.y);
+	}
+
+	@Override
+	public float getVelocity()
+	{
+		return shift;
 	}
 
 	@Override
@@ -133,9 +138,9 @@ public class CameraObject extends OrthographicCamera implements Movable, Followe
 	 * Metodo che permette alla camera di seguire un target Entity passato come parametro
 	 */
 	@Override
-	public void followThisTarget(Entity target)
+	public void followThisTarget(Movable target)
 	{
-		if (target.getBody().getPosition().x > cameraMinPosition.x && target.getBody().getPosition().x < cameraMaxPosition.x)
-			position.x = target.getBody().getPosition().x;
+		if (target.getPosition().x > cameraMinPosition.x && target.getPosition().x < cameraMaxPosition.x)
+			position.x = target.getPosition().x;
 	}
 }

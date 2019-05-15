@@ -14,9 +14,9 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.game.AdventureGame;
 import com.game.graphics.CameraObject;
-import com.game.graphics.entities.AnimatedEntity;
 import com.game.graphics.entities.Entity;
-import com.game.graphics.entities.Player;
+import com.game.graphics.entities.MovableAnimatedEntity;
+import com.game.graphics.entities.players.Pippo;
 
 /**
  * 
@@ -36,7 +36,7 @@ public class PlayScreen implements Screen
 	private World world;
 	private Box2DDebugRenderer debugRender;
 	
-	private AnimatedEntity player;
+	private MovableAnimatedEntity player;
 	
 	public PlayScreen(AdventureGame game)
 	{
@@ -58,25 +58,24 @@ public class PlayScreen implements Screen
 		for (MapObject mapObject : tiledMap.getLayers().get("Collision").getObjects())
         	new Entity(world, mapObject, BodyType.StaticBody);
 		
-		player = new AnimatedEntity(world, tiledMap.getLayers().get("Spawn").getObjects().get(0), BodyType.DynamicBody,
-				"sprites/PlayerIdle.pack", "Idle0", new Vector2(319, 486));
+		player = new Pippo(world, tiledMap.getLayers().get("Spawn").getObjects().get(0));
 	}
 	
 	private void handleInput()
 	{
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
 		{
-			player.getBody().applyLinearImpulse(new Vector2(0, 4f), player.getBody().getWorldCenter(), true);
+			player.moveUp();
 		}
 		
-		if (Gdx.input.isKeyPressed(Input.Keys.D) && (player.getBody().getLinearVelocity().x <= 2))
+		if (Gdx.input.isKeyPressed(Input.Keys.D) && (player.getVelocity() <= 2))
 		{
-			player.getBody().applyLinearImpulse(new Vector2(0.1f, 0), player.getBody().getWorldCenter(), true);
+			player.moveRight();
 		}
 		
-		if (Gdx.input.isKeyPressed(Input.Keys.A) && (player.getBody().getLinearVelocity().x >= -2))
+		if (Gdx.input.isKeyPressed(Input.Keys.A) && (player.getVelocity() >= -2))
 		{
-			player.getBody().applyLinearImpulse(new Vector2(-0.1f, 0), player.getBody().getWorldCenter(), true);
+			player.moveLeft();
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1))
@@ -96,7 +95,7 @@ public class PlayScreen implements Screen
 		
 		camera.followThisTarget(player);
 		
-		//player.update();
+		player.update();
 		
 		camera.update();
 		mapRender.setView(camera);

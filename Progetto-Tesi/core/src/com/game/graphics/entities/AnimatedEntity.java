@@ -38,7 +38,7 @@ public class AnimatedEntity extends Entity
 	{
 		sprite.setTexture(textureAtlas.findRegion(textureRegionName).getTexture());
 		textureRegions.put(textureRegionName, new TextureRegion(sprite.getTexture(),
-				0, 0, textureDimension.x, textureDimension.y));
+				0, 0, (int)textureDimension.x, (int)textureDimension.y));
 		sprite.setBounds(0, 0, textureDimension.x / AdventureGame.pixelPerMeter,
 				textureDimension.y / AdventureGame.pixelPerMeter);
 		sprite.setRegion(textureRegions.get(textureRegionName));

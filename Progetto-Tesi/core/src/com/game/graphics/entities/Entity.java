@@ -80,9 +80,4 @@ public class Entity
 			body.createFixture(fixtureDef);
 		}
 	}
-
-	public Body getBody()
-	{
-		return body;
-	}
 }
