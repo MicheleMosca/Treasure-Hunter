@@ -41,8 +41,6 @@ public class PlayScreen implements Screen
 	{
 		this.game = game;
 
-		// prova
-
 		// Carico la mappa
 		TmxMapLoader mapLoader = new TmxMapLoader();
 		tiledMap = mapLoader.load("maps/level1/level1.tmx");
