@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.World;
+import com.game.Enum.AnimationState;
 import com.game.interfaces.Movable;
 
 /**
@@ -18,7 +19,7 @@ public class MovableAnimatedEntity extends AnimatedEntity implements Movable
 	public MovableAnimatedEntity(World world, MapObject mapObject, BodyType bodyType, String textureAtlasPath,
 								 String textureRegionName, Vector2 textureDimension)
 	{
-		super(world, mapObject, bodyType, textureAtlasPath, textureRegionName, textureDimension);
+		super(world, mapObject, bodyType, textureAtlasPath, textureRegionName, textureDimension, AnimationState.Idle);
 	}
 
 	@Override

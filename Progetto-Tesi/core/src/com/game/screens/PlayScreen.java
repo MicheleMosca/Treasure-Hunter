@@ -87,7 +87,7 @@ public class PlayScreen implements Screen
 		}
 	}
 	
-	private void update(float delta)
+	private void update(float deltaTime)
 	{
 		handleInput();
 		
@@ -95,16 +95,16 @@ public class PlayScreen implements Screen
 		
 		camera.followThisTarget(player);
 		
-		player.update();
+		player.update(deltaTime);
 		
 		camera.update();
 		mapRender.setView(camera);
 	}
 
 	@Override
-	public void render(float delta)
+	public void render(float deltaTime)
 	{
-		update(delta);
+		update(deltaTime);
 		
 		// Pulisco il buffer dello schermo
 		Gdx.gl.glClearColor(0, 0, 0, 1);	//Red, gree, blue, alpha(0 = trasparete, 1 = opaco) 
