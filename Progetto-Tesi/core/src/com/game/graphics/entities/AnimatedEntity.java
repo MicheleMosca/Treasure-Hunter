@@ -11,9 +11,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.game.AdventureGame;
 import com.game.Enum.AnimationState;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Classe che definisce un elemento del gioco avente una texture e un animazione legata al proprio corpo affetto
@@ -23,14 +21,17 @@ import java.util.List;
 public class AnimatedEntity extends Entity
 {
 	// parametri di default per una semplice sprite all'inizio
-	protected HashMap<AnimationState, TextureAtlas> textureAtlas;
-	protected Sprite sprite;
-	protected HashMap<String, TextureRegion> textureRegions;
-	protected Vector2 textureDimension;
+	private HashMap<AnimationState, TextureAtlas> textureAtlas;
+	private Sprite sprite;
+	private HashMap<String, TextureRegion> textureRegions;
 
-	protected AnimationState currentState;
-	protected AnimationState previousState;
-	protected HashMap<AnimationState, Animation<TextureRegion>> animations;
+	// attributi per la gestione delle animazioni
+	private AnimationState currentState;
+	private AnimationState previousState;
+	private HashMap<AnimationState, Animation<TextureRegion>> animations;
+
+	// dimensioni delle texture inerenti alle animazioni
+	private HashMap<AnimationState, Vector2> texturesDimension;
 
 	private float stateTimer;
 
@@ -39,17 +40,17 @@ public class AnimatedEntity extends Entity
 	{
 		super(world, mapObject, bodyType, textureDimension);
 
-		this.textureDimension = textureDimension;
-
 		textureRegions = new HashMap<String, TextureRegion>();
 		sprite = new Sprite();
 		textureAtlas = new HashMap<AnimationState, TextureAtlas>();
 		animations = new HashMap<AnimationState, Animation<TextureRegion>>();
+		texturesDimension = new HashMap<AnimationState, Vector2>();
 
 		textureAtlas.put(animationName, new TextureAtlas(textureAtlasPath));
 		currentState = AnimationState.Idle;
 		previousState = AnimationState.Idle;
 		stateTimer = 0;
+		texturesDimension.put(animationName, textureDimension);
 
 		initSprite(textureRegionName, textureDimension, animationName);
 	}
@@ -63,13 +64,16 @@ public class AnimatedEntity extends Entity
 				textureDimension.y / AdventureGame.pixelPerMeter);
 		sprite.setRegion(textureRegions.get(textureRegionName));
 
-		createAnimation(animationName, "" , textureRegionName);
+		createAnimation(animationName, "" , textureRegionName, textureDimension);
 	}
 
-	private void createAnimation(AnimationState animationName, String textureAtlasPath, String textureRegionName)
+	protected void createAnimation(AnimationState animationName, String textureAtlasPath, String textureRegionName, Vector2 textureDimension)
 	{
 		if (textureAtlas.containsKey(animationName) == false)
+		{
 			textureAtlas.put(animationName, new TextureAtlas(textureAtlasPath));
+			texturesDimension.put(animationName, textureDimension);
+		}
 
 		animations.put(animationName, new Animation<TextureRegion>(0.1f, textureAtlas.get(animationName).getRegions(), Animation.PlayMode.LOOP));
 	}
@@ -80,6 +84,10 @@ public class AnimatedEntity extends Entity
 
 		// sovrascrivo la texture della sprite con quella dello stato corrispondente (alla prima regione)
 		sprite.setTexture(textureAtlas.get(currentState).getRegions().get(0).getTexture());
+
+		// imposto le dimensioni della sprite in base alla texture inserita
+		sprite.setBounds(0, 0, texturesDimension.get(currentState).x / AdventureGame.pixelPerMeter,
+				texturesDimension.get(currentState).y / AdventureGame.pixelPerMeter);
 
 		// prelevo la regione della texture che mi interessa in base allo stateTimer
 		TextureRegion region = animations.get(currentState).getKeyFrame(stateTimer);
@@ -93,7 +101,7 @@ public class AnimatedEntity extends Entity
 		return region;
 	}
 
-	private AnimationState getState()
+	protected AnimationState getState()
 	{
 		return AnimationState.Idle;
 	}
