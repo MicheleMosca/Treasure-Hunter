@@ -15,12 +15,12 @@ import com.game.graphics.entities.MovableAnimatedEntity;
 public class Carl extends MovableAnimatedEntity
 {
     // Inserisco i parametri che di default avrà il personaggio
-    private static final String textureAtlasPath = "sprites/Carl/Idle/Idle.atlas";
-    private static final String textureRegionName = "Idle0";
+    private static final String defaultTextureAtlasPath = "sprites/Carl/Idle/Idle.atlas";
+    private static final String defaultTextureRegionName = "Idle0";
     private static final Vector2 textureDimension = new Vector2(64, 98);
 
     public Carl(World world, MapObject spawnPoint)
     {
-        super(world, spawnPoint, BodyDef.BodyType.DynamicBody, textureAtlasPath, textureRegionName, textureDimension);
+        super(world, spawnPoint, BodyDef.BodyType.DynamicBody, defaultTextureAtlasPath, defaultTextureRegionName, textureDimension);
     }
 }

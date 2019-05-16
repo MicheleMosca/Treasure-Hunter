@@ -77,6 +77,11 @@ public class AnimatedEntity extends Entity
 	private TextureRegion getFrame(float deltaTime)
 	{
 		currentState = getState();
+
+		// sovrascrivo la texture della sprite con quella dello stato corrispondente (alla prima regione)
+		sprite.setTexture(textureAtlas.get(currentState).getRegions().get(0).getTexture());
+
+		// prelevo la regione della texture che mi interessa in base allo stateTimer
 		TextureRegion region = animations.get(currentState).getKeyFrame(stateTimer);
 
 		// Avanzamento dei frame di animazione inerenti alla stesso stato
