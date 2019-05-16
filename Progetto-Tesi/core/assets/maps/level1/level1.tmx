@@ -159,6 +159,6 @@
   <object id="3" x="672.667" y="609.333" width="270.667" height="30"/>
  </objectgroup>
  <objectgroup id="10" name="Spawn">
-  <object id="4" x="65.3333" y="593.333" width="14" height="15.3333"/>
+  <object id="4" name="playerSpawn" x="65.3333" y="593.333" width="14" height="15.3333"/>
  </objectgroup>
 </map>

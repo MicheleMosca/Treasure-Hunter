@@ -17,7 +17,7 @@ public class Carl extends MovableAnimatedEntity
     // Inserisco i parametri che di default avrà il personaggio
     private static final String defaultTextureAtlasPath = "sprites/Carl/Idle/Idle.atlas";
     private static final String defaultTextureRegionName = "Idle0";
-    private static final Vector2 textureDimension = new Vector2(64, 98);
+    private static final Vector2 textureDimension = new Vector2(64, 98);    //x: 64, y: 98
 
     public Carl(World world, MapObject spawnPoint)
     {

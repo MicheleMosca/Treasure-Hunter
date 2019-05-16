@@ -4,19 +4,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.game.AdventureGame;
 import com.game.graphics.CameraObject;
-import com.game.graphics.entities.Entity;
+import com.game.graphics.WorldCreator;
+import com.game.graphics.entities.AnimatedEntity;
 import com.game.graphics.entities.MovableAnimatedEntity;
-import com.game.graphics.entities.players.Carl;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 
@@ -35,8 +36,7 @@ public class PlayScreen implements Screen
 	
 	private World world;
 	private Box2DDebugRenderer debugRender;
-	
-	private MovableAnimatedEntity player;
+	private HashMap<String, AnimatedEntity> gameObjects;
 	
 	public PlayScreen(AdventureGame game)
 	{
@@ -53,29 +53,27 @@ public class PlayScreen implements Screen
 		// Inizializzo il mondo e il debug render
 		world = new World(new Vector2 (0,-10), true);
 		debugRender = new Box2DDebugRenderer();
-		
-		// Inserisco nel mondo tutti gli oggetti di tipo ground della mappa con le rispettive collisioni
-		for (MapObject mapObject : tiledMap.getLayers().get("Collision").getObjects())
-        	new Entity(world, mapObject, BodyType.StaticBody);
-		
-		player = new Carl(world, tiledMap.getLayers().get("Spawn").getObjects().get(0));
+
+		// Instanzio tutti gli oggetti di gioco all'interno del mondo
+		gameObjects = WorldCreator.initWorld(tiledMap, world);
+
 	}
 	
 	private void handleInput()
 	{
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
 		{
-			player.moveUp();
+			((MovableAnimatedEntity)gameObjects.get("player")).moveUp();
 		}
 		
-		if (Gdx.input.isKeyPressed(Input.Keys.D) && (player.getVelocity() <= 2))
+		if (Gdx.input.isKeyPressed(Input.Keys.D) && (((MovableAnimatedEntity)gameObjects.get("player")).getVelocity() <= 2))
 		{
-			player.moveRight();
+			((MovableAnimatedEntity)gameObjects.get("player")).moveRight();
 		}
 		
-		if (Gdx.input.isKeyPressed(Input.Keys.A) && (player.getVelocity() >= -2))
+		if (Gdx.input.isKeyPressed(Input.Keys.A) && (((MovableAnimatedEntity)gameObjects.get("player")).getVelocity() >= -2))
 		{
-			player.moveLeft();
+			((MovableAnimatedEntity)gameObjects.get("player")).moveLeft();
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1))
@@ -92,12 +90,13 @@ public class PlayScreen implements Screen
 		handleInput();
 		
 		world.step(1 / 60f,  6, 2);
-		
-		camera.followThisTarget(player);
-		
-		player.update(deltaTime);
-		
+
+		for (Map.Entry<String, AnimatedEntity> object : gameObjects.entrySet())
+			object.getValue().update(deltaTime);
+
 		camera.update();
+
+		camera.followThisTarget(((MovableAnimatedEntity)gameObjects.get("player")));
 		mapRender.setView(camera);
 	}
 
@@ -122,8 +121,11 @@ public class PlayScreen implements Screen
 		// Inizio i desegni sulla camera
 		game.batch.begin();
 
-		player.getSprite().draw(game.batch);
+		// Disegno tutte le Sprite degli oggetti del mondo
+		for (Map.Entry<String, AnimatedEntity> object : gameObjects.entrySet())
+			object.getValue().getSprite().draw(game.batch);
 
+		// Termino i disegni sulla camera
 		game.batch.end();
 	}
 
