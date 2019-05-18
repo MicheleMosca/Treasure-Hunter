@@ -78,7 +78,6 @@ public class Carl extends MovableAnimatedEntity
         inputHandler();
         if (isLeft)
             getSprite().setFlip(true, false);
-        System.out.println(getState());
     }
 
     private void inputHandler()
