@@ -100,9 +100,9 @@ public class CameraObject extends OrthographicCamera implements Movable, Followe
 	}
 
 	@Override
-	public float getVelocity()
+	public Vector2 getVelocity()
 	{
-		return shift;
+		return null;
 	}
 
 	@Override

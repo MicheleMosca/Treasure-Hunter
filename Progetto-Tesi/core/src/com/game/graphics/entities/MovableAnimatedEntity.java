@@ -1,5 +1,7 @@
 package com.game.graphics.entities;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -29,21 +31,23 @@ public class MovableAnimatedEntity extends AnimatedEntity implements Movable
 	}
 
 	@Override
-	public float getVelocity()
+	public Vector2 getVelocity()
 	{
-		return body.getLinearVelocity().x;
+		return body.getLinearVelocity();
 	}
 
 	@Override
 	public void moveRight()
 	{
-		body.applyLinearImpulse(new Vector2(0.1f, 0), body.getWorldCenter(), true);
+		if (getVelocity().x <= 2.25f)
+			body.applyLinearImpulse(new Vector2(0.1f, 0), body.getWorldCenter(), true);
 	}
 
 	@Override
 	public void moveLeft()
 	{
-		body.applyLinearImpulse(new Vector2(-0.1f, 0), body.getWorldCenter(), true);
+		if (getVelocity().x >= -2.25f)
+			body.applyLinearImpulse(new Vector2(-0.1f, 0), body.getWorldCenter(), true);
 	}
 
 	@Override

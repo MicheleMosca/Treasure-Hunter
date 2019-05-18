@@ -1,5 +1,6 @@
 package com.game.graphics.entities;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
@@ -48,7 +49,8 @@ public class Entity
 			Rectangle rectangle = ((RectangleMapObject) mapObject).getRectangle();
 			
 			bodyDef.type = bodyType;
-			bodyDef.position.set((rectangle.getX() + rectangle.getWidth() / 2) / AdventureGame.pixelPerMeter, (rectangle.getY() + rectangle.getHeight() /2) / AdventureGame.pixelPerMeter);
+			bodyDef.position.set((rectangle.getX() + rectangle.getWidth() / 2) / AdventureGame.pixelPerMeter,
+					(rectangle.getY() + rectangle.getHeight() /2) / AdventureGame.pixelPerMeter);
 			
 			body = world.createBody(bodyDef);
 			
@@ -70,7 +72,7 @@ public class Entity
 
 			bodyDef.type = bodyType;
 			bodyDef.position.set((rectangle.getX() + bodyDimension.x / 2) / AdventureGame.pixelPerMeter,
-					(rectangle.getY() + bodyDimension.y /2) / AdventureGame.pixelPerMeter);;
+					(rectangle.getY() + bodyDimension.y /2) / AdventureGame.pixelPerMeter);
 
 			body = world.createBody(bodyDef);
 
@@ -79,5 +81,24 @@ public class Entity
 			fixtureDef.shape = shape;
 			body.createFixture(fixtureDef);
 		}
+	}
+
+	protected void resetBoxShape(Vector2 previousBodyDimension, Vector2 bodyDimension)
+	{
+		FixtureDef fixtureDef = new FixtureDef();
+		PolygonShape shape = new PolygonShape();
+		float positionY = 0;
+
+		if (previousBodyDimension.y > bodyDimension.y)
+			positionY = body.getPosition().y - (( (previousBodyDimension.y - bodyDimension.y) / 2) / AdventureGame.pixelPerMeter);
+		else
+			positionY = body.getPosition().y + (( (bodyDimension.y - previousBodyDimension.y) / 2) / AdventureGame.pixelPerMeter);
+
+		body.destroyFixture(body.getFixtureList().get(0));
+		shape.setAsBox((bodyDimension.x / 2) / AdventureGame.pixelPerMeter,
+				(bodyDimension.y / 2 ) / AdventureGame.pixelPerMeter);
+		fixtureDef.shape = shape;
+		body.createFixture(fixtureDef);
+		body.setTransform(body.getPosition().x, positionY, 0);
 	}
 }

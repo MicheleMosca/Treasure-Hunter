@@ -12,6 +12,7 @@ import com.game.AdventureGame;
 import com.game.Enum.AnimationState;
 
 import java.util.HashMap;
+import java.util.Vector;
 
 /**
  * Classe che definisce un elemento del gioco avente una texture e un animazione legata al proprio corpo affetto
@@ -64,10 +65,11 @@ public class AnimatedEntity extends Entity
 				textureDimension.y / AdventureGame.pixelPerMeter);
 		sprite.setRegion(textureRegions.get(textureRegionName));
 
-		createAnimation(animationName, "" , textureRegionName, textureDimension);
+		createAnimation(animationName, "" , textureRegionName, textureDimension, Animation.PlayMode.LOOP);
 	}
 
-	protected void createAnimation(AnimationState animationName, String textureAtlasPath, String textureRegionName, Vector2 textureDimension)
+	protected void createAnimation(AnimationState animationName, String textureAtlasPath, String textureRegionName,
+								   Vector2 textureDimension, Animation.PlayMode animationMode)
 	{
 		if (textureAtlas.containsKey(animationName) == false)
 		{
@@ -75,28 +77,35 @@ public class AnimatedEntity extends Entity
 			texturesDimension.put(animationName, textureDimension);
 		}
 
-		animations.put(animationName, new Animation<TextureRegion>(0.1f, textureAtlas.get(animationName).getRegions(), Animation.PlayMode.LOOP));
+		animations.put(animationName, new Animation<TextureRegion>(0.1f, textureAtlas.get(animationName).getRegions(),
+				animationMode));
 	}
 
 	private TextureRegion getFrame(float deltaTime)
 	{
 		currentState = getState();
 
-		// sovrascrivo la texture della sprite con quella dello stato corrispondente (alla prima regione)
-		sprite.setTexture(textureAtlas.get(currentState).getRegions().get(0).getTexture());
-
-		// imposto le dimensioni della sprite in base alla texture inserita
-		sprite.setBounds(0, 0, texturesDimension.get(currentState).x / AdventureGame.pixelPerMeter,
-				texturesDimension.get(currentState).y / AdventureGame.pixelPerMeter);
-
-		// prelevo la regione della texture che mi interessa in base allo stateTimer
-		TextureRegion region = animations.get(currentState).getKeyFrame(stateTimer);
-
 		// Avanzamento dei frame di animazione inerenti alla stesso stato
 		if (currentState == previousState)
 			stateTimer += deltaTime;
 		else
+		{
 			stateTimer = 0;
+
+			// sovrascrivo la texture della sprite con quella dello stato corrispondente (alla prima regione)
+			sprite.setTexture(textureAtlas.get(currentState).getRegions().get(0).getTexture());
+
+			// imposto le dimensioni della sprite in base alla texture inserita
+			sprite.setBounds(0, 0, texturesDimension.get(currentState).x / AdventureGame.pixelPerMeter,
+					texturesDimension.get(currentState).y / AdventureGame.pixelPerMeter);
+
+			// importo le dimensioni del body in base alla texture
+			resetBoxShape(texturesDimension.get(previousState), texturesDimension.get(currentState));
+		}
+
+		// prelevo la regione della texture che mi interessa in base allo stateTimer
+		TextureRegion region = animations.get(currentState).getKeyFrame(stateTimer);
+
 		previousState = currentState;
 		return region;
 	}

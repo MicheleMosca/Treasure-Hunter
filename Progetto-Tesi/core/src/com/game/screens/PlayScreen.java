@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -16,6 +17,8 @@ import com.game.graphics.WorldCreator;
 import com.game.graphics.entities.AnimatedEntity;
 import com.game.graphics.entities.MovableAnimatedEntity;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,24 +61,9 @@ public class PlayScreen implements Screen
 		gameObjects = WorldCreator.initWorld(tiledMap, world);
 
 	}
-	
-	private void handleInput()
+
+	private void handleInput(float deltaTime)
 	{
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
-		{
-			((MovableAnimatedEntity)gameObjects.get("player")).moveUp();
-		}
-		
-		if (Gdx.input.isKeyPressed(Input.Keys.D) && (((MovableAnimatedEntity)gameObjects.get("player")).getVelocity() <= 2))
-		{
-			((MovableAnimatedEntity)gameObjects.get("player")).moveRight();
-		}
-		
-		if (Gdx.input.isKeyPressed(Input.Keys.A) && (((MovableAnimatedEntity)gameObjects.get("player")).getVelocity() >= -2))
-		{
-			((MovableAnimatedEntity)gameObjects.get("player")).moveLeft();
-		}
-		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1))
 		{
 			if (Gdx.graphics.isFullscreen())
@@ -87,8 +75,8 @@ public class PlayScreen implements Screen
 	
 	private void update(float deltaTime)
 	{
-		handleInput();
-		
+		handleInput(deltaTime);
+
 		world.step(1 / 60f,  6, 2);
 
 		for (Map.Entry<String, AnimatedEntity> object : gameObjects.entrySet())
@@ -166,10 +154,11 @@ public class PlayScreen implements Screen
 	@Override
 	public void dispose()
 	{
+		for (Map.Entry<String, AnimatedEntity> object : gameObjects.entrySet())
+			object.getValue().getSprite().getTexture().dispose();
 		world.dispose();
 		mapRender.dispose();
 		tiledMap.dispose();
 		debugRender.dispose();
 	}
-
 }

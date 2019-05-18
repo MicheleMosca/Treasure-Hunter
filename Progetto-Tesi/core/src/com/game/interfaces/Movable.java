@@ -14,7 +14,7 @@ public interface Movable
 	public Vector2 getPosition();
 
 	// metodo che restituisce la velocità del corpo
-	public float getVelocity();
+	public Vector2 getVelocity();
 
 	// metodi per muovere il corpo nelle quattro principali direzioni
 	public void moveRight();
