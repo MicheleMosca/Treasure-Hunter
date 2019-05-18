@@ -51,7 +51,7 @@ public class Carl extends MovableAnimatedEntity
         createAnimation(AnimationState.Jump, "sprites/Carl/Jump/Jump.atlas", "Jump0",
                 new Vector2(81, 107), Animation.PlayMode.NORMAL);
         createAnimation(AnimationState.Dead, "sprites/Carl/Dead/Dead.atlas", "Dead0",
-                new Vector2(118, 120), Animation.PlayMode.NORMAL);
+                new Vector2(118, 96), Animation.PlayMode.NORMAL);
         createAnimation(AnimationState.Slide, "sprites/Carl/Slide/Slide.atlas", "Slide0",
                 new Vector2(79, 78), Animation.PlayMode.NORMAL);
     }

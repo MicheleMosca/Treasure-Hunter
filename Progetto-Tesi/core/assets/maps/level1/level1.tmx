@@ -154,8 +154,8 @@
 </data>
  </layer>
  <objectgroup id="9" name="Collision">
-  <object id="3" x="672.667" y="608.33" width="270" height="30"/>
-  <object id="5" x="240.17" y="657.394" width="383.727" height="29.8821"/>
+  <object id="3" x="672.667" y="609.603" width="270" height="28.7273"/>
+  <object id="5" x="240.17" y="657.394" width="383.727" height="30.7912"/>
   <object id="6" x="0.333333" y="689.333" width="3199.12" height="30.6667"/>
  </objectgroup>
  <objectgroup id="10" name="Spawn">
