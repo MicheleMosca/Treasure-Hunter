@@ -127,12 +127,12 @@ public class Carl extends MovableAnimatedEntity
         if (body.getLinearVelocity().y != 0)
             return AnimationState.Jump;
 
-        if (body.getLinearVelocity().x > 0f)
+        if (body.getLinearVelocity().x > 0f || Gdx.input.isKeyPressed(Input.Keys.D))
         {
             isLeft = false;
             return AnimationState.Run;
         }
-        else if (body.getLinearVelocity().x < -0f)
+        else if (body.getLinearVelocity().x < -0f || Gdx.input.isKeyPressed(Input.Keys.A))
         {
             isLeft = true;
             return AnimationState.Run;
