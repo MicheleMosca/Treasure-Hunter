@@ -84,7 +84,7 @@ public class Carl extends MovableAnimatedEntity
     {
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_9))
             isAlive = false;
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (getVelocity().y == 0))
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (getVelocity().y == 0) && getState() != AnimationState.Slide)
             moveUp();
 
         if (getVelocity().x == 0 && isSliding == true)
@@ -93,7 +93,7 @@ public class Carl extends MovableAnimatedEntity
             sliderTimer.cancel();
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT) && (getVelocity().x != 0))
+        if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT) && (getVelocity().x != 0) && getState() != AnimationState.Jump)
         {
             isSliding = true;
             sliderTimer = new Timer();
@@ -104,7 +104,7 @@ public class Carl extends MovableAnimatedEntity
                 {
                     Carl.isSliding = false;
                 }
-            }, 1000);
+            }, 1800);
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.D))
