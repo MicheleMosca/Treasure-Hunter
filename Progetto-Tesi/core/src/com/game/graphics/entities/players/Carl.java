@@ -93,7 +93,7 @@ public class Carl extends MovableAnimatedEntity
             sliderTimer.cancel();
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT) && (getVelocity().x != 0) && getState() != AnimationState.Jump)
+        if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT) && getVelocity().x != 0 && getState() != AnimationState.Jump)
         {
             isSliding = true;
             sliderTimer = new Timer();

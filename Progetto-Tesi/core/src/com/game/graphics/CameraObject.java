@@ -71,7 +71,8 @@ public class CameraObject extends OrthographicCamera implements Movable, Followe
 		
 		// Definisco i confini della mappa
 		cameraMinPosition.set(position.x, position.y);
-		cameraMaxPosition.set(((position.x + mapPixelWidth) - AdventureGame.worldWidth) / AdventureGame.pixelPerMeter, ((position.y + mapPixelHeight) - AdventureGame.worldHeight) / AdventureGame.pixelPerMeter);
+		cameraMaxPosition.set(((position.x + (mapPixelWidth / AdventureGame.pixelPerMeter)) - (AdventureGame.worldWidth / AdventureGame.pixelPerMeter)),
+				((position.y + (mapPixelHeight / AdventureGame.pixelPerMeter)) - (AdventureGame.worldHeight / AdventureGame.pixelPerMeter)));
 	}
 
 	public TiledMap getTiledMap()
