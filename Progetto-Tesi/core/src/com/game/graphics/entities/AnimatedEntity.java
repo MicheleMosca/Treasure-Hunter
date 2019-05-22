@@ -100,7 +100,7 @@ public class AnimatedEntity extends Entity
 					texturesDimension.get(currentState).y / AdventureGame.pixelPerMeter);
 
 			// importo le dimensioni del body in base alla texture
-			resetBoxShape(texturesDimension.get(previousState), texturesDimension.get(currentState));
+			resetBodyShape(texturesDimension.get(previousState), texturesDimension.get(currentState));
 		}
 
 		// prelevo la regione della texture che mi interessa in base allo stateTimer
