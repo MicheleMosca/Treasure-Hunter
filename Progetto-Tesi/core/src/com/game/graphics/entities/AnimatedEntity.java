@@ -12,7 +12,6 @@ import com.game.AdventureGame;
 import com.game.Enum.AnimationState;
 
 import java.util.HashMap;
-import java.util.Vector;
 
 /**
  * Classe che definisce un elemento del gioco avente una texture e un animazione legata al proprio corpo affetto

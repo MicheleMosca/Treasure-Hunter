@@ -20,19 +20,22 @@ public class Entity
 {
 	protected Body body;
 	
-	public Entity(Body body, Shape shape)
+	public Entity(Body body)
 	{
 		this.body = body;
+		body.setUserData(this);
 	}
 
 	public Entity(World world, MapObject mapObject, BodyType bodyType)
 	{
 		initBody(world, mapObject, bodyType);
+		body.setUserData(this);
 	}
 
 	public Entity(World world, MapObject mapObject, BodyType bodyType, Vector2 bodyDimension)
 	{
 		initBodyWithDimension(world, mapObject, bodyType, bodyDimension);
+		body.setUserData(this);
 	}
 	
 	private void initBody(World world, MapObject mapObject, BodyType bodyType)
@@ -120,4 +123,5 @@ public class Entity
 
 		body.setTransform(body.getPosition().x, positionY, 0);
 	}
+
 }

@@ -13,9 +13,11 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.game.AdventureGame;
 import com.game.graphics.CameraObject;
+import com.game.graphics.CollisionDetector;
 import com.game.graphics.WorldCreator;
 import com.game.graphics.entities.AnimatedEntity;
 import com.game.graphics.entities.MovableAnimatedEntity;
+import com.game.graphics.entities.Player;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -60,6 +62,8 @@ public class PlayScreen implements Screen
 		// Instanzio tutti gli oggetti di gioco all'interno del mondo
 		gameObjects = WorldCreator.initWorld(tiledMap, world);
 
+		// Imposto il ContactListener per gli oggetti all'interno del mondo
+		world.setContactListener(new CollisionDetector());
 	}
 
 	private void handleInput(float deltaTime)
