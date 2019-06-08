@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.game.Enum.AnimationState;
 import com.game.graphics.entities.MovableAnimatedEntity;
 
+import java.sql.Time;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,7 +38,7 @@ public abstract class Player extends MovableAnimatedEntity
         isLeft = false;
         isAlive = true;
         isSliding = false;
-        health = 3;
+        health = 1;
     }
 
     /**
@@ -83,7 +84,7 @@ public abstract class Player extends MovableAnimatedEntity
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (getVelocity().y == 0) && getState() != AnimationState.Slide)
             moveUp();
 
-        if (getVelocity().x == 0 && isSliding == true)
+        if (getVelocity().x == 0 && isSliding)
         {
             isSliding = false;
             sliderTimer.cancel();
@@ -114,10 +115,10 @@ public abstract class Player extends MovableAnimatedEntity
     @Override
     protected AnimationState getState()
     {
-        if (isAlive == false)
+        if (!isAlive)
             return AnimationState.Dead;
 
-        if (isSliding == true)
+        if (isSliding)
             return AnimationState.Slide;
 
         if (body.getLinearVelocity().y != 0)
@@ -160,6 +161,5 @@ public abstract class Player extends MovableAnimatedEntity
         }
 
         health -= damage;
-        System.out.println(getHealth());
     }
 }

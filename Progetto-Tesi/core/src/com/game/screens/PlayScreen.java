@@ -105,7 +105,7 @@ public class PlayScreen implements Screen
 		mapRender.render();
 		
 		// Renderizzo gli oggetti del mondo per debug
-		debugRender.render(world, camera.combined);
+		//debugRender.render(world, camera.combined);
 		
 		// Impongo al batch di proiettare tutto sulla camera 
 		game.batch.setProjectionMatrix(camera.combined);
