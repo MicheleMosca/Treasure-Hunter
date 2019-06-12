@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="200" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="19">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="200" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="21">
  <tileset firstgid="1" name="jungleSheet" tilewidth="16" tileheight="16" tilecount="741" columns="39">
   <image source="../../titlesets/jungleSheet.png" width="624" height="304"/>
  </tileset>
@@ -172,6 +172,8 @@
  <objectgroup id="10" name="Spawn">
   <object id="4" name="playerSpawn" x="66.3333" y="350.333" width="14" height="15.3333"/>
   <object id="18" name="coinSpawn" x="783.5" y="582.5" width="17" height="15"/>
+  <object id="19" name="coinSpawn" x="1775" y="600" width="17" height="15"/>
+  <object id="20" name="coinSpawn" x="2431.5" y="663" width="17" height="15"/>
  </objectgroup>
  <objectgroup id="12" name="Enemies">
   <object id="14" name="spike" x="1922.5" y="660.5" width="138.5" height="27.5"/>

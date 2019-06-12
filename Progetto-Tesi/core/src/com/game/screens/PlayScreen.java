@@ -16,6 +16,7 @@ import com.game.graphics.CameraObject;
 import com.game.graphics.CollisionDetector;
 import com.game.graphics.WorldCreator;
 import com.game.graphics.entities.AnimatedEntity;
+import com.game.graphics.entities.Entity;
 import com.game.graphics.entities.MovableAnimatedEntity;
 import com.game.graphics.entities.Player;
 
@@ -44,11 +45,13 @@ public class PlayScreen implements Screen
 	
 	private World world;
 	private Box2DDebugRenderer debugRender;
-	private HashMap<String, AnimatedEntity> gameObjects;
+	private List<AnimatedEntity> gameObjects;
 
 	private float currentTime;
 	private List<Integer> scoreTime;
-	private static int scoreCoins;
+	private int scoreCoins;
+
+	private AnimatedEntity player;
 	
 	public PlayScreen(AdventureGame game)
 	{
@@ -70,13 +73,17 @@ public class PlayScreen implements Screen
 		gameObjects = WorldCreator.initWorld(tiledMap, world);
 
 		// Imposto il ContactListener per gli oggetti all'interno del mondo
-		world.setContactListener(new CollisionDetector());
+		world.setContactListener(new CollisionDetector(this));
 
 		currentTime = 0;
 		scoreTime = new ArrayList<Integer>(2);
 		scoreTime.add(0, 0);
 		scoreTime.add(1,0);
 		scoreCoins = 0;
+
+		for (AnimatedEntity object : gameObjects)
+			if (object instanceof Player)
+				player = object;
 	}
 
 	private void handleInput(float deltaTime)
@@ -116,12 +123,12 @@ public class PlayScreen implements Screen
 
 		world.step(1 / 60f,  6, 2);
 
-		for (Map.Entry<String, AnimatedEntity> object : gameObjects.entrySet())
-			object.getValue().update(deltaTime);
+		for (AnimatedEntity object : gameObjects)
+			object.update(deltaTime);
 
 		camera.update();
 
-		camera.followThisTarget(((MovableAnimatedEntity)gameObjects.get("player")));
+		camera.followThisTarget((MovableAnimatedEntity) player);
 		mapRender.setView(camera);
 	}
 
@@ -147,14 +154,22 @@ public class PlayScreen implements Screen
 		game.batch.begin();
 
 		// Disegno tutte le Sprite degli oggetti del mondo
-		for (Map.Entry<String, AnimatedEntity> object : gameObjects.entrySet())
-			object.getValue().getSprite().draw(game.batch);
+		for (AnimatedEntity object : gameObjects)
+			object.getSprite().draw(game.batch);
 
 		// Termino i disegni sulla camera
 		game.batch.end();
 	}
 
-	public static void addCoin()
+	public void removeBodyFromWorld(AnimatedEntity entity)
+	{
+		entity.getSprite().getTexture().dispose();
+		world.step(0,0,0);
+		world.destroyBody(entity.getBody());
+		gameObjects.remove(entity);
+	}
+
+	public void addCoin()
 	{
 		scoreCoins++;
 		System.out.println("Coins: " + scoreCoins);
@@ -197,8 +212,8 @@ public class PlayScreen implements Screen
 	@Override
 	public void dispose()
 	{
-		for (Map.Entry<String, AnimatedEntity> object : gameObjects.entrySet())
-			object.getValue().getSprite().getTexture().dispose();
+		for (AnimatedEntity object : gameObjects)
+			object.getSprite().getTexture().dispose();
 		world.dispose();
 		mapRender.dispose();
 		tiledMap.dispose();

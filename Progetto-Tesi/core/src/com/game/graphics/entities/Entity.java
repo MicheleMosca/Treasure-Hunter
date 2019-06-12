@@ -124,4 +124,9 @@ public class Entity
 		body.setTransform(body.getPosition().x, positionY, 0);
 	}
 
+	public Body getBody()
+	{
+		return body;
+	}
+
 }

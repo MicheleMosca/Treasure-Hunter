@@ -11,12 +11,14 @@ import com.game.graphics.entities.enemies.Spike;
 import com.game.graphics.entities.players.Carl;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public class WorldCreator
 {
-    public static HashMap<String, AnimatedEntity> initWorld(TiledMap tiledMap, World world)
+    public static List<AnimatedEntity> initWorld(TiledMap tiledMap, World world)
     {
-        HashMap<String, AnimatedEntity> gameObjects = new HashMap<String, AnimatedEntity>();
+        List<AnimatedEntity> gameObjects = new LinkedList<AnimatedEntity>();
 
         // Inserisco nel mondo tutti gli oggetti di tipo ground della mappa con le rispettive collisioni,
         // ma non prelevo il loro riferimento
@@ -34,14 +36,14 @@ public class WorldCreator
         for (MapObject mapObject : tiledMap.getLayers().get("Spawn").getObjects())
         {
             if (mapObject.getName().equals("coinSpawn"))
-                gameObjects.put("coin", new Coin(world, mapObject));
+                gameObjects.add(new Coin(world, mapObject));
         }
 
         // Inserisco nel mondo il player in uso con il relativo spawn point
         for (MapObject mapObject : tiledMap.getLayers().get("Spawn").getObjects())
         {
             if (mapObject.getName().equals("playerSpawn"))
-                gameObjects.put("player", new Carl(world, mapObject));
+                gameObjects.add(new Carl(world, mapObject));
         }
 
         return gameObjects;

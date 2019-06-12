@@ -1,6 +1,7 @@
 package com.game.graphics;
 
 import com.badlogic.gdx.physics.box2d.*;
+import com.game.graphics.entities.AnimatedEntity;
 import com.game.graphics.entities.Coin;
 import com.game.graphics.entities.Entity;
 import com.game.graphics.entities.Player;
@@ -13,6 +14,13 @@ import com.game.screens.PlayScreen;
 
 public class CollisionDetector implements ContactListener
 {
+    private PlayScreen game;
+
+    public CollisionDetector(PlayScreen game)
+    {
+        this.game = game;
+    }
+
     /**
      * Inizio del contatto tra due figure
      * @param contact contiene le informazioni sul contatto avvenuto tra le due figure
@@ -28,7 +36,8 @@ public class CollisionDetector implements ContactListener
 
         if (receiver instanceof Coin && sender instanceof Player)
         {
-            PlayScreen.addCoin();
+            game.addCoin();
+            game.removeBodyFromWorld((Coin) receiver);
         }
     }
 
