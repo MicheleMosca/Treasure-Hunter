@@ -10,9 +10,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.game.Enum.AnimationState;
 import com.game.graphics.entities.MovableAnimatedEntity;
 
-import java.sql.Time;
-import java.util.Timer;
-import java.util.TimerTask;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 /**
@@ -21,12 +21,12 @@ import java.util.TimerTask;
  *
  */
 
-public abstract class Player extends MovableAnimatedEntity
+public abstract class Player extends MovableAnimatedEntity implements ActionListener
 {
     private boolean isLeft;
     private boolean isAlive;
 
-    private static boolean isSliding;
+    private boolean isSliding;
     private Timer sliderTimer;
 
     private int health;
@@ -69,6 +69,13 @@ public abstract class Player extends MovableAnimatedEntity
     }
 
     @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        if (e.getSource() == sliderTimer)
+            isSliding = false;
+    }
+
+    @Override
     public void update(float deltaTime)
     {
         super.update(deltaTime);
@@ -87,21 +94,15 @@ public abstract class Player extends MovableAnimatedEntity
         if (getVelocity().x == 0 && isSliding)
         {
             isSliding = false;
-            sliderTimer.cancel();
+            sliderTimer.stop();
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT) && getVelocity().x != 0 && getState() != AnimationState.Jump)
+        if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT) && getVelocity().x != 0
+                && getState() != AnimationState.Jump && !isSliding)
         {
             isSliding = true;
-            sliderTimer = new Timer();
-            sliderTimer.schedule(new TimerTask()
-            {
-                @Override
-                public void run()
-                {
-                    Player.isSliding = false;
-                }
-            }, 1800);
+            sliderTimer = new Timer(1600, this);
+            sliderTimer.start();
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.D))

@@ -19,9 +19,12 @@ import com.game.graphics.entities.AnimatedEntity;
 import com.game.graphics.entities.MovableAnimatedEntity;
 import com.game.graphics.entities.Player;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,6 +45,10 @@ public class PlayScreen implements Screen
 	private World world;
 	private Box2DDebugRenderer debugRender;
 	private HashMap<String, AnimatedEntity> gameObjects;
+
+	private float currentTime;
+	private List<Integer> scoreTime;
+	private static int scoreCoins;
 	
 	public PlayScreen(AdventureGame game)
 	{
@@ -64,6 +71,12 @@ public class PlayScreen implements Screen
 
 		// Imposto il ContactListener per gli oggetti all'interno del mondo
 		world.setContactListener(new CollisionDetector());
+
+		currentTime = 0;
+		scoreTime = new ArrayList<Integer>(2);
+		scoreTime.add(0, 0);
+		scoreTime.add(1,0);
+		scoreCoins = 0;
 	}
 
 	private void handleInput(float deltaTime)
@@ -76,10 +89,30 @@ public class PlayScreen implements Screen
 				Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		}
 	}
+
+	private void timerCount(float deltatime)
+	{
+		currentTime += deltatime;
+
+		if (currentTime >= 1)
+		{
+			if (scoreTime.get(1) == 59)
+			{
+				scoreTime.add(0, scoreTime.get(0) + 1);
+				scoreTime.add(1, 0);
+			}
+			else
+				scoreTime.add(1 , scoreTime.get(1) + 1);
+			currentTime = 0;
+			System.out.println("Score Timer: " + scoreTime.get(0) + ":" + scoreTime.get(1));
+		}
+	}
 	
 	private void update(float deltaTime)
 	{
 		handleInput(deltaTime);
+
+		timerCount(deltaTime);
 
 		world.step(1 / 60f,  6, 2);
 
@@ -119,6 +152,12 @@ public class PlayScreen implements Screen
 
 		// Termino i disegni sulla camera
 		game.batch.end();
+	}
+
+	public static void addCoin()
+	{
+		scoreCoins++;
+		System.out.println("Coins: " + scoreCoins);
 	}
 
 	@Override

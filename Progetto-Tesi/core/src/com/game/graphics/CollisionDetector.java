@@ -1,9 +1,11 @@
 package com.game.graphics;
 
 import com.badlogic.gdx.physics.box2d.*;
+import com.game.graphics.entities.Coin;
 import com.game.graphics.entities.Entity;
 import com.game.graphics.entities.Player;
 import com.game.interfaces.Enemy;
+import com.game.screens.PlayScreen;
 
 /**
  * Classe che si occupa di gestire le collisioni tra gli oggetti in gioco
@@ -23,6 +25,11 @@ public class CollisionDetector implements ContactListener
 
         if (receiver instanceof Enemy && sender instanceof Player)
             ((Enemy) receiver).hit((Player) sender);
+
+        if (receiver instanceof Coin && sender instanceof Player)
+        {
+            PlayScreen.addCoin();
+        }
     }
 
     @Override
