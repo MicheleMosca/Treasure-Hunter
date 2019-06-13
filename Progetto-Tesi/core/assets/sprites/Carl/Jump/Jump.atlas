@@ -1,0 +1,75 @@
+Jump.png
+size: 810, 107
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Jump0
+  rotate: false
+  xy: 0, 0
+  size: 81, 107
+  orig: 81, 107
+  offset: 0, 0
+  index: -1
+Jump1
+  rotate: false
+  xy: 81, 0
+  size: 81, 107
+  orig: 81, 107
+  offset: 0, 0
+  index: -1
+Jump2
+  rotate: false
+  xy: 162, 0
+  size: 81, 107
+  orig: 81, 107
+  offset: 0, 0
+  index: -1
+Jump3
+  rotate: false
+  xy: 243, 0
+  size: 81, 107
+  orig: 81, 107
+  offset: 0, 0
+  index: -1
+Jump4
+  rotate: false
+  xy: 324, 0
+  size: 81, 107
+  orig: 81, 107
+  offset: 0, 0
+  index: -1
+Jump5
+  rotate: false
+  xy: 405, 0
+  size: 81, 107
+  orig: 81, 107
+  offset: 0, 0
+  index: -1
+Jump6
+  rotate: false
+  xy: 486, 0
+  size: 81, 107
+  orig: 81, 107
+  offset: 0, 0
+  index: -1
+Jump7
+  rotate: false
+  xy: 567, 0
+  size: 81, 107
+  orig: 81, 107
+  offset: 0, 0
+  index: -1
+Jump8
+  rotate: false
+  xy: 648, 0
+  size: 81, 107
+  orig: 81, 107
+  offset: 0, 0
+  index: -1
+Jump9
+  rotate: false
+  xy: 729, 0
+  size: 81, 107
+  orig: 81, 107
+  offset: 0, 0
+  index: -1
