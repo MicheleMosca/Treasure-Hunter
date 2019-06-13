@@ -1,6 +1,7 @@
 package com.game.graphics;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -10,9 +11,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Hud extends Stage
 {
-	private float timecount;
-	private Integer score;
-	
 	Label countdownlabel;
 	Label timelabel;
 	Label scorelabel;
@@ -21,8 +19,6 @@ public class Hud extends Stage
     public Hud()
     {
         super();
-    	timecount=0;
-    	score=0;
 
         Table table = new Table();
         table.top();
@@ -30,9 +26,10 @@ public class Hud extends Stage
 
         timelabel = new Label("TIMER: ", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         countdownlabel= new Label("0:0",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scorelabel=new Label("SCORE: ", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scorelabel=new Label("SCORE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scorevaluelabel = new Label("0",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         
+ 
         table.add(timelabel).expandX().padTop(10);
         table.add(scorelabel).expandX().padTop(10);
         table.row();
