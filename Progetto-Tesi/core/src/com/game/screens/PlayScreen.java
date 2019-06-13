@@ -124,7 +124,8 @@ public class PlayScreen implements Screen
 			else
 				scoreTime.add(1 , scoreTime.get(1) + 1);
 			currentTime = 0;
-			System.out.println("Score Timer: " + scoreTime.get(0) + ":" + scoreTime.get(1));
+			
+			hud.setcountdownlabel(scoreTime.get(0) + ":" + scoreTime.get(1));
 		}
 	}
 	
@@ -138,7 +139,7 @@ public class PlayScreen implements Screen
 
 		for (AnimatedEntity object : gameObjects)
 			object.update(deltaTime);
-
+		
 		camera.update();
 
 		camera.followThisTarget((MovableAnimatedEntity) player);
@@ -188,7 +189,7 @@ public class PlayScreen implements Screen
 	public void addCoin()
 	{
 		scoreCoins++;
-		System.out.println("Coins: " + scoreCoins);
+		hud.setscorevaluelabel(""+scoreCoins);
 	}
 
 	@Override

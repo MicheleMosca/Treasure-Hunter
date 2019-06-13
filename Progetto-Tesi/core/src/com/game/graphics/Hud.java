@@ -10,18 +10,46 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Hud extends Stage
 {
+	private float timecount;
+	private Integer score;
+	
+	Label countdownlabel;
+	Label timelabel;
+	Label scorelabel;
+	Label scorevaluelabel;
+	
     public Hud()
     {
         super();
+    	timecount=0;
+    	score=0;
 
         Table table = new Table();
-        table.top().left();
+        table.top();
         table.setFillParent(true);
 
-        Label time = new Label("Timer: ", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-
-        table.add(time).pad(50);
+        timelabel = new Label("TIMER: ", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        countdownlabel= new Label("0:0",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scorelabel=new Label("SCORE: ", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scorevaluelabel = new Label("0",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        
+        table.add(timelabel).expandX().padTop(10);
+        table.add(scorelabel).expandX().padTop(10);
+        table.row();
+        table.add(countdownlabel);
+        table.add(scorevaluelabel);
 
         addActor(table);
     }
+    
+    public void setcountdownlabel(String countdown)
+    {
+    	countdownlabel.setText(countdown);
+    }
+    
+    public void setscorevaluelabel(String score)
+    {
+    	scorevaluelabel.setText(score);
+    }
+  
 }
