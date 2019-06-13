@@ -94,6 +94,11 @@ public class CameraObject extends OrthographicCamera implements Movable, Followe
 		this.shift = shift;
 	}
 
+	public Viewport getViewport()
+	{
+		return viewport;
+	}
+
 	@Override
 	public Vector2 getPosition()
 	{

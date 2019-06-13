@@ -3,7 +3,9 @@ package com.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -11,9 +13,13 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.game.AdventureGame;
 import com.game.graphics.CameraObject;
 import com.game.graphics.CollisionDetector;
+import com.game.graphics.Hud;
 import com.game.graphics.WorldCreator;
 import com.game.graphics.entities.AnimatedEntity;
 import com.game.graphics.entities.Entity;
@@ -26,7 +32,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 /**
  * 
@@ -52,6 +58,8 @@ public class PlayScreen implements Screen
 	private int scoreCoins;
 
 	private AnimatedEntity player;
+
+	private Hud hud;
 	
 	public PlayScreen(AdventureGame game)
 	{
@@ -75,6 +83,9 @@ public class PlayScreen implements Screen
 		// Imposto il ContactListener per gli oggetti all'interno del mondo
 		world.setContactListener(new CollisionDetector(this));
 
+		// Inizializzo l'hud di gioco
+		hud = new Hud();
+
 		currentTime = 0;
 		scoreTime = new ArrayList<Integer>(2);
 		scoreTime.add(0, 0);
@@ -82,8 +93,10 @@ public class PlayScreen implements Screen
 		scoreCoins = 0;
 
 		for (AnimatedEntity object : gameObjects)
+		{
 			if (object instanceof Player)
 				player = object;
+		}
 	}
 
 	private void handleInput(float deltaTime)
@@ -149,7 +162,10 @@ public class PlayScreen implements Screen
 		
 		// Impongo al batch di proiettare tutto sulla camera 
 		game.batch.setProjectionMatrix(camera.combined);
-		
+
+		// Disegno tutti i componenti dell'hud
+		hud.draw();
+
 		// Inizio i desegni sulla camera
 		game.batch.begin();
 
