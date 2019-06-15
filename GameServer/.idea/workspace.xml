@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/Hud.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/Hud.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="60" column="73" selection-start-line="60" selection-start-column="61" selection-end-line="60" selection-end-column="73" />
+            <state relative-caret-position="289">
+              <caret line="68" column="66" selection-start-line="68" selection-start-column="66" selection-end-line="68" selection-end-column="66" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -31,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="587">
-              <caret line="143" column="4" selection-start-line="143" selection-start-column="4" selection-end-line="143" selection-end-column="4" />
+            <state relative-caret-position="553">
+              <caret line="152" column="9" lean-forward="true" selection-start-line="152" selection-start-column="9" selection-end-line="152" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,8 +60,8 @@
         <option value="$PROJECT_DIR$/src/com/dlinkddns/micheleserver/main/Main.java" />
         <option value="$PROJECT_DIR$/src/com/gameserver/restserver/ServerRest.java" />
         <option value="$PROJECT_DIR$/src/com/gameserver/main/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java" />
         <option value="$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java" />
+        <option value="$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java" />
       </list>
     </option>
   </component>
@@ -192,6 +191,14 @@
       <option name="presentableId" value="Default" />
       <updated>1560421141433</updated>
     </task>
+    <task id="LOCAL-00001" summary="Inserimento del metodo per inserire un nuovo record">
+      <created>1560627401263</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1560627401263</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -207,7 +214,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -226,22 +233,26 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Inserimento del metodo per inserire un nuovo record" />
+    <option name="LAST_COMMIT_MESSAGE" value="Inserimento del metodo per inserire un nuovo record" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/gameserver/main/Main.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java">
+    <entry file="file://$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="60" column="73" selection-start-line="60" selection-start-column="61" selection-end-line="60" selection-end-column="73" />
+        <state relative-caret-position="553">
+          <caret line="152" column="9" lean-forward="true" selection-start-line="152" selection-start-column="9" selection-end-line="152" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java">
+    <entry file="file://$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="143" column="4" selection-start-line="143" selection-start-column="4" selection-end-line="143" selection-end-column="4" />
+        <state relative-caret-position="289">
+          <caret line="68" column="66" selection-start-line="68" selection-start-column="66" selection-end-line="68" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

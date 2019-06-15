@@ -64,6 +64,10 @@ public class RestServerResource extends ServerResource
                         getQuery().getValues("livello"), Integer.parseInt(getQuery().getValues("coins")),
                         getQuery().getValues("time")));
             }
+            else if (getReference().getLastSegment().equals("getLivelli"))
+            {
+                response = resultset_to_json(dbManager.getLivelli(getQuery().getValues("username")));
+            }
             else
             {
                 throw new ResourceException(new Status(Status.SERVER_ERROR_NOT_IMPLEMENTED, ""));

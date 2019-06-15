@@ -141,5 +141,16 @@ public class DBManager
         return true;
     }
 
-
+    public ResultSet getLivelli(String username)
+    {
+        ResultSet resultSet = null;
+        try
+        {
+            resultSet = statement.executeQuery("select livello from Partite where username = '" + username + "' order by livello");
+        } catch (SQLException e)
+        {
+            System.out.println("Errore: Query get Livelli non risolta");
+        }
+        return resultSet;
+    }
 }
