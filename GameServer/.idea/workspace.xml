@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca5ff812-8a21-42d6-b039-3250831762f0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/json-20180813.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/org.restlet.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameServer/com/dlinkddns/micheleserver/main/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dlinkddns/micheleserver/main/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/sprites/Coin/Coin_01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/sprites/Coin/Coin_02.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/sprites/Coin/Coin_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/sprites/Coin/Coin_6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/sprites/Coin/Idle1.atlas" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/Hud.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/Hud.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -29,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="43" column="9" lean-forward="true" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
+            <state relative-caret-position="255">
+              <caret line="60" column="73" selection-start-line="60" selection-start-column="61" selection-end-line="60" selection-end-column="73" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,14 +31,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="55" column="22" selection-start-line="55" selection-start-column="22" selection-end-line="55" selection-end-column="22" />
+            <state relative-caret-position="587">
+              <caret line="143" column="4" selection-start-line="143" selection-start-column="4" selection-end-line="143" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1107#1115#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,8 +61,8 @@
         <option value="$PROJECT_DIR$/src/com/dlinkddns/micheleserver/main/Main.java" />
         <option value="$PROJECT_DIR$/src/com/gameserver/restserver/ServerRest.java" />
         <option value="$PROJECT_DIR$/src/com/gameserver/main/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java" />
         <option value="$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java" />
+        <option value="$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java" />
       </list>
     </option>
   </component>
@@ -89,7 +78,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -140,6 +128,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -173,32 +162,6 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.gameserver.main.Main" />
-      <module name="GameServer" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.gameserver.main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.dlinkddns.micheleserver.main.Main" />
-      <module name="GameServer" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.dlinkddns.micheleserver.main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="RestServerResource" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.gameserver.restserver.RestServerResource" />
       <module name="GameServer" />
@@ -215,8 +178,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.RestServerResource" />
-        <item itemvalue="Application.Main (1)" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -237,7 +198,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25637585" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2624161" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -246,15 +207,15 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3286119" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3286119" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3286119" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -266,10 +227,11 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/gameserver/main/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/com/gameserver/main/Main.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="17" column="32" lean-forward="true" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
+        <state relative-caret-position="255">
+          <caret line="60" column="73" selection-start-line="60" selection-start-column="61" selection-end-line="60" selection-end-column="73" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -278,19 +240,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="55" column="22" selection-start-line="55" selection-start-column="22" selection-end-line="55" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1107#1115#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="43" column="9" lean-forward="true" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
+        <state relative-caret-position="587">
+          <caret line="143" column="4" selection-start-line="143" selection-start-column="4" selection-end-line="143" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

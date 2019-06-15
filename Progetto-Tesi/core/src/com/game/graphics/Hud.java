@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Hud extends Stage
@@ -23,7 +24,7 @@ public class Hud extends Stage
         super();
 
         Table table = new Table();
-        table.top();
+        table.top().left().pad(50);
         table.setFillParent(true);
 
         texture=new Texture("sprites/Coin/Coin.png");
@@ -32,12 +33,11 @@ public class Hud extends Stage
         coin=new Image(texture);
         scorevaluelabel = new Label("0",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-
-        table.add(timelabel).expandX().padTop(10);
-        table.add(coin).expandX().padTop(10);
-        table.row();
-        table.add(countdownlabel);
+        table.add(coin);
         table.add(scorevaluelabel);
+        table.row().padTop(20).padLeft(20);
+        table.add(timelabel);
+        table.add(countdownlabel).padLeft(10);
 
         addActor(table);
     }

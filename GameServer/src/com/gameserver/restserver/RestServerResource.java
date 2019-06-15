@@ -1,9 +1,11 @@
 package com.gameserver.restserver;
 
-import java.util.Calendar;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
 
 import com.gameserver.dbManager.DBManager;
-import org.json.JSONObject;
+import org.json.JSONArray;
 import org.restlet.Server;
 import org.restlet.data.Protocol;
 import org.restlet.data.Status;
@@ -11,55 +13,56 @@ import org.restlet.resource.Get;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
+/**
+ * Classe per la gestione del server REST basato sulla connessione ad un database
+ */
+
 public class RestServerResource extends ServerResource
 {
     public static DBManager dbManager;
 
-    public String getDate()
+    /**
+     * Metodo universale per ottenere un json array di json object presi dal risultato di una query
+     * @param resultSet result set della query procesata
+     * @return JSON array in forma di stringa
+     * @throws SQLException Eventuali errori sql devono essere gestiti dal chiamante
+     */
+    private String resultset_to_json(ResultSet resultSet) throws SQLException
     {
-        JSONObject obj = new JSONObject();
-        obj.put("machine", "pippo.frida.org");
-        obj.put("year", Calendar.getInstance().get(Calendar.YEAR));
-        obj.put("month", Calendar.getInstance().get(Calendar.MONTH));
-        obj.put("day", Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        return obj.toString();
-    }
-
-    public String getTime()
-    {
-        JSONObject obj = new JSONObject();
-        obj.put("machine", "pippo.frida.org");
-        obj.put("second", Calendar.getInstance().get(Calendar.SECOND));
-        obj.put("minute", Calendar.getInstance().get(Calendar.MINUTE));
-        obj.put("hour", Calendar.getInstance().get(Calendar.HOUR));
-        return obj.toString();
-    }
-
-    public String getNames()
-    {
-        JSONObject obj = new JSONObject();
-        for (String str : dbManager.getNames())
+        JSONArray jarr = new JSONArray();
+        while (resultSet.next())
         {
-            obj.put("nome", dbManager.getNames());
+            HashMap<String, String> row = new HashMap<String, String>();
+            for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++)
+                row.put(resultSet.getMetaData().getColumnName(i), String.valueOf(resultSet.getObject(i)));
+            jarr.put(row);
         }
-        return obj.toString();
+        return jarr.toString();
     }
 
+    /**
+     * Metodo per la gestione delle connessioni in arrivo
+     * @return Risposta all'utente
+     */
     @Get
     public String handleConnection()
     {
         String response = null;
         try
         {
-            if (getReference().getLastSegment().equals("current_date"))
+            if (getReference().getLastSegment().equals("getClassifica"))
             {
-                response = getDate();
-            } else if (getReference().getLastSegment().equals("current_time"))
+                response = resultset_to_json(dbManager.getClassifica(getQuery().getValues("livello")));
+            }
+            else if (getReference().getLastSegment().equals("checkUser"))
             {
-                response = getTime();
-            } else if (getReference().getLastSegment().equals("names"))
+                response = String.valueOf(dbManager.checkUser(getQuery().getValues("username"), getQuery().getValues("password")));
+            }
+            else if (getReference().getLastSegment().equals("updateRecord"))
             {
-                response = getNames();
+                response = String.valueOf(dbManager.updateRecord(getQuery().getValues("username"),
+                        getQuery().getValues("livello"), Integer.parseInt(getQuery().getValues("coins")),
+                        getQuery().getValues("time")));
             }
             else
             {
