@@ -3,12 +3,17 @@ package com.game.graphics;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.viewport.Viewport;
+
+
+/**
+ * 
+ * Classe per HUD del gioco, verrà avviato insieme al 
+ *
+ */
 
 public class Hud extends Stage
 {
@@ -32,7 +37,7 @@ public class Hud extends Stage
         coin=new Image(texture);
         scorevaluelabel = new Label("0",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-
+        
         table.add(timelabel).expandX().padTop(10);
         table.add(coin).expandX().padTop(10);
         table.row();

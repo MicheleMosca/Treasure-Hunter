@@ -2,7 +2,8 @@ package com.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.game.screens.PlayScreen;
+import com.game.screens.MainMenuScreen;
+
 
 /**
  * 
@@ -23,7 +24,7 @@ public class AdventureGame extends Game
 	public void create ()
 	{
 		batch = new SpriteBatch();
-		setScreen(new PlayScreen(this));
+		setScreen(new MainMenuScreen(this));
 	}
 
 	@Override
