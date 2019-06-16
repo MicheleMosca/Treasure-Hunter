@@ -2,7 +2,9 @@ package com.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.game.screens.LoginScreen;
 import com.game.screens.MainMenuScreen;
+import com.game.screens.SignupScreen;
 
 
 /**
@@ -24,7 +26,7 @@ public class AdventureGame extends Game
 	public void create ()
 	{
 		batch = new SpriteBatch();
-		setScreen(new MainMenuScreen(this));
+		setScreen(new SignupScreen(this));
 	}
 
 	@Override

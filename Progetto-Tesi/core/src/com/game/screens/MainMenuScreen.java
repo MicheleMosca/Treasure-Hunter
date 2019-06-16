@@ -27,12 +27,12 @@ import com.game.AdventureGame;
 
 public class MainMenuScreen implements Screen
 {
-	private static final int Width = 80;
-	private static final int Height = 80;
-	private static final int PlayPositionX=500;
-	private static final int PlayPositionY=400;
-	private static final int ExitPositionX=500;
-	private static final int ExitPositionY=200;
+	private static final int Width = 200; //80
+	private static final int Height = 100;
+	private static final int PlayPositionX = 500;
+	private static final int PlayPositionY = 400;
+	private static final int ExitPositionX = 500;
+	private static final int ExitPositionY = 200;
 	
 	private Stage stage;
 	private Texture Background;
@@ -40,7 +40,7 @@ public class MainMenuScreen implements Screen
 	public MainMenuScreen(final AdventureGame game)
 	{
 		//texture del pulsante PLAY
-		Texture Play= new Texture("menu/play.png");
+		Texture Play= new Texture("menu/Prova.png");
 		//texture del pulsante EXIT
 		Texture Exit= new Texture("menu/close_2.png");
 		//texture del background

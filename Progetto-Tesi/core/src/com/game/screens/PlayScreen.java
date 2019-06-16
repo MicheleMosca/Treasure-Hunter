@@ -21,7 +21,6 @@ import com.game.graphics.entities.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * 
  * Screen che rappresenta il gioco in riproduzione
