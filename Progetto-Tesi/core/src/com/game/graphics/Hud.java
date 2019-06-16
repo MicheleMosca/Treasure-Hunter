@@ -9,19 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 
-
 /**
  * 
  * Classe per HUD del gioco, verrà avviato insieme al PlayScreen
- *
- */
-
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.Viewport;
-
-/**
- * 
- * Classe per HUD del gioco
  *
  */
 
