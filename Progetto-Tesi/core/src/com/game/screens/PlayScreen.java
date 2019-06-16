@@ -3,36 +3,24 @@ package com.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.game.AdventureGame;
 import com.game.graphics.CameraObject;
 import com.game.graphics.CollisionDetector;
 import com.game.graphics.Hud;
 import com.game.graphics.WorldCreator;
 import com.game.graphics.entities.AnimatedEntity;
-import com.game.graphics.entities.Entity;
 import com.game.graphics.entities.MovableAnimatedEntity;
 import com.game.graphics.entities.Player;
-
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
+
 
 /**
  * 
