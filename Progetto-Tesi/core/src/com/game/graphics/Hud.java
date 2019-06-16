@@ -19,6 +19,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+/**
+ * 
+ * Classe per HUD del gioco
+ *
+ */
+
 public class Hud extends Stage
 {
 	Label countdownlabel;
