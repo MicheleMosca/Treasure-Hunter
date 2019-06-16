@@ -97,6 +97,8 @@ public class PlayScreen implements Screen
 			if (object instanceof Player)
 				player = object;
 		}
+
+		Gdx.input.setInputProcessor(null);
 	}
 
 	private void handleInput(float deltaTime)

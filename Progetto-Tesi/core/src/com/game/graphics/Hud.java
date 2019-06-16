@@ -8,24 +8,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
-
-
 /**
  * 
  * Classe per HUD del gioco, verrà avviato insieme al PlayScreen
  *
  */
 
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.Viewport;
-
 public class Hud extends Stage
 {
-	Label countdownlabel;
-	Label timelabel;
-    Image coin;
-	Label scorevaluelabel;
-    Texture texture;
+	private Label countdownlabel;
+	private Label scorevaluelabel;
 	
     public Hud()
     {
@@ -35,10 +27,10 @@ public class Hud extends Stage
         table.top();
         table.setFillParent(true);
 
-        texture=new Texture("sprites/Coin/Coin.png");
-        timelabel = new Label("TIMER: ", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Texture texture = new Texture("sprites/Coin/Coin.png");
+        Label timelabel = new Label("TIMER: ", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         countdownlabel= new Label("0:0",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        coin=new Image(texture);
+        Image coin=new Image(texture);
         scorevaluelabel = new Label("0",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
        
@@ -47,7 +39,6 @@ public class Hud extends Stage
         table.row();
         table.add(countdownlabel);
         table.add(scorevaluelabel);
-      
 
         addActor(table);
     }
