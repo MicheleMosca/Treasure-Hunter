@@ -33,7 +33,6 @@ public class Hud extends Stage
         Image coin=new Image(texture);
         scorevaluelabel = new Label("0",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-       
         table.add(timelabel).expandX().padTop(10);
         table.add(coin).expandX().padTop(10);
         table.row();
