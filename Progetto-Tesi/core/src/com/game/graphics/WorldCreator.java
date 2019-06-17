@@ -55,7 +55,7 @@ public class WorldCreator
 
             // Inserisco nel mondo il punto di fine del gioco
             else if (mapObject.getName().equals("finishSpawn"))
-                gameObjects.add(new );
+                gameObjects.add(new Chest(world, mapObject));
         }
 
         return gameObjects;
