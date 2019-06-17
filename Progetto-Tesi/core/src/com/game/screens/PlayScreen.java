@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.game.AdventureGame;
+import com.game.User;
 import com.game.graphics.CameraObject;
 import com.game.graphics.CollisionDetector;
 import com.game.graphics.Hud;
@@ -47,6 +48,9 @@ public class PlayScreen implements Screen
 	private AnimatedEntity player;
 
 	private Hud hud;
+	
+	//da cancellare
+	private User user;
 	
 	public PlayScreen(AdventureGame game)
 	{
@@ -97,6 +101,9 @@ public class PlayScreen implements Screen
 			else
 				Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		}
+		
+		if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
+			game.setScreen(new MainMenuScreen(game, user));
 	}
 
 	private void timerCount(float deltatime)
