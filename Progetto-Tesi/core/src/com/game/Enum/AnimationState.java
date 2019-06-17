@@ -5,8 +5,6 @@ public enum AnimationState
     Idle,
     Run,
     Jump,
-    Fall,
     Dead,
-    Slide,
-    Crouch
+    Slide
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.game.graphics.entities.AnimatedEntity;
+import com.game.graphics.entities.Chest;
 import com.game.graphics.entities.Coin;
 import com.game.graphics.entities.Entity;
 import com.game.graphics.entities.enemies.Spike;
@@ -32,19 +33,25 @@ public class WorldCreator
                 new Spike(world, mapObject, BodyDef.BodyType.StaticBody);
         }
 
+        // Inserisco nel mondo i coin con i relativi spawn points
         for (MapObject mapObject : tiledMap.getLayers().get("Spawn").getObjects())
         {
-            // Inserisco nel mondo i coin con i relativi spawn points
             if (mapObject.getName().equals("coinSpawn"))
                 gameObjects.add(new Coin(world, mapObject));
+        }
 
-            // Inserisco nel mondo il player in uso con il relativo spawn point
-            else if (mapObject.getName().equals("playerSpawn"))
+        // Inserisco nel mondo la chest di fine livello
+        for (MapObject mapObject : tiledMap.getLayers().get("Spawn").getObjects())
+        {
+            if (mapObject.getName().equals("finishSpawn"))
+                gameObjects.add(new Chest(world, mapObject));
+        }
+
+        // Inserisco nel mondo il player in uso con il relativo spawn point
+        for (MapObject mapObject : tiledMap.getLayers().get("Spawn").getObjects())
+        {
+            if (mapObject.getName().equals("playerSpawn"))
                 gameObjects.add(new Carl(world, mapObject));
-
-            // Inserisco nel mondo il punto di fine del gioco
-            else if (mapObject.getName().equals("finishSpawn"))
-                gameObjects.add(new );
         }
 
         return gameObjects;

@@ -8,7 +8,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.game.Enum.AnimationState;
+import com.game.graphics.Panels.GameOver;
 import com.game.graphics.entities.MovableAnimatedEntity;
+import com.game.screens.PlayScreen;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -156,7 +158,8 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
     {
         if (health - damage <= 0)
         {
-            System.out.println("Game Over!");
+            PlayScreen.gameOnPause = true;
+            GameOver.setVisible(true);
             isAlive = false;
             return;
         }

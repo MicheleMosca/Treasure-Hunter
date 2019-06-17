@@ -174,7 +174,7 @@
   <object id="18" name="coinSpawn" x="783.5" y="582.5" width="17" height="15"/>
   <object id="19" name="coinSpawn" x="1775" y="600" width="17" height="15"/>
   <object id="20" name="coinSpawn" x="2431.5" y="663" width="17" height="15"/>
-  <object id="21" name="finishSpawn" x="3007.5" y="640" width="33.5" height="34"/>
+  <object id="21" name="finishSpawn" x="3008.5" y="655" width="33.5" height="34"/>
  </objectgroup>
  <objectgroup id="12" name="Enemies">
   <object id="14" name="spike" x="1922.5" y="660.5" width="138.5" height="27.5"/>

@@ -25,7 +25,7 @@ public class AnimatedEntity extends Entity
 	// attributi per la gestione delle animazioni
 	private AnimationState currentState;
 	private AnimationState previousState;
-	private HashMap<AnimationState, Animation<TextureRegion>> animations;
+	protected HashMap<AnimationState, Animation<TextureRegion>> animations;
 
 	// dimensioni delle texture inerenti alle animazioni
 	private HashMap<AnimationState, Vector2> texturesDimension;
@@ -67,7 +67,7 @@ public class AnimatedEntity extends Entity
 	protected void createAnimation(AnimationState animationName, String textureAtlasPath, String textureRegionName,
 								   Vector2 textureDimension, Animation.PlayMode animationMode)
 	{
-		if (textureAtlas.containsKey(animationName) == false)
+		if (!textureAtlas.containsKey(animationName))
 		{
 			textureAtlas.put(animationName, new TextureAtlas(textureAtlasPath));
 			texturesDimension.put(animationName, textureDimension);
