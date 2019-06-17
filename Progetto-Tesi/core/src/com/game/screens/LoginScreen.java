@@ -89,7 +89,7 @@ public class LoginScreen extends ChangeListener implements Screen
         Button exitButton = new Button(new TextureRegionDrawable(new TextureRegion((closeTexture))));
         exitButton.setName("exit");
         exitButton.addListener(this);
-        exitButton.setSize(150 / 4, 147 / 4);
+        exitButton.setSize(214 / 5, 215 / 5);
         exitButton.setPosition(table.getX() + table.getWidth() - (exitButton.getWidth()*2),
                 table.getY() + table.getHeight() - exitButton.getHeight() - 10);
 
