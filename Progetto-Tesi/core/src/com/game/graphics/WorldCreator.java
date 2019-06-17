@@ -11,7 +11,6 @@ import com.game.graphics.entities.Entity;
 import com.game.graphics.entities.enemies.Spike;
 import com.game.graphics.entities.players.Carl;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 

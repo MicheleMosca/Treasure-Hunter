@@ -1,7 +1,6 @@
 package com.game.graphics.Panels;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -12,25 +11,23 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.game.AdventureGame;
 import com.game.screens.LevelScreen;
-import com.game.screens.MainMenuScreen;
 import com.game.screens.PlayScreen;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-
-import javax.swing.event.ChangeEvent;
 
 public class GameOver extends ChangeListener
 {
     public static Stage stage;
     private static boolean visible;
     private AdventureGame game;
+    private PlayScreen playScreen;
 
-    public GameOver(AdventureGame game)
+    public GameOver(AdventureGame game, PlayScreen playScreen)
     {
         super();
 
         visible = false;
         this.game = game;
+        this.playScreen = playScreen;
+
         stage = new Stage();
         Vector2 stageSize = new Vector2(1298 / 2, 952 / 2);
 
@@ -75,18 +72,13 @@ public class GameOver extends ChangeListener
     @Override
     public void changed(ChangeEvent event, Actor actor)
     {
-        if (actor.getName().equals("playagain"))
-        {
-            stage.dispose();
-            setVisible(false);
-            game.setScreen(new PlayScreen(game));
-        }
+        stage.dispose();
+        playScreen.dispose();
 
-        if (actor.getName().equals("exit"))
-        {
-            stage.dispose();
-            setVisible(false);
+        if (actor.getName().equals("playagain"))
+            game.setScreen(new PlayScreen(game));
+
+        else if (actor.getName().equals("exit"))
             game.setScreen(new LevelScreen(game));
-        }
     }
 }

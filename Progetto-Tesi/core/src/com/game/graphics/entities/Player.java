@@ -30,6 +30,7 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
 
     private boolean isSliding;
     private Timer sliderTimer;
+    private Timer deadTimer;
 
     private int health;
 
@@ -74,7 +75,16 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == sliderTimer)
+        {
             isSliding = false;
+            sliderTimer.stop();
+        }
+        else if (e.getSource() == deadTimer)
+        {
+            PlayScreen.gameOnPause = true;
+            GameOver.setVisible(true);
+            deadTimer.stop();
+        }
     }
 
     @Override
@@ -156,14 +166,13 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
      */
     public void takeHit(int damage)
     {
-        if (health - damage <= 0)
-        {
-            PlayScreen.gameOnPause = true;
-            GameOver.setVisible(true);
-            isAlive = false;
-            return;
-        }
-
         health -= damage;
+
+        if (health <= 0)
+        {
+            deadTimer = new Timer(650, this);
+            deadTimer.start();
+            isAlive = false;
+        }
     }
 }

@@ -94,7 +94,7 @@ public class PlayScreen implements Screen
 				player = object;
 		}
 
-		gameOverScreen = new GameOver(game);
+		gameOverScreen = new GameOver(game, this);
 
 		Gdx.input.setInputProcessor(null);
 	}
@@ -183,7 +183,7 @@ public class PlayScreen implements Screen
 
 		// Visualizzo il menu di game over
 		if (gameOverScreen.isVisible())
-			gameOverScreen.stage.draw();
+			GameOver.stage.draw();
 	}
 
 	public void removeBodyFromWorld(AnimatedEntity entity)
