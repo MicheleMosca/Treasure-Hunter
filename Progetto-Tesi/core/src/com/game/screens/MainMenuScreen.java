@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.game.AdventureGame;
@@ -38,16 +39,12 @@ public class MainMenuScreen implements Screen
 	{
 		this.game = game;
 		this.user = user;
-
-		//texture del pulsante PLAY
-		Texture Play= new Texture("menu/Prova.png");
-		//texture del pulsante EXIT
-		Texture Exit= new Texture("menu/close.png");
+		
 		//texture del background
 		background = new Texture("menu/background.png");
 		
 		//carico l'immagine del pulsante EXIT
-	    Button ExitButton = new Button(new TextureRegionDrawable(new TextureRegion(Exit)));
+	    Button ExitButton = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/exit.png"))));
 	    
 	    ExitButton.setSize(Width, Height);
 	    ExitButton.setPosition(ExitPositionX, ExitPositionY);
@@ -61,7 +58,7 @@ public class MainMenuScreen implements Screen
 		});
 	    
 	    //caruco l'immagine del pulsante PLAY
-	    Button PlayButton = new Button(new TextureRegionDrawable(new TextureRegion(Play)));
+	    Button PlayButton = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/play.png"))));
 	    
 	    PlayButton.setSize(Width, Height);
 	    PlayButton.setPosition(PlayPositionX, PlayPositionY);
@@ -75,10 +72,17 @@ public class MainMenuScreen implements Screen
 			}
 		});
 	    
+	    Table table= new Table();
+	    table.setPosition(Gdx.graphics.getWidth()/2 -  800 / 2  , Gdx.graphics.getHeight()/2 - 1457 / 4);
+	    table.setSize(800, 1457 / 2);
 	    
-	    stage=new Stage();
-	    stage.addActor(PlayButton);
-	    stage.addActor(ExitButton);
+	    table.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/table.png"))));
+	    table.add(PlayButton).size(240,180).pad(20);
+	    table.row();
+	    table.add(ExitButton).size(240,180).pad(20);
+	    
+	    stage=new Stage(); 
+	    stage.addActor(table);
 
 	    Gdx.input.setInputProcessor(stage);
 

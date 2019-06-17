@@ -52,6 +52,10 @@ public class WorldCreator
         {
             if (mapObject.getName().equals("playerSpawn"))
                 gameObjects.add(new Carl(world, mapObject));
+
+            // Inserisco nel mondo il punto di fine del gioco
+            else if (mapObject.getName().equals("finishSpawn"))
+                gameObjects.add(new );
         }
 
         return gameObjects;

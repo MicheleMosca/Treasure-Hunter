@@ -40,35 +40,19 @@ public class LevelScreen implements Screen
 
 	public LevelScreen (final AdventureGame game)
 	{
-		//texture del pulsante level1
-		Texture Level1= new Texture("menu/level_select/1.png");
-		
-		//texture del pulsante level2
-		Texture Level2= new Texture("menu/level_select/2.png");
-		
 		//texture del background
 		background = new Texture("menu/level_select/Sky.png");
 		
-		//texture del pulsante per tornare al menu principale
-		Texture Prew= new Texture("menu/level_select/prew.png");
-		
-		//background table1
-		Texture tab =new Texture("menu/level_select/bg.png");
-		
-		//Scritta select level
-		Texture StrLevel = new Texture("menu/level_select/header.png");
-		
-		//background table2
-		Texture tab1=new Texture("menu/level_select/table2.png");
-		
 		//Header level select
-		Image Header = new Image(StrLevel);
+		Image Header = new Image(new Texture("menu/level_select/header.png"));
 		
 		//stelle
 		Image Star = new Image(new Texture("menu/level_select/star_1.png"));
 		
+		Image Lock = new Image(new Texture("menu/level_select/lockbtnw.png"));
+		
 		//carico l'immagine del pulsante PREW
-	    Button PrewButton = new Button(new TextureRegionDrawable(new TextureRegion(Prew)));
+	    Button PrewButton = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/level_select/prew.png"))));
 	    
 	    //listener per il bottone PREW
 	    PrewButton.addListener(new ChangeListener()
@@ -82,8 +66,8 @@ public class LevelScreen implements Screen
 		});
 	    
 	    //carico l'immagine dei pulsanti dei livelli 
-	    Button Level1Button = new Button(new TextureRegionDrawable(new TextureRegion(Level1)));
-	    Button Level2Button = new Button(new TextureRegionDrawable(new TextureRegion(Level2)));
+	    Button Level1Button = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/level_select/btn1.png"))));
+	    Button Level2Button = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/level_select/btn2.png"))));
 	    
 	    //listener per il bottone livello 1
 	    Level1Button.addListener(new ChangeListener()
@@ -114,20 +98,25 @@ public class LevelScreen implements Screen
 	    table1.setSize(1307 / 2, 1457 / 2);
 	    
 	    table1.top().pad(40);
-	    table1.background(new TextureRegionDrawable(new TextureRegion(tab)));
+	    table1.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/level_select/bg.png"))));
 	    table1.add(Header).size(1003/2,396/2);
 	    table1.row();
 	    
 	    //init table2
 	    Table table2 = new Table();
 	    table2.pad(20);
-	    table2.background(new TextureRegionDrawable(new TextureRegion(tab1)));
+	    table2.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/level_select/table2.png"))));
 	    
 	    //init table3
 	    Table table3 =new Table();
 	    table3.pad(20);
-	    table3.add(Level1Button).expandY().pad(50);
-	    table3.add(Level2Button).expandY().pad(50);
+	    
+	    table3.add(Level1Button).expandY().pad(30);
+	    
+	    if(0>=1)
+	    	table3.add(Level2Button).expandY().pad(30);
+	    else
+	    	table3.add(Lock).expandY().pad(30);
 	    
 	    table2.add(table3);
 	    table2.row();
