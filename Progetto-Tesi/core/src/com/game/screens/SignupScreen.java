@@ -121,13 +121,13 @@ public class SignupScreen extends ChangeListener implements Screen
             String reply = null;
             try
             {
-                reply = new ClientResource("http://localhost:4444/checkUser?username=" + usernameField.getText() +
+                reply = new ClientResource("http://" + AdventureGame.serverIP + ":4444/checkUser?username=" + usernameField.getText() +
                         "").get().getText();
 
                 if (reply.equals("true"))
                 {
                     // Username disponibile
-                    reply = new ClientResource("http://localhost:4444/addUser?username=" + usernameField.getText() +
+                    reply = new ClientResource("http://" + AdventureGame.serverIP + ":4444/addUser?username=" + usernameField.getText() +
                             "&password=" + passwordField.getText() + "").get().getText();
 
                     if (reply.equals("true"))

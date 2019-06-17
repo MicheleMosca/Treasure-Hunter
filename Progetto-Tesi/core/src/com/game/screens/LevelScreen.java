@@ -35,37 +35,37 @@ public class LevelScreen implements Screen
 {
 
 	private Stage stage;
-	private Texture Background;
+	private Texture background;
 	private User user;
 
 	public LevelScreen (final AdventureGame game)
 	{
 		//texture del pulsante level1
-		Texture Level1= new Texture("level_select/1.png");
+		Texture Level1= new Texture("menu/level_select/1.png");
 		
 		//texture del pulsante level2
-		Texture Level2= new Texture("level_select/2.png");
+		Texture Level2= new Texture("menu/level_select/2.png");
 		
 		//texture del background
-		Background = new Texture("level_select/Sky.png");
+		background = new Texture("menu/level_select/Sky.png");
 		
 		//texture del pulsante per tornare al menu principale
-		Texture Prew= new Texture("level_select/prew.png");
+		Texture Prew= new Texture("menu/level_select/prew.png");
 		
 		//background table1
-		Texture tab =new Texture("level_select/bg.png");
+		Texture tab =new Texture("menu/level_select/bg.png");
 		
 		//Scritta select level
-		Texture StrLevel = new Texture("level_select/header.png");
+		Texture StrLevel = new Texture("menu/level_select/header.png");
 		
 		//background table2
-		Texture tab1=new Texture("level_select/table2.png");
+		Texture tab1=new Texture("menu/level_select/table2.png");
 		
 		//Header level select
 		Image Header = new Image(StrLevel);
 		
 		//stelle
-		Image Star = new Image(new Texture("level_select/star_1.png"));
+		Image Star = new Image(new Texture("menu/level_select/star_1.png"));
 		
 		//carico l'immagine del pulsante PREW
 	    Button PrewButton = new Button(new TextureRegionDrawable(new TextureRegion(Prew)));
@@ -76,6 +76,7 @@ public class LevelScreen implements Screen
 			@Override
 			public void changed (ChangeEvent event, Actor actor)
 			{
+				dispose();
 				game.setScreen(new MainMenuScreen(game, user));
 			}
 		});
@@ -90,6 +91,7 @@ public class LevelScreen implements Screen
 			@Override
 			public void changed (ChangeEvent event, Actor actor)
 			{
+				dispose();
 				game.setScreen(new PlayScreen(game));
 			}
 		});
@@ -100,6 +102,7 @@ public class LevelScreen implements Screen
 			@Override
 			public void changed (ChangeEvent event, Actor actor)
 			{
+				dispose();
 				game.setScreen(new PlayScreen(game));
 			}
 		});
@@ -155,7 +158,7 @@ public class LevelScreen implements Screen
 		
 		//inserire nello stage il background
 		stage.getBatch().begin();
-		stage.getBatch().draw(Background, 0, 0);
+		stage.getBatch().draw(background, 0, 0);
 		stage.getBatch().end();
 
 		stage.draw();
@@ -193,8 +196,8 @@ public class LevelScreen implements Screen
 	@Override
 	public void dispose()
 	{
-		// TODO Auto-generated method stub
-		
+		stage.dispose();
+		background.dispose();
 	}
 
 }

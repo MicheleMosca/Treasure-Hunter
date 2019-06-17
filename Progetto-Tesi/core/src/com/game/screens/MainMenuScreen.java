@@ -32,7 +32,7 @@ public class MainMenuScreen implements Screen
 	private User user;
 
 	private Stage stage;
-	private Texture Background;
+	private Texture background;
 	
 	public MainMenuScreen(final AdventureGame game, User user)
 	{
@@ -45,7 +45,7 @@ public class MainMenuScreen implements Screen
 		//texture del pulsante EXIT
 		Texture Exit= new Texture("menu/close.png");
 		//texture del background
-		Background = new Texture("menu/background.png");
+		background = new Texture("menu/background.png");
 		
 		//carico l'immagine del pulsante EXIT
 	    Button ExitButton = new Button(new TextureRegionDrawable(new TextureRegion(Exit)));
@@ -71,7 +71,8 @@ public class MainMenuScreen implements Screen
 			@Override
 			public void changed (ChangeEvent event, Actor actor)
 			{
-				game.setScreen(new PlayScreen(game));
+				dispose();
+				game.setScreen(new LevelScreen(game));
 			}
 		});
 	    
@@ -99,7 +100,7 @@ public class MainMenuScreen implements Screen
 		
 		//inserire nello stage il background
 		stage.getBatch().begin();
-		stage.getBatch().draw(Background, 0, 0);
+		stage.getBatch().draw(background, 0, 0);
 		stage.getBatch().end();
 
 		stage.draw();
@@ -136,8 +137,8 @@ public class MainMenuScreen implements Screen
 	@Override
 	public void dispose()
 	{
-		// TODO Auto-generated method stub
-		
+		stage.dispose();
+		background.dispose();
 	}
 	
 }
