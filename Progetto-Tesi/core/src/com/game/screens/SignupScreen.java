@@ -14,6 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.game.AdventureGame;
+import org.restlet.resource.ClientResource;
+
+import java.io.IOException;
 
 /**
  * Classe per la crazione del menu di sign up del gioco
@@ -21,14 +24,24 @@ import com.game.AdventureGame;
 
 public class SignupScreen extends ChangeListener implements Screen
 {
+    private AdventureGame game;
+
     private Stage stage;
+    private Texture background;
+
     private Label warningLabel;
     private Button signupButton;
+    private TextField usernameField;
+    private TextField passwordField;
 
     public SignupScreen(final AdventureGame game)
     {
+        this.game = game;
+
         stage = new Stage();
         Vector2 stageSize = new Vector2(1298 / 2, 952 / 2);
+
+        background = new Texture("menu/background.png");
 
         Table table = new Table();
         table.setPosition(((float) Gdx.graphics.getWidth() /2) - (stageSize.x /2), ((float) Gdx.graphics.getHeight() /2) - (stageSize.y /2));
@@ -39,18 +52,17 @@ public class SignupScreen extends ChangeListener implements Screen
         labelStyle.font = new BitmapFont();
         labelStyle.fontColor = Color.RED;
         warningLabel = new Label("", labelStyle);
-        warningLabel.setText("Username non disponibile");
 
         TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
         textFieldStyle.background = new TextureRegionDrawable(new TextureRegion(new Texture("menu/field.png")));
         textFieldStyle.fontColor = Color.LIGHT_GRAY;
         textFieldStyle.font = new BitmapFont();
 
-        TextField usernameField = new TextField("", textFieldStyle);
+        usernameField = new TextField("", textFieldStyle);
         usernameField.setMessageText("Inserisci un Username");
         usernameField.setAlignment(1);
 
-        TextField passwordField = new TextField("", textFieldStyle);
+        passwordField = new TextField("", textFieldStyle);
         passwordField.setMessageText("Inserire la Password");
         passwordField.setAlignment(1);
         passwordField.setPasswordCharacter('*');
@@ -77,8 +89,41 @@ public class SignupScreen extends ChangeListener implements Screen
     @Override
     public void changed(ChangeEvent event, Actor actor)
     {
+        if(usernameField.getText().equals("") || passwordField.getText().equals(""))
+        {
+            warningLabel.setText("Username e Password non validi!");
+            return;
+        }
+
         if(actor.getName().equals(signupButton.getName()))
-            warningLabel.setText("signup");
+        {
+            String reply = null;
+            try
+            {
+                reply = new ClientResource("http://localhost:4444/checkUser?username=" + usernameField.getText() +
+                        "").get().getText();
+
+                if (reply.equals("true"))
+                {
+                    // Username disponibile
+                    reply = new ClientResource("http://localhost:4444/addUser?username=" + usernameField.getText() +
+                            "&password=" + passwordField.getText() + "").get().getText();
+
+                    if (reply.equals("true"))
+                    {
+                        dispose();
+                        game.setScreen(new LoginScreen(game));
+                    }
+                    else
+                        warningLabel.setText("Errore inserimento del nuovo utente");
+                }
+                else
+                    warningLabel.setText("Username non disponibile");
+            } catch (IOException e)
+            {
+                warningLabel.setText("Server non disponibile, riprovare più tardi");
+            }
+        }
     }
 
     @Override
@@ -96,7 +141,7 @@ public class SignupScreen extends ChangeListener implements Screen
 
         //inserire nello stage il background
         stage.getBatch().begin();
-        stage.getBatch().draw(new Texture("menu/background.png"), 0, 0);
+        stage.getBatch().draw(background, 0, 0);
         stage.getBatch().end();
 
         stage.draw();

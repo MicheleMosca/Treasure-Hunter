@@ -153,4 +153,21 @@ public class DBManager
         }
         return resultSet;
     }
+
+    public boolean addUser(String username, String password)
+    {
+        if (username == null || password == null)
+            return false;
+
+        try
+        {
+            statement.executeUpdate("insert into Utenti values ('" + username + "', " + password + ")");
+        } catch (SQLException e)
+        {
+            System.out.println("Errore: inserimento di un nuovo utente");
+            return false;
+        }
+
+        return true;
+    }
 }

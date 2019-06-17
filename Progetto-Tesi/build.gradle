@@ -57,6 +57,7 @@ project(":core") {
 
 
     dependencies {
+        compile fileTree(include: ['*.jar'], dir: 'lib')
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
     }

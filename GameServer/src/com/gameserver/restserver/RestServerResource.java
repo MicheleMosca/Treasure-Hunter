@@ -68,6 +68,11 @@ public class RestServerResource extends ServerResource
             {
                 response = resultset_to_json(dbManager.getLivelli(getQuery().getValues("username")));
             }
+            else if (getReference().getLastSegment().equals("addUser"))
+            {
+                response = String.valueOf(dbManager.addUser(getQuery().getValues("username"),
+                        getQuery().getValues("password")));
+            }
             else
             {
                 throw new ResourceException(new Status(Status.SERVER_ERROR_NOT_IMPLEMENTED, ""));

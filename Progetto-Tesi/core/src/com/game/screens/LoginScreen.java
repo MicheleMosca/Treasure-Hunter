@@ -14,6 +14,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.game.AdventureGame;
+import org.json.JSONObject;
+import org.restlet.resource.ClientResource;
+
+import java.io.IOException;
 
 /**
  * Classe per la crazione del menu di login del gioco
@@ -25,11 +29,19 @@ public class LoginScreen extends ChangeListener implements Screen
     private Label warningLabel;
     private Button loginButton;
     private Button signupButton;
+    private Texture background;
+    private AdventureGame game;
+    private TextField usernameField;
+    private TextField passwordField;
 
     public LoginScreen(final AdventureGame game)
     {
+        this.game = game;
+
         stage = new Stage();
         Vector2 stageSize = new Vector2(1298 / 2, 952 / 2);
+
+        background = new Texture("menu/background.png");
 
         Table table = new Table();
         table.setPosition(((float) Gdx.graphics.getWidth() /2) - (stageSize.x /2), ((float) Gdx.graphics.getHeight() /2) - (stageSize.y /2));
@@ -40,18 +52,17 @@ public class LoginScreen extends ChangeListener implements Screen
         labelStyle.font = new BitmapFont();
         labelStyle.fontColor = Color.RED;
         warningLabel = new Label("", labelStyle);
-        warningLabel.setText("Username e Password non validi!");
 
         TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
         textFieldStyle.background = new TextureRegionDrawable(new TextureRegion(new Texture("menu/field.png")));
         textFieldStyle.fontColor = Color.LIGHT_GRAY;
         textFieldStyle.font = new BitmapFont();
 
-        TextField usernameField = new TextField("", textFieldStyle);
+        usernameField = new TextField("", textFieldStyle);
         usernameField.setMessageText("Username");
         usernameField.setAlignment(1);
 
-        TextField passwordField = new TextField("", textFieldStyle);
+        passwordField = new TextField("", textFieldStyle);
         passwordField.setMessageText("Password");
         passwordField.setAlignment(1);
         passwordField.setPasswordCharacter('*');
@@ -86,9 +97,36 @@ public class LoginScreen extends ChangeListener implements Screen
     public void changed(ChangeEvent event, Actor actor)
     {
         if (actor.getName().equals(loginButton.getName()))
-            warningLabel.setText("Urca!");
+        {
+            if(usernameField.getText().equals("") || passwordField.getText().equals(""))
+            {
+                warningLabel.setText("Username e Password non validi!");
+                return;
+            }
+
+            String reply = null;
+            try
+            {
+                reply = new ClientResource("http://localhost:4444/checkUser?username=" + usernameField.getText() +
+                        "&password=" + passwordField.getText() + "").get().getText();
+
+                if (reply.equals("true"))
+                {
+                    dispose();
+                    game.setScreen(new MainMenuScreen(game));
+                }
+                else
+                    warningLabel.setText("Username e Password non validi!");
+            } catch (IOException e)
+            {
+                warningLabel.setText("Server non disponibile, riprovare più tardi");
+            }
+        }
         else if(actor.getName().equals(signupButton.getName()))
-            warningLabel.setText("signup");
+        {
+            dispose();
+            game.setScreen(new SignupScreen(game));
+        }
     }
 
     @Override
@@ -106,7 +144,7 @@ public class LoginScreen extends ChangeListener implements Screen
 
         //inserire nello stage il background
         stage.getBatch().begin();
-        stage.getBatch().draw(new Texture("menu/background.png"), 0, 0);
+        stage.getBatch().draw(background, 0, 0);
         stage.getBatch().end();
 
         stage.draw();
