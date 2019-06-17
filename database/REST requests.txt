@@ -1,0 +1,17 @@
+Controllare se lo username è disponibile:
+http://localhost:4444/checkUser?username=michel
+
+Controllare se username e password sono corretti:
+http://localhost:4444/checkUser?username=michele&password=1234
+
+Ricevere la classifica in base al livello che do in input:
+http://localhost:4444/getClassifica?livello=1
+
+Inserimento di un nuovo record su Partite:
+http://localhost:4444/updateRecord?username=michele&livello=1&coins=3&time=32:10
+
+Ricevere l'ultimo livello che l'utente ha finito:
+http://localhost:4444/getLastLevel?username=michele
+
+Inserimento di un nuovo utente:
+http://localhost:4444/addUser?username=gianluca&password=123
