@@ -17,6 +17,7 @@ import com.game.AdventureGame;
 import com.game.User;
 import org.json.JSONObject;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 
 import java.io.IOException;
 
@@ -135,7 +136,12 @@ public class LoginScreen extends ChangeListener implements Screen
                 }
                 else
                     warningLabel.setText("Username e Password non validi!");
-            } catch (IOException e)
+            }
+            catch (ResourceException e)
+            {
+                warningLabel.setText("Server non disponibile, riprovare piu' tardi");
+            }
+            catch (IOException e)
             {
                 warningLabel.setText("Server non disponibile, riprovare più tardi");
             }

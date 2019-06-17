@@ -84,6 +84,15 @@ public class SignupScreen extends ChangeListener implements Screen
         exitButton.setPosition(table.getX() + table.getWidth() - (exitButton.getWidth()*2),
                 table.getY() + table.getHeight() - exitButton.getHeight() - 10);
 
+        Texture backTexture = new Texture("menu/prew.png");
+
+        Button backButton = new Button(new TextureRegionDrawable(new TextureRegion((backTexture))));
+        backButton.setName("back");
+        backButton.addListener(this);
+        backButton.setSize(214 / 5, 215 / 5);
+        backButton.setPosition(table.getX() + backButton.getWidth(),
+                table.getY() + backButton.getHeight());
+
         table.add(warningLabel).padBottom(10);
         table.row();
         table.add(usernameField).size(300,50).padBottom(20);
@@ -94,6 +103,7 @@ public class SignupScreen extends ChangeListener implements Screen
 
         stage.addActor(table);
         stage.addActor(exitButton);
+        stage.addActor(backButton);
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -140,8 +150,13 @@ public class SignupScreen extends ChangeListener implements Screen
             }
 
         }
-        else  if (actor.getName().equals("exit"))
+        else if (actor.getName().equals("exit"))
             Gdx.app.exit();
+        else if (actor.getName().equals("back"))
+        {
+            dispose();
+            game.setScreen(new LoginScreen(game));
+        }
     }
 
     @Override
