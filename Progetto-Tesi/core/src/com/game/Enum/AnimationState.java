@@ -6,5 +6,6 @@ public enum AnimationState
     Run,
     Jump,
     Dead,
-    Slide
+    Slide,
+    Open
 }
