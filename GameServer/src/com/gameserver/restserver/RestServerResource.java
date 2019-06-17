@@ -64,9 +64,9 @@ public class RestServerResource extends ServerResource
                         getQuery().getValues("livello"), Integer.parseInt(getQuery().getValues("coins")),
                         getQuery().getValues("time")));
             }
-            else if (getReference().getLastSegment().equals("getLivelli"))
+            else if (getReference().getLastSegment().equals("getLastLevel"))
             {
-                response = resultset_to_json(dbManager.getLivelli(getQuery().getValues("username")));
+                response = String.valueOf(dbManager.getLastLevel(getQuery().getValues("username")));
             }
             else if (getReference().getLastSegment().equals("addUser"))
             {

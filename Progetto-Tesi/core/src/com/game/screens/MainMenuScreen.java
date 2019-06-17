@@ -2,22 +2,16 @@ package com.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.game.AdventureGame;
+import com.game.User;
 
 /**
  * 
@@ -33,16 +27,23 @@ public class MainMenuScreen implements Screen
 	private static final int PlayPositionY = 400;
 	private static final int ExitPositionX = 500;
 	private static final int ExitPositionY = 200;
-	
+
+	private AdventureGame game;
+	private User user;
+
 	private Stage stage;
 	private Texture Background;
 	
-	public MainMenuScreen(final AdventureGame game)
+	public MainMenuScreen(final AdventureGame game, User user)
 	{
+		this.game = game;
+		this.user = user;
+
+		System.out.println(user.getUsername() + " " + user.getLastLevel());
 		//texture del pulsante PLAY
 		Texture Play= new Texture("menu/Prova.png");
 		//texture del pulsante EXIT
-		Texture Exit= new Texture("menu/close_2.png");
+		Texture Exit= new Texture("menu/close.png");
 		//texture del background
 		Background = new Texture("menu/background.png");
 		

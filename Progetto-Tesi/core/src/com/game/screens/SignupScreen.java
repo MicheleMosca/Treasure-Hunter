@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.game.AdventureGame;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 
 import java.io.IOException;
 
@@ -74,6 +75,15 @@ public class SignupScreen extends ChangeListener implements Screen
         signupButton.setName("signup");
         signupButton.addListener(this);
 
+        Texture closeTexture = new Texture("menu/close.png");
+
+        Button exitButton = new Button(new TextureRegionDrawable(new TextureRegion((closeTexture))));
+        exitButton.setName("exit");
+        exitButton.addListener(this);
+        exitButton.setSize(150 / 4, 147 / 4);
+        exitButton.setPosition(table.getX() + table.getWidth() - (exitButton.getWidth()*2),
+                table.getY() + table.getHeight() - exitButton.getHeight() - 10);
+
         table.add(warningLabel).padBottom(10);
         table.row();
         table.add(usernameField).size(300,50).padBottom(20);
@@ -83,20 +93,21 @@ public class SignupScreen extends ChangeListener implements Screen
         table.add(signupButton).size(1298 / 6,952 / 10).padBottom(15);
 
         stage.addActor(table);
+        stage.addActor(exitButton);
         Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void changed(ChangeEvent event, Actor actor)
     {
-        if(usernameField.getText().equals("") || passwordField.getText().equals(""))
-        {
-            warningLabel.setText("Username e Password non validi!");
-            return;
-        }
-
         if(actor.getName().equals(signupButton.getName()))
         {
+            if(usernameField.getText().equals("") || passwordField.getText().equals(""))
+            {
+                warningLabel.setText("Username e Password non validi!");
+                return;
+            }
+
             String reply = null;
             try
             {
@@ -119,11 +130,18 @@ public class SignupScreen extends ChangeListener implements Screen
                 }
                 else
                     warningLabel.setText("Username non disponibile");
-            } catch (IOException e)
+            } catch (ResourceException e)
             {
-                warningLabel.setText("Server non disponibile, riprovare più tardi");
+                warningLabel.setText("Server non disponibile, riprovare piu' tardi");
             }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
         }
+        else  if (actor.getName().equals("exit"))
+            Gdx.app.exit();
     }
 
     @Override

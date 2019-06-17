@@ -141,17 +141,23 @@ public class DBManager
         return true;
     }
 
-    public ResultSet getLivelli(String username)
+    public int getLastLevel(String username)
     {
         ResultSet resultSet = null;
+        int livello = 0;
         try
         {
-            resultSet = statement.executeQuery("select livello from Partite where username = '" + username + "' order by livello");
+            resultSet = statement.executeQuery("select livello from Partite as P where username = '" + username +
+                    "' and livello >=ALL( select livello from Partite as P1 where P1.username = P.username)");
+            resultSet.next();
+
+            livello = resultSet.getInt("livello");
         } catch (SQLException e)
         {
-            System.out.println("Errore: Query get Livelli non risolta");
+            e.printStackTrace();
+            System.out.println("Errore: Query getLastLevel non risolta");
         }
-        return resultSet;
+        return livello;
     }
 
     public boolean addUser(String username, String password)

@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.game.AdventureGame;
+import com.game.User;
 import org.json.JSONObject;
 import org.restlet.resource.ClientResource;
 
@@ -25,12 +26,14 @@ import java.io.IOException;
 
 public class LoginScreen extends ChangeListener implements Screen
 {
+    private AdventureGame game;
+
     private Stage stage;
+    private Texture background;
+
     private Label warningLabel;
     private Button loginButton;
     private Button signupButton;
-    private Texture background;
-    private AdventureGame game;
     private TextField usernameField;
     private TextField passwordField;
 
@@ -69,15 +72,25 @@ public class LoginScreen extends ChangeListener implements Screen
         passwordField.setPasswordMode(true);
 
         Texture loginTexture = new Texture("menu/login/login.png");
-        Texture signupTexture = new Texture("menu/signup/signup.png");
 
         loginButton = new Button(new TextureRegionDrawable(new TextureRegion(loginTexture)));
         loginButton.setName("login");
         loginButton.addListener(this);
 
+        Texture signupTexture = new Texture("menu/signup/signup.png");
+
         signupButton = new Button(new TextureRegionDrawable(new TextureRegion(signupTexture)));
         signupButton.setName("signup");
         signupButton.addListener(this);
+
+        Texture closeTexture = new Texture("menu/close.png");
+
+        Button exitButton = new Button(new TextureRegionDrawable(new TextureRegion((closeTexture))));
+        exitButton.setName("exit");
+        exitButton.addListener(this);
+        exitButton.setSize(150 / 4, 147 / 4);
+        exitButton.setPosition(table.getX() + table.getWidth() - (exitButton.getWidth()*2),
+                table.getY() + table.getHeight() - exitButton.getHeight() - 10);
 
         table.add(warningLabel).padBottom(10);
         table.row();
@@ -90,6 +103,7 @@ public class LoginScreen extends ChangeListener implements Screen
         table.add(signupButton).size(1298 / 11,952 / 16);
 
         stage.addActor(table);
+        stage.addActor(exitButton);
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -112,8 +126,12 @@ public class LoginScreen extends ChangeListener implements Screen
 
                 if (reply.equals("true"))
                 {
+                    // effettuare il check dei livelli dell'utente e poi creare l'oggetto utente
+                    reply = new ClientResource("http://localhost:4444/getLastLevel?username=" + usernameField.getText() +
+                            "").get().getText();
+
                     dispose();
-                    game.setScreen(new MainMenuScreen(game));
+                    game.setScreen(new MainMenuScreen(game, new User(usernameField.getText(), Integer.valueOf(reply))));
                 }
                 else
                     warningLabel.setText("Username e Password non validi!");
@@ -127,6 +145,8 @@ public class LoginScreen extends ChangeListener implements Screen
             dispose();
             game.setScreen(new SignupScreen(game));
         }
+        else  if (actor.getName().equals("exit"))
+            Gdx.app.exit();
     }
 
     @Override
