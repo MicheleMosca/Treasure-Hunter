@@ -154,8 +154,7 @@ public class DBManager
             livello = resultSet.getInt("livello");
         } catch (SQLException e)
         {
-            e.printStackTrace();
-            System.out.println("Errore: Query getLastLevel non risolta");
+            return 0;
         }
         return livello;
     }

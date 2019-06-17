@@ -39,7 +39,6 @@ public class MainMenuScreen implements Screen
 		this.game = game;
 		this.user = user;
 
-		System.out.println(user.getUsername() + " " + user.getLastLevel());
 		//texture del pulsante PLAY
 		Texture Play= new Texture("menu/Prova.png");
 		//texture del pulsante EXIT
