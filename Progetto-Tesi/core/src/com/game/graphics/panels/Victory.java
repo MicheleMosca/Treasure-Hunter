@@ -13,8 +13,10 @@ import com.game.AdventureGame;
 import com.game.User;
 import com.game.screens.LevelScreen;
 import com.game.screens.PlayScreen;
+import org.restlet.resource.ClientResource;
 
 import javax.jws.soap.SOAPBinding;
+import java.io.IOException;
 import java.util.List;
 
 public class Victory extends ChangeListener
@@ -73,7 +75,20 @@ public class Victory extends ChangeListener
 
     public void sendRecord(int scoreCoins, List<Integer> scoreTime)
     {
-        System.out.println(scoreCoins + " " + scoreTime.get(0) + ":" + scoreTime.get(1));
+        try
+        {
+            String reply = new ClientResource("http://" + AdventureGame.serverIP +
+                    ":4444/updateRecord?username=" + userData.getUsername() +
+                    "&livello=" + userData.getLevelSelected() + "&coins=" + scoreCoins +
+                    "&time=" + scoreTime.get(0) + ":" + scoreTime.get(1) + "").get().getText();
+
+            if (!Boolean.valueOf(reply))
+                System.out.println("Errore: Update fallito!");  //TEMPORANEO
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
         userData.addNewLevel(userData.getLevelSelected());
     }
 
