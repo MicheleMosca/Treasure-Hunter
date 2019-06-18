@@ -19,7 +19,6 @@ import com.game.screens.LevelScreen;
 import com.game.screens.PlayScreen;
 import org.restlet.resource.ClientResource;
 
-import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
 import java.util.List;
 
