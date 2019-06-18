@@ -2,14 +2,12 @@ package com.game.graphics.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.game.Enum.AnimationState;
-import com.game.graphics.Panels.GameOver;
-import com.game.graphics.entities.MovableAnimatedEntity;
+import com.game.graphics.panels.GameOver;
 import com.game.screens.PlayScreen;
 
 import javax.swing.*;
@@ -34,9 +32,14 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
 
     private int health;
 
-    public Player(World world, MapObject mapObject, BodyDef.BodyType bodyType, String textureAtlasPath, String textureRegionName, Vector2 textureDimension)
+    private PlayScreen playScreen;
+
+    public Player(World world, MapObject mapObject, BodyDef.BodyType bodyType, String textureAtlasPath,
+                  String textureRegionName, Vector2 textureDimension, PlayScreen playScreen)
     {
         super(world, mapObject, bodyType, textureAtlasPath, textureRegionName, textureDimension);
+
+        this.playScreen = playScreen;
 
         isLeft = false;
         isAlive = true;
@@ -81,7 +84,7 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
         }
         else if (e.getSource() == deadTimer)
         {
-            PlayScreen.gameOnPause = true;
+            playScreen.setGameOnPause(true);
             GameOver.setVisible(true);
             deadTimer.stop();
         }

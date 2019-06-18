@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.game.Enum.AnimationState;
 import com.game.graphics.entities.MovableAnimatedEntity;
 import com.game.graphics.entities.Player;
+import com.game.screens.PlayScreen;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,10 +28,10 @@ public class Carl extends Player
     private static final String defaultTextureAtlasPath = "sprites/Carl/Idle/Idle.atlas";
     private static final String defaultTextureRegionName = "Idle0";
 
-    public Carl(World world, MapObject spawnPoint)
+    public Carl(World world, MapObject spawnPoint, PlayScreen playScreen)
     {
         super(world, spawnPoint, BodyDef.BodyType.DynamicBody, defaultTextureAtlasPath, defaultTextureRegionName,
-                new Vector2(64 , 98));
+                new Vector2(64 , 98), playScreen);
 
         initCarl();
     }

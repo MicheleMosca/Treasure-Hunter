@@ -3,7 +3,10 @@ package com.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.game.screens.LoginScreen;
+import com.game.screens.MainMenuScreen;
 import com.game.screens.PlayScreen;
+
+import javax.jws.soap.SOAPBinding;
 
 /**
  * 
@@ -16,7 +19,7 @@ public class AdventureGame extends Game
 	public static final int worldWidth = 1280;
 	public static final int worldHeight = 720;
 	public static final float pixelPerMeter = 100;
-	public static final boolean fullScreenOnStart = true;
+	public static final boolean fullScreenOnStart = false;
 	public static final String serverIP = "localhost";
 	
 	public SpriteBatch batch;
@@ -25,7 +28,7 @@ public class AdventureGame extends Game
 	public void create ()
 	{
 		batch = new SpriteBatch();
-		setScreen(new LoginScreen(this)); //LoginScreen
+		setScreen(new MainMenuScreen(this, new User("pippo", 0))); //LoginScreen
 	}
 
 	@Override

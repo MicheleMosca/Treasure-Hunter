@@ -1,4 +1,4 @@
-package com.game.graphics.Panels;
+package com.game.graphics.panels;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.game.AdventureGame;
+import com.game.User;
 import com.game.screens.LevelScreen;
 import com.game.screens.PlayScreen;
 
@@ -20,13 +21,16 @@ public class GameOver extends ChangeListener
     private AdventureGame game;
     private PlayScreen playScreen;
 
-    public GameOver(AdventureGame game, PlayScreen playScreen)
+    private User userData;
+
+    public GameOver(AdventureGame game, PlayScreen playScreen, User userData)
     {
         super();
 
         visible = false;
         this.game = game;
         this.playScreen = playScreen;
+        this.userData = userData;
 
         stage = new Stage();
         Vector2 stageSize = new Vector2(1298 / 2, 952 / 2);
@@ -76,9 +80,9 @@ public class GameOver extends ChangeListener
         playScreen.dispose();
 
         if (actor.getName().equals("playagain"))
-            game.setScreen(new PlayScreen(game));
+            game.setScreen(new PlayScreen(game, userData));
 
         else if (actor.getName().equals("exit"))
-            game.setScreen(new LevelScreen(game));
+            game.setScreen(new LevelScreen(game, userData));
     }
 }

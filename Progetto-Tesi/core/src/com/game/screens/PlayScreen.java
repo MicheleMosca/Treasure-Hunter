@@ -15,11 +15,14 @@ import com.game.User;
 import com.game.graphics.CameraObject;
 import com.game.graphics.CollisionDetector;
 import com.game.graphics.Hud;
-import com.game.graphics.Panels.GameOver;
+import com.game.graphics.panels.GameOver;
 import com.game.graphics.WorldCreator;
 import com.game.graphics.entities.AnimatedEntity;
 import com.game.graphics.entities.MovableAnimatedEntity;
 import com.game.graphics.entities.Player;
+import com.game.graphics.panels.Pause;
+import com.game.graphics.panels.Victory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,20 +53,23 @@ public class PlayScreen implements Screen
 
 	private Hud hud;
 	private GameOver gameOverScreen;
+	private Victory victoryScreen;
+	private Pause pauseScreen;
 
-	public static boolean gameOnPause;
+	private boolean gameOnPause;
 
-	//da cancellare
-	private User user;
+	private User userData;
 
-	public PlayScreen(AdventureGame game)
+	public PlayScreen(AdventureGame game, User userData)
 	{
 		this.game = game;
+		this.userData = userData;
 
 		gameOnPause = false;
 		// Carico la mappa
 		TmxMapLoader mapLoader = new TmxMapLoader();
-		tiledMap = mapLoader.load("maps/level1/level1.tmx");
+		tiledMap = mapLoader.load("maps/level" + userData.getLevelSelected() +
+				"/level" + userData.getLevelSelected() + ".tmx");
 		mapRender = new OrthogonalTiledMapRenderer(tiledMap, 1 / AdventureGame.pixelPerMeter);
 		
 		// creazione di una camera che seguirà il player
@@ -74,7 +80,8 @@ public class PlayScreen implements Screen
 		debugRender = new Box2DDebugRenderer();
 
 		// Instanzio tutti gli oggetti di gioco all'interno del mondo
-		gameObjects = WorldCreator.initWorld(tiledMap, world);
+		WorldCreator worldCreator = new WorldCreator(this);
+		gameObjects = worldCreator.initWorld(tiledMap, world);
 
 		// Imposto il ContactListener per gli oggetti all'interno del mondo
 		world.setContactListener(new CollisionDetector(this));
@@ -82,20 +89,31 @@ public class PlayScreen implements Screen
 		// Inizializzo l'hud di gioco
 		hud = new Hud();
 
+		// Inizializzo gli elementi che costituiscono il punteggio e il tempo che in giocatore impiega
 		currentTime = 0;
 		scoreTime = new ArrayList<Integer>(2);
 		scoreTime.add(0, 0);
 		scoreTime.add(1,0);
 		scoreCoins = 0;
 
+		// Ricerco al'interno degli oggetti di gioco qual è il player
 		for (AnimatedEntity object : gameObjects)
 		{
 			if (object instanceof Player)
 				player = object;
 		}
 
-		gameOverScreen = new GameOver(game, this);
+		// Inizializzo il GameOver screen
+		gameOverScreen = new GameOver(game, this, userData);
 
+		// Inizializzo il Victory screen
+		victoryScreen = new Victory(game, this, userData);
+
+		// Inizializzo il Pause screen
+		pauseScreen = new Pause(game, this, userData);
+
+		// Imposto come input processor null per togliere i comandi di imput agli screen
+		// (le azioni di input a livello di schermo non sono previste per il gioco, solo input da tastiera)
 		Gdx.input.setInputProcessor(null);
 	}
 
@@ -110,7 +128,10 @@ public class PlayScreen implements Screen
 		}
 
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
-			game.setScreen(new MainMenuScreen(game, user));
+		{
+			gameOnPause = true;
+			Pause.setVisible(true);
+		}
 	}
 
 	private void timerCount(float deltatime)
@@ -181,9 +202,13 @@ public class PlayScreen implements Screen
 		// Termino i disegni sulla camera
 		game.batch.end();
 
-		// Visualizzo il menu di game over
-		if (gameOverScreen.isVisible())
+		// Visualizzo il menu di game over oppure quello di victory o quello di pausa
+		if (pauseScreen.isVisible())
+			Pause.stage.draw();
+		else if (gameOverScreen.isVisible())
 			GameOver.stage.draw();
+		else if (victoryScreen.isVisible())
+			Victory.stage.draw();
 	}
 
 	public void removeBodyFromWorld(AnimatedEntity entity)
@@ -198,6 +223,19 @@ public class PlayScreen implements Screen
 	{
 		scoreCoins++;
 		hud.setscorevaluelabel(""+scoreCoins);
+	}
+
+	public boolean isGameOnPause()
+	{
+		return gameOnPause;
+	}
+
+	public void setGameOnPause(boolean gameOnPause)
+	{
+		this.gameOnPause = gameOnPause;
+
+		if (gameOnPause && victoryScreen.isVisible())
+			victoryScreen.sendRecord(scoreCoins, scoreTime);
 	}
 
 	@Override
