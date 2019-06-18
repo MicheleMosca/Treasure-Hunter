@@ -25,7 +25,7 @@ public class AdventureGame extends Game
 	public void create ()
 	{
 		batch = new SpriteBatch();
-		setScreen(new PlayScreen(this)); //LoginScreen
+		setScreen(new LoginScreen(this)); //LoginScreen
 	}
 
 	@Override
