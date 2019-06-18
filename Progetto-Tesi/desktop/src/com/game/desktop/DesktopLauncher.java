@@ -20,6 +20,7 @@ public class DesktopLauncher
 		configuration.title = "Adventure Game";
 		configuration.width = AdventureGame.worldWidth;
 		configuration.height = AdventureGame.worldHeight;
+		configuration.useGL30 = false;
 		configuration.foregroundFPS = 60;
 		configuration.fullscreen = AdventureGame.fullScreenOnStart;
 		

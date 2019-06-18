@@ -74,7 +74,7 @@ public class Victory extends ChangeListener
     public void sendRecord(int scoreCoins, List<Integer> scoreTime)
     {
         System.out.println(scoreCoins + " " + scoreTime.get(0) + ":" + scoreTime.get(1));
-        userData.addNewLevel();
+        userData.addNewLevel(userData.getLevelSelected());
     }
 
     public boolean isVisible()

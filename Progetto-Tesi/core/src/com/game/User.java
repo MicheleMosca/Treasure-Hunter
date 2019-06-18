@@ -23,9 +23,10 @@ public class User
         return levelSelected;
     }
 
-    public void addNewLevel()
+    public void addNewLevel(int levelSelected)
     {
-        lastLevel++;
+        if (lastLevel < levelSelected)
+            lastLevel++;
     }
 
     public String getUsername()
