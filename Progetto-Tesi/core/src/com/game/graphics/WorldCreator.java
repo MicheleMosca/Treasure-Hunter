@@ -10,13 +10,21 @@ import com.game.graphics.entities.Coin;
 import com.game.graphics.entities.Entity;
 import com.game.graphics.entities.enemies.Spike;
 import com.game.graphics.entities.players.Carl;
+import com.game.screens.PlayScreen;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class WorldCreator
 {
-    public static List<AnimatedEntity> initWorld(TiledMap tiledMap, World world)
+    private PlayScreen playScreen;
+
+    public WorldCreator(PlayScreen playScreen)
+    {
+        this.playScreen = playScreen;
+    }
+
+    public List<AnimatedEntity> initWorld(TiledMap tiledMap, World world)
     {
         List<AnimatedEntity> gameObjects = new LinkedList<AnimatedEntity>();
 
@@ -43,14 +51,14 @@ public class WorldCreator
         for (MapObject mapObject : tiledMap.getLayers().get("Spawn").getObjects())
         {
             if (mapObject.getName().equals("finishSpawn"))
-                gameObjects.add(new Chest(world, mapObject));
+                gameObjects.add(new Chest(world, mapObject, playScreen));
         }
 
         // Inserisco nel mondo il player in uso con il relativo spawn point
         for (MapObject mapObject : tiledMap.getLayers().get("Spawn").getObjects())
         {
             if (mapObject.getName().equals("playerSpawn"))
-                gameObjects.add(new Carl(world, mapObject));
+                gameObjects.add(new Carl(world, mapObject, playScreen));
         }
 
         return gameObjects;

@@ -5,9 +5,9 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
-import com.game.AdventureGame;
 import com.game.Enum.AnimationState;
-import com.game.graphics.Panels.GameOver;
+import com.game.graphics.panels.GameOver;
+import com.game.graphics.panels.Victory;
 import com.game.screens.PlayScreen;
 
 import javax.swing.*;
@@ -23,10 +23,14 @@ public class Chest extends AnimatedEntity implements ActionListener
     private AnimationState state;
     private Timer openTimer;
 
-    public Chest(World world, MapObject spawnPoint)
+    private PlayScreen playScreen;
+
+    public Chest(World world, MapObject spawnPoint, PlayScreen playScreen)
     {
         super(world, spawnPoint, BodyDef.BodyType.StaticBody, defaultTextureAtlasPath, defaultTextureRegionName,
                 new Vector2(128 / 2, 128 / 2), AnimationState.Idle);
+
+        this.playScreen = playScreen;
 
         animations.get(AnimationState.Idle).setPlayMode(Animation.PlayMode.NORMAL);
         body.getFixtureList().get(0).setSensor(true);   // tolgo tutte le collisioni standard
@@ -56,8 +60,8 @@ public class Chest extends AnimatedEntity implements ActionListener
         if (e.getSource() == openTimer)
         {
             openTimer.stop();
-            PlayScreen.gameOnPause = true;
-            GameOver.setVisible(true);
+            Victory.setVisible(true);
+            playScreen.setGameOnPause(true);
         }
     }
 }

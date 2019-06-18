@@ -25,22 +25,22 @@ import com.game.AdventureGame;
 import com.game.User;
 
 /**
-/**
- * 
- * Classe per la selezione del livello 
- *
+ * Classe per la selezione del livello
  */
 
-
-public class LevelScreen implements Screen
+public class LevelScreen extends ChangeListener implements Screen
 {
-
 	private Stage stage;
 	private Texture background;
-	private User user;
 
-	public LevelScreen (final AdventureGame game)
+	private User userData;
+	private AdventureGame game;
+
+	public LevelScreen (final AdventureGame game, User userData)
 	{
+		this.userData = userData;
+		this.game = game;
+
 		Vector2 stageSize = new Vector2(1298 / 2, 952 / 2);
 		
 		//texture del background
@@ -54,37 +54,16 @@ public class LevelScreen implements Screen
 	    Button PrewButton = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/level_select/prew.png"))));
 	    
 	    //listener per il bottone livello 1
-	    Level1Button.addListener(new ChangeListener()
-		{
-			@Override
-			public void changed (ChangeEvent event, Actor actor)
-			{
-				dispose();
-				game.setScreen(new PlayScreen(game));
-			}
-		});
+		Level1Button.setName("level1");
+	    Level1Button.addListener(this);
 	    
 	    //listener per il bottone livello2
-	    Level2Button.addListener(new ChangeListener()
-		{
-			@Override
-			public void changed (ChangeEvent event, Actor actor)
-			{
-				dispose();
-				game.setScreen(new PlayScreen(game));
-			}
-		});
+		Level2Button.setName("level2");
+	    Level2Button.addListener(this);
 	    
-	  //listener per il bottone PREW
-	    PrewButton.addListener(new ChangeListener()
-		{
-			@Override
-			public void changed (ChangeEvent event, Actor actor)
-			{
-				dispose();
-				game.setScreen(new MainMenuScreen(game, user));
-			}
-		});
+	  	//listener per il bottone PREW
+		PrewButton.setName("prew");
+	    PrewButton.addListener(this);
 	    
 	    //init table1
 	    Table table1 = new Table();
@@ -97,10 +76,10 @@ public class LevelScreen implements Screen
 	    
 	    table1.add(Level1Button).expandY().padLeft(140).padTop(100);
 	    
-	    if(0>=1)
-	    	table1.add(Level2Button).expandY().padLeft(10).padTop(100);
+	    if (userData.getLastLevel() < 1)
+			table1.add(Lock).expandY().padLeft(10).padTop(100);
 	    else
-	    	table1.add(Lock).expandY().padLeft(10).padTop(100);
+			table1.add(Level2Button).expandY().padLeft(10).padTop(100);
 	    
 	    table1.row();
 	    table1.add(PrewButton).size(80,80).left();
@@ -109,6 +88,25 @@ public class LevelScreen implements Screen
 	    stage.addActor(table1);
 
 	    Gdx.input.setInputProcessor(stage);
+	}
+
+	@Override
+	public void changed(ChangeEvent event, Actor actor)
+	{
+		dispose();
+
+		if (actor.getName().equals("level1"))
+		{
+			userData.selectLevel(1);
+			game.setScreen(new PlayScreen(game, userData));
+		}
+		else if (actor.getName().equals("level2"))
+		{
+			userData.selectLevel(2);
+			game.setScreen(new PlayScreen(game, userData));
+		}
+		else if (actor.getName().equals("prew"))
+			game.setScreen(new MainMenuScreen(game, userData));
 	}
 	
 	@Override
@@ -167,5 +165,4 @@ public class LevelScreen implements Screen
 		stage.dispose();
 		background.dispose();
 	}
-
 }

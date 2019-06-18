@@ -21,7 +21,7 @@ import com.game.User;
  *
  */
 
-public class MainMenuScreen implements Screen
+public class MainMenuScreen extends ChangeListener implements Screen
 {
 	private static final int Width = 200; //80
 	private static final int Height = 100;
@@ -31,15 +31,15 @@ public class MainMenuScreen implements Screen
 	private static final int ExitPositionY = 200;
 
 	private AdventureGame game;
-	private User user;
+	private User userData;
 
 	private Stage stage;
 	private Texture background;
 	
-	public MainMenuScreen(final AdventureGame game, User user)
+	public MainMenuScreen(AdventureGame game, User userData)
 	{
 		this.game = game;
-		this.user = user;
+		this.userData = userData;
 		Vector2 stageSize = new Vector2(1298 / 2, 952 / 2);
 		
 		//texture del background
@@ -47,28 +47,13 @@ public class MainMenuScreen implements Screen
 		
 		//carico l'immagine del pulsante EXIT
 	    Button ExitButton = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/exit.png"))));
-	    
-	    ExitButton.addListener(new ChangeListener()
-		{
-			@Override
-			public void changed (ChangeEvent event, Actor actor)
-			{
-				Gdx.app.exit();
-			}
-		});
+	    ExitButton.setName("exit");
+	    ExitButton.addListener(this);
 	    
 	    //caruco l'immagine del pulsante PLAY
 	    Button PlayButton = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/play.png"))));
-	    
-	    PlayButton.addListener(new ChangeListener()
-		{
-			@Override
-			public void changed (ChangeEvent event, Actor actor)
-			{
-				dispose();
-				game.setScreen(new LevelScreen(game));
-			}
-		});
+	    PlayButton.setName("play");
+	    PlayButton.addListener(this);
 	    
 	    Table table= new Table();
 	    table.setPosition(((float) Gdx.graphics.getWidth() /2) - (stageSize.x /2), ((float) Gdx.graphics.getHeight() /2) - (stageSize.y /2));
@@ -81,13 +66,23 @@ public class MainMenuScreen implements Screen
 	    table.row();
 	    table.add(ExitButton).size(180,100).pad(20);
 	    
-	    
-	    
 	    stage=new Stage(); 
 	    stage.addActor(table);
 
 	    Gdx.input.setInputProcessor(stage);
 
+	}
+
+	@Override
+	public void changed(ChangeEvent event, Actor actor)
+	{
+		if (actor.getName().equals("play"))
+		{
+			dispose();
+			game.setScreen(new LevelScreen(game, userData));
+		}
+		else if (actor.getName().equals("exit"))
+			Gdx.app.exit();
 	}
 	
 	@Override
@@ -145,5 +140,4 @@ public class MainMenuScreen implements Screen
 		stage.dispose();
 		background.dispose();
 	}
-	
 }
