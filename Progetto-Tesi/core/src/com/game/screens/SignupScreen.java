@@ -31,7 +31,6 @@ public class SignupScreen extends ChangeListener implements Screen
     private Texture background;
 
     private Label warningLabel;
-    private Button signupButton;
     private TextField usernameField;
     private TextField passwordField;
 
@@ -71,7 +70,7 @@ public class SignupScreen extends ChangeListener implements Screen
 
         Texture signupTexture = new Texture("menu/signup/signup.png");
 
-        signupButton = new Button(new TextureRegionDrawable(new TextureRegion(signupTexture)));
+        Button signupButton = new Button(new TextureRegionDrawable(new TextureRegion(signupTexture)));
         signupButton.setName("signup");
         signupButton.addListener(this);
 
@@ -110,7 +109,7 @@ public class SignupScreen extends ChangeListener implements Screen
     @Override
     public void changed(ChangeEvent event, Actor actor)
     {
-        if(actor.getName().equals(signupButton.getName()))
+        if(actor.getName().equals("signup"))
         {
             if(usernameField.getText().equals("") || passwordField.getText().equals(""))
             {

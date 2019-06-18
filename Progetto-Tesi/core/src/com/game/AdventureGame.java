@@ -3,9 +3,7 @@ package com.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.game.screens.LoginScreen;
-import com.game.screens.MainMenuScreen;
-import com.game.screens.SignupScreen;
-
+import com.game.screens.PlayScreen;
 
 /**
  * 
@@ -22,13 +20,12 @@ public class AdventureGame extends Game
 	public static final String serverIP = "localhost";
 	
 	public SpriteBatch batch;
-	private User user;
 	
 	@Override
 	public void create ()
 	{
 		batch = new SpriteBatch();
-		setScreen(new MainMenuScreen(this, user));
+		setScreen(new LoginScreen(this)); //LoginScreen
 	}
 
 	@Override

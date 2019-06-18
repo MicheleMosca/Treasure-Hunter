@@ -15,6 +15,7 @@ import com.game.User;
 import com.game.graphics.CameraObject;
 import com.game.graphics.CollisionDetector;
 import com.game.graphics.Hud;
+import com.game.graphics.Panels.GameOver;
 import com.game.graphics.WorldCreator;
 import com.game.graphics.entities.AnimatedEntity;
 import com.game.graphics.entities.MovableAnimatedEntity;
@@ -48,14 +49,18 @@ public class PlayScreen implements Screen
 	private AnimatedEntity player;
 
 	private Hud hud;
-	
+	private GameOver gameOverScreen;
+
+	public static boolean gameOnPause;
+
 	//da cancellare
 	private User user;
-	
+
 	public PlayScreen(AdventureGame game)
 	{
 		this.game = game;
 
+		gameOnPause = false;
 		// Carico la mappa
 		TmxMapLoader mapLoader = new TmxMapLoader();
 		tiledMap = mapLoader.load("maps/level1/level1.tmx");
@@ -89,6 +94,8 @@ public class PlayScreen implements Screen
 				player = object;
 		}
 
+		gameOverScreen = new GameOver(game, this);
+
 		Gdx.input.setInputProcessor(null);
 	}
 
@@ -101,7 +108,7 @@ public class PlayScreen implements Screen
 			else
 				Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		}
-		
+
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
 			game.setScreen(new MainMenuScreen(game, user));
 	}
@@ -145,7 +152,8 @@ public class PlayScreen implements Screen
 	@Override
 	public void render(float deltaTime)
 	{
-		update(deltaTime);
+	    if (!gameOnPause)
+		    update(deltaTime);
 		
 		// Pulisco il buffer dello schermo
 		Gdx.gl.glClearColor(0, 0, 0, 1);	//Red, gree, blue, alpha(0 = trasparete, 1 = opaco) 
@@ -155,7 +163,7 @@ public class PlayScreen implements Screen
 		mapRender.render();
 		
 		// Renderizzo gli oggetti del mondo per debug
-		//debugRender.render(world, camera.combined);
+		debugRender.render(world, camera.combined);
 		
 		// Impongo al batch di proiettare tutto sulla camera 
 		game.batch.setProjectionMatrix(camera.combined);
@@ -172,6 +180,10 @@ public class PlayScreen implements Screen
 
 		// Termino i disegni sulla camera
 		game.batch.end();
+
+		// Visualizzo il menu di game over
+		if (gameOverScreen.isVisible())
+			GameOver.stage.draw();
 	}
 
 	public void removeBodyFromWorld(AnimatedEntity entity)

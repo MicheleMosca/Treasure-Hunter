@@ -8,7 +8,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.game.Enum.AnimationState;
+import com.game.graphics.Panels.GameOver;
 import com.game.graphics.entities.MovableAnimatedEntity;
+import com.game.screens.PlayScreen;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -28,6 +30,7 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
 
     private boolean isSliding;
     private Timer sliderTimer;
+    private Timer deadTimer;
 
     private int health;
 
@@ -72,7 +75,16 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == sliderTimer)
+        {
             isSliding = false;
+            sliderTimer.stop();
+        }
+        else if (e.getSource() == deadTimer)
+        {
+            PlayScreen.gameOnPause = true;
+            GameOver.setVisible(true);
+            deadTimer.stop();
+        }
     }
 
     @Override
@@ -154,13 +166,13 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
      */
     public void takeHit(int damage)
     {
-        if (health - damage <= 0)
-        {
-            System.out.println("Game Over!");
-            isAlive = false;
-            return;
-        }
-
         health -= damage;
+
+        if (health <= 0)
+        {
+            deadTimer = new Timer(650, this);
+            deadTimer.start();
+            isAlive = false;
+        }
     }
 }

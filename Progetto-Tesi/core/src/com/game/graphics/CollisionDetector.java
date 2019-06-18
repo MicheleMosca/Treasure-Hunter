@@ -1,10 +1,7 @@
 package com.game.graphics;
 
 import com.badlogic.gdx.physics.box2d.*;
-import com.game.graphics.entities.AnimatedEntity;
-import com.game.graphics.entities.Coin;
-import com.game.graphics.entities.Entity;
-import com.game.graphics.entities.Player;
+import com.game.graphics.entities.*;
 import com.game.interfaces.Enemy;
 import com.game.screens.PlayScreen;
 
@@ -39,6 +36,9 @@ public class CollisionDetector implements ContactListener
             game.addCoin();
             game.removeBodyFromWorld((Coin) receiver);
         }
+
+        if (receiver instanceof Chest && sender instanceof Player)
+            ((Chest) receiver).endLevel();
     }
 
     @Override
