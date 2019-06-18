@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -40,34 +41,17 @@ public class LevelScreen implements Screen
 
 	public LevelScreen (final AdventureGame game)
 	{
+		Vector2 stageSize = new Vector2(1298 / 2, 952 / 2);
+		
 		//texture del background
 		background = new Texture("menu/level_select/Sky.png");
 		
-		//Header level select
-		Image Header = new Image(new Texture("menu/level_select/header.png"));
-		
-		//stelle
-		Image Star = new Image(new Texture("menu/level_select/star_1.png"));
-		
 		Image Lock = new Image(new Texture("menu/level_select/lockbtnw.png"));
 		
-		//carico l'immagine del pulsante PREW
-	    Button PrewButton = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/level_select/prew.png"))));
-	    
-	    //listener per il bottone PREW
-	    PrewButton.addListener(new ChangeListener()
-		{
-			@Override
-			public void changed (ChangeEvent event, Actor actor)
-			{
-				dispose();
-				game.setScreen(new MainMenuScreen(game, user));
-			}
-		});
-	    
-	    //carico l'immagine dei pulsanti dei livelli 
+	    //carico l'immagine dei pulsanti 
 	    Button Level1Button = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/level_select/btn1.png"))));
 	    Button Level2Button = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/level_select/btn2.png"))));
+	    Button PrewButton = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/level_select/prew.png"))));
 	    
 	    //listener per il bottone livello 1
 	    Level1Button.addListener(new ChangeListener()
@@ -91,38 +75,33 @@ public class LevelScreen implements Screen
 			}
 		});
 	    
+	  //listener per il bottone PREW
+	    PrewButton.addListener(new ChangeListener()
+		{
+			@Override
+			public void changed (ChangeEvent event, Actor actor)
+			{
+				dispose();
+				game.setScreen(new MainMenuScreen(game, user));
+			}
+		});
+	    
 	    //init table1
 	    Table table1 = new Table();
 	    
-	    table1.setPosition(Gdx.graphics.getWidth()/2 - 1307 / 4 , Gdx.graphics.getHeight()/2 - 1457 / 4);
-	    table1.setSize(1307 / 2, 1457 / 2);
+	    table1.setPosition(((float) Gdx.graphics.getWidth() /2) - (stageSize.x /2), ((float) Gdx.graphics.getHeight() /2) - (stageSize.y /2));
+        table1.setSize(stageSize.x, stageSize.y);
 	    
-	    table1.top().pad(40);
-	    table1.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/level_select/bg.png"))));
-	    table1.add(Header).size(1003/2,396/2);
-	    table1.row();
+	    table1.bottom().left().pad(40);
+	    table1.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/level_select/bg3.png"))));
 	    
-	    //init table2
-	    Table table2 = new Table();
-	    table2.pad(20);
-	    table2.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/level_select/table2.png"))));
-	    
-	    //init table3
-	    Table table3 =new Table();
-	    table3.pad(20);
-	    
-	    table3.add(Level1Button).expandY().pad(30);
+	    table1.add(Level1Button).expandY().padLeft(140).padTop(100);
 	    
 	    if(0>=1)
-	    	table3.add(Level2Button).expandY().pad(30);
+	    	table1.add(Level2Button).expandY().padLeft(10).padTop(100);
 	    else
-	    	table3.add(Lock).expandY().pad(30);
+	    	table1.add(Lock).expandY().padLeft(10).padTop(100);
 	    
-	    table2.add(table3);
-	    table2.row();
-	    table2.add(Star);
-	   
-	    table1.add(table2);
 	    table1.row();
 	    table1.add(PrewButton).size(80,80).left();
         

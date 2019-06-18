@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -39,6 +40,7 @@ public class MainMenuScreen implements Screen
 	{
 		this.game = game;
 		this.user = user;
+		Vector2 stageSize = new Vector2(1298 / 2, 952 / 2);
 		
 		//texture del background
 		background = new Texture("menu/background.png");
@@ -46,8 +48,6 @@ public class MainMenuScreen implements Screen
 		//carico l'immagine del pulsante EXIT
 	    Button ExitButton = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/exit.png"))));
 	    
-	    ExitButton.setSize(Width, Height);
-	    ExitButton.setPosition(ExitPositionX, ExitPositionY);
 	    ExitButton.addListener(new ChangeListener()
 		{
 			@Override
@@ -60,8 +60,6 @@ public class MainMenuScreen implements Screen
 	    //caruco l'immagine del pulsante PLAY
 	    Button PlayButton = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/play.png"))));
 	    
-	    PlayButton.setSize(Width, Height);
-	    PlayButton.setPosition(PlayPositionX, PlayPositionY);
 	    PlayButton.addListener(new ChangeListener()
 		{
 			@Override
@@ -73,13 +71,17 @@ public class MainMenuScreen implements Screen
 		});
 	    
 	    Table table= new Table();
-	    table.setPosition(Gdx.graphics.getWidth()/2 -  800 / 2  , Gdx.graphics.getHeight()/2 - 1457 / 4);
-	    table.setSize(800, 1457 / 2);
+	    table.setPosition(((float) Gdx.graphics.getWidth() /2) - (stageSize.x /2), ((float) Gdx.graphics.getHeight() /2) - (stageSize.y /2));
+        table.setSize(stageSize.x, stageSize.y);
+        table.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/login/table.png"))));
 	    
-	    table.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/table.png"))));
-	    table.add(PlayButton).size(240,180).pad(20);
+	    table.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/table2.png"))));
+	    
+	    table.add(PlayButton).size(180,100).pad(20);
 	    table.row();
-	    table.add(ExitButton).size(240,180).pad(20);
+	    table.add(ExitButton).size(180,100).pad(20);
+	    
+	    
 	    
 	    stage=new Stage(); 
 	    stage.addActor(table);
