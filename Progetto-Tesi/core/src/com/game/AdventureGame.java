@@ -21,7 +21,7 @@ public class AdventureGame extends Game
 	public static final float pixelPerMeter = 100;
 	public static final boolean fullScreenOnStart = true;
 	public static final String serverIP = "localhost";
-	
+
 	public SpriteBatch batch;
 	private User user;
 
@@ -31,7 +31,7 @@ public class AdventureGame extends Game
 	{
 		batch = new SpriteBatch();
 
-		setScreen(new LoginScreen(this));//, new User("pippo", 0))); //LoginScreen
+		setScreen(new PlayScreen(this, new User("pippo", 0))); //LoginScreen
 	}
 
 	@Override

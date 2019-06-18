@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ca5ff812-8a21-42d6-b039-3250831762f0" name="Default Changelist" comment="Conversione del server in Eclipse project">
+    <list default="true" id="ca5ff812-8a21-42d6-b039-3250831762f0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameServer/com/gameserver/dbManager/DBManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameServer/com/gameserver/dbManager/DBManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/AdventureGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/AdventureGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/CameraObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/CameraObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/Hud.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/Hud.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/panels/Victory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/panels/Victory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/desktop/src/com/game/desktop/DesktopLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/desktop/src/com/game/desktop/DesktopLauncher.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,7 +25,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1326">
+            <state relative-caret-position="621">
               <caret line="89" column="40" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -34,8 +37,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="158" column="23" selection-start-line="158" selection-start-column="23" selection-end-line="158" selection-end-column="23" />
+            <state relative-caret-position="692">
+              <caret line="172" column="25" lean-forward="true" selection-start-line="172" selection-start-column="25" selection-end-line="172" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -66,7 +69,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="85" />
     <option name="y" value="25" />
     <option name="width" value="1750" />
@@ -78,6 +81,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -129,7 +133,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -213,13 +216,21 @@
       <option name="project" value="LOCAL" />
       <updated>1560784883996</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Bug nella sezione di sign up risolto&#10;Aggiunta dell'evento del tasto di invio per andare avanti con il login/signup&#10;Comunicazione con il db per il risultato effettuato">
+      <created>1560868809437</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1560868809437</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2865772" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29060403" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -251,13 +262,14 @@
     <MESSAGE value="Inserimento del metodo per inserire un nuovo record" />
     <MESSAGE value="Inserimento del metodo per ricavare i livelli che un utente ha finito" />
     <MESSAGE value="Conversione del server in Eclipse project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Conversione del server in Eclipse project" />
+    <MESSAGE value="Bug nella sezione di sign up risolto&#10;Aggiunta dell'evento del tasto di invio per andare avanti con il login/signup&#10;Comunicazione con il db per il risultato effettuato" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug nella sezione di sign up risolto&#10;Aggiunta dell'evento del tasto di invio per andare avanti con il login/signup&#10;Comunicazione con il db per il risultato effettuato" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/gameserver/main/Main.java" />
     <entry file="file://$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1326">
+        <state relative-caret-position="621">
           <caret line="89" column="40" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -267,8 +279,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="158" column="23" selection-start-line="158" selection-start-column="23" selection-end-line="158" selection-end-column="23" />
+        <state relative-caret-position="692">
+          <caret line="172" column="25" lean-forward="true" selection-start-line="172" selection-start-column="25" selection-end-line="172" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

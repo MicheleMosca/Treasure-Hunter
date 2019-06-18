@@ -148,7 +148,5 @@ public class CameraObject extends OrthographicCamera implements Movable, Followe
 	{
 		if (target.getPosition().x > cameraMinPosition.x && target.getPosition().x < cameraMaxPosition.x)
 			position.x = target.getPosition().x;
-
-		update();
 	}
 }
