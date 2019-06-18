@@ -168,6 +168,7 @@ public class PlayScreen implements Screen
 
 		camera.followThisTarget((MovableAnimatedEntity) player);
 		mapRender.setView(camera);
+		camera.update();
 	}
 
 	@Override
