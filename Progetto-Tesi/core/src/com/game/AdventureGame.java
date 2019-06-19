@@ -33,7 +33,7 @@ public class AdventureGame extends Game
 	public void create ()
 	{
 		batch = new SpriteBatch();
-		defaultFont = createFont(22);
+		defaultFont = createFont(30);
 
 		setScreen(new MainMenuScreen(this, new User("pippo", 0))); //LoginScreen
 	}

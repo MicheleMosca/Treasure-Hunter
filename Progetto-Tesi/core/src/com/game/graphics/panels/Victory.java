@@ -18,6 +18,7 @@ import com.game.User;
 import com.game.screens.LevelScreen;
 import com.game.screens.PlayScreen;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 
 import java.io.IOException;
 import java.util.List;
@@ -145,6 +146,10 @@ public class Victory extends ChangeListener
 
             if (!Boolean.valueOf(reply))
                 System.out.println("Errore: Update fallito!");  //TEMPORANEO
+        }
+        catch (ResourceException e)
+        {
+            System.out.println("Server non disponibile!");
         }
         catch (IOException e)
         {
