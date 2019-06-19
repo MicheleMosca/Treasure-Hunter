@@ -17,6 +17,7 @@ import com.game.AdventureGame;
 import com.game.User;
 import com.game.screens.LevelScreen;
 import com.game.screens.PlayScreen;
+import javafx.scene.control.Tab;
 import org.restlet.resource.ClientResource;
 
 import java.io.IOException;
@@ -50,6 +51,8 @@ public class Victory extends ChangeListener
         table.setSize(stageSize.x, stageSize.y);
         table.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/victory/table.png"))));
 
+        Table tableButtons = new Table();
+
         Texture playagainTexture = new Texture("menu/gameover/playagain.png");
 
         com.badlogic.gdx.scenes.scene2d.ui.Button playagainButton = new com.badlogic.gdx.scenes.scene2d.ui.Button(new TextureRegionDrawable(new TextureRegion((playagainTexture))));
@@ -61,6 +64,9 @@ public class Victory extends ChangeListener
         com.badlogic.gdx.scenes.scene2d.ui.Button exitButton = new com.badlogic.gdx.scenes.scene2d.ui.Button(new TextureRegionDrawable(new TextureRegion((exitTexture))));
         exitButton.setName("exit");
         exitButton.addListener(this);
+
+        tableButtons.add(playagainButton).size(1298 / 6,952 / 9).padRight(30);
+        tableButtons.add(exitButton).size(1298 / 6,952 / 9);
 
         Table tableScore = new Table();
 
@@ -79,12 +85,9 @@ public class Victory extends ChangeListener
         tableScore.add(timeTextLabel).padRight(20);
         tableScore.add(timeLabel);
 
-        table.bottom();
-        table.add(tableScore).padBottom(40);
+        table.add(tableScore).padBottom(55);
         table.row();
-        table.add(playagainButton).size(1298 / 7,952 / 11).padBottom(20);
-        table.row();
-        table.add(exitButton).size(1298 / 7,952 / 11).padBottom(90);
+        table.add(tableButtons);
 
         stage.addActor(table);
     }

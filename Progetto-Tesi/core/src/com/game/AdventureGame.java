@@ -6,8 +6,6 @@ import com.game.screens.LoginScreen;
 import com.game.screens.MainMenuScreen;
 import com.game.screens.PlayScreen;
 
-import javax.jws.soap.SOAPBinding;
-
 /**
  * 
  * Classe principale del gioco, la prima ad essere instanziata e quella che decide quale screen avviare
