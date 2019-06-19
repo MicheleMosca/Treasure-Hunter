@@ -46,7 +46,13 @@ public class MainMenuScreen extends ChangeListener implements Screen
 
 	private void drawUI()
 	{
+		stage = new Stage();
 		Vector2 stageSize = new Vector2(1298 / 2, 952 / 2);
+
+		Table table= new Table();
+		table.setPosition(((float) Gdx.graphics.getWidth() /2) - (stageSize.x /2), ((float) Gdx.graphics.getHeight() /2) - (stageSize.y /2));
+		table.setSize(stageSize.x, stageSize.y);
+		table.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/table2.png"))));
 
 		// Texture del background
 		background = new Texture("menu/background.png");
@@ -66,12 +72,13 @@ public class MainMenuScreen extends ChangeListener implements Screen
 		rankingButton.setName("ranking");
 		rankingButton.addListener(this);
 
-		Table table= new Table();
-		table.setPosition(((float) Gdx.graphics.getWidth() /2) - (stageSize.x /2), ((float) Gdx.graphics.getHeight() /2) - (stageSize.y /2));
-		table.setSize(stageSize.x, stageSize.y);
-		table.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/login/table.png"))));
-
-		table.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/table2.png"))));
+		// Definisco il pulsante per effettuare il logout
+		Button logoutButton = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/prew.png"))));
+		logoutButton.setName("logout");
+		logoutButton.addListener(this);
+		logoutButton.setSize(214 / 5, 215 / 5);
+		logoutButton.setPosition(table.getX() + logoutButton.getWidth(),
+				table.getY() + logoutButton.getHeight());
 
 		table.add(PlayButton).size(1298 / 7,952 / 11).padBottom(20);
 		table.row();
@@ -79,8 +86,8 @@ public class MainMenuScreen extends ChangeListener implements Screen
 		table.row();
 		table.add(ExitButton).size(1298 / 7,952 / 11);
 
-		stage=new Stage();
 		stage.addActor(table);
+		stage.addActor(logoutButton);
 
 		Gdx.input.setInputProcessor(stage);
 	}
@@ -88,18 +95,20 @@ public class MainMenuScreen extends ChangeListener implements Screen
 	@Override
 	public void changed(ChangeEvent event, Actor actor)
 	{
-		if (actor.getName().equals("play"))
+		if (actor.getName().equals("exit"))
 		{
-			dispose();
-			game.setScreen(new LevelScreen(game, userData));
-		}
-		else if (actor.getName().equals("ranking"))
-		{
-			dispose();
-			game.setScreen(new RankingLevelScreen(game, userData));
-		}
-		else if (actor.getName().equals("exit"))
 			Gdx.app.exit();
+			return;
+		}
+
+		dispose();
+
+		if (actor.getName().equals("play"))
+			game.setScreen(new LevelScreen(game, userData));
+		else if (actor.getName().equals("ranking"))
+			game.setScreen(new RankingLevelScreen(game, userData));
+		else if (actor.getName().equals("logout"))
+			game.setScreen(new LoginScreen(game));
 	}
 	
 	@Override

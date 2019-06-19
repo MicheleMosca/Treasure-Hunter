@@ -44,7 +44,7 @@ public class LevelScreen extends ChangeListener implements Screen
 		Vector2 stageSize = new Vector2(1298 / 2, 952 / 2);
 		
 		//texture del background
-		background = new Texture("menu/level_select/Sky.png");
+		background = new Texture("menu/background.png");	//menu/level_select/Sky.png
 		
 		Image Lock = new Image(new Texture("menu/level_select/lockbtnw.png"));
 		

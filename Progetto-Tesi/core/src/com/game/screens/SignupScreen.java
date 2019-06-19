@@ -44,27 +44,30 @@ public class SignupScreen extends ChangeListener implements Screen
 
         background = new Texture("menu/background.png");
 
+        BitmapFont fontBig = game.createFont(25);
+        BitmapFont fontSmall = game.createFont(20);
+
         Table table = new Table();
         table.setPosition(((float) Gdx.graphics.getWidth() /2) - (stageSize.x /2), ((float) Gdx.graphics.getHeight() /2) - (stageSize.y /2));
         table.setSize(stageSize.x, stageSize.y);
         table.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/signup/table.png"))));
 
         Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = new BitmapFont();
+        labelStyle.font = fontSmall;
         labelStyle.fontColor = Color.RED;
         warningLabel = new Label("", labelStyle);
 
         TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
         textFieldStyle.background = new TextureRegionDrawable(new TextureRegion(new Texture("menu/field.png")));
         textFieldStyle.fontColor = Color.LIGHT_GRAY;
-        textFieldStyle.font = new BitmapFont();
+        textFieldStyle.font = fontBig;
 
         usernameField = new TextField("", textFieldStyle);
-        usernameField.setMessageText("Inserisci un Username");
+        usernameField.setMessageText("Username");
         usernameField.setAlignment(1);
 
         passwordField = new TextField("", textFieldStyle);
-        passwordField.setMessageText("Inserire la Password");
+        passwordField.setMessageText("Password");
         passwordField.setAlignment(1);
         passwordField.setPasswordCharacter('*');
         passwordField.setPasswordMode(true);
@@ -99,7 +102,7 @@ public class SignupScreen extends ChangeListener implements Screen
         table.row();
         table.add(passwordField).size(300,50).padBottom(25);
         table.row();
-        table.add(signupButton).size(1298 / 6,952 / 10).padBottom(15);
+        table.add(signupButton).size(1298 / 8,952 / 11).padBottom(15);
 
         stage.addActor(table);
         stage.addActor(exitButton);

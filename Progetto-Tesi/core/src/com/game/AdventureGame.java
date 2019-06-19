@@ -35,7 +35,7 @@ public class AdventureGame extends Game
 		batch = new SpriteBatch();
 		defaultFont = createFont(30);
 
-		setScreen(new MainMenuScreen(this, new User("pippo", 0))); //LoginScreen
+		setScreen(new LoginScreen(this)); //, new User("pippo", 0))); //LoginScreen
 	}
 
 	public BitmapFont createFont(int size)

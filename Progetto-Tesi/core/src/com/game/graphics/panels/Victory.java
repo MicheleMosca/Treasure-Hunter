@@ -75,7 +75,7 @@ public class Victory extends ChangeListener
         playagainButton.addListener(this);
 
         // Texture e bottone di EXIT
-        Texture exitTexture = new Texture("menu/main/exit.png");
+        Texture exitTexture = new Texture("menu/back.png");
         com.badlogic.gdx.scenes.scene2d.ui.Button exitButton = new com.badlogic.gdx.scenes.scene2d.ui.Button(new TextureRegionDrawable(new TextureRegion((exitTexture))));
         exitButton.setName("exit");
         exitButton.addListener(this);

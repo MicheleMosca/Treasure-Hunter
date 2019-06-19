@@ -41,8 +41,8 @@ public class DBManager
 
     /**
      * Metodo per avere la classifica del gioco per livello
-     * @Param livello indicatore del livello di riferimento
-     * @return
+     * @param livello indicatore del livello di riferimento
+     * @return ritorna un result set
      */
     public ResultSet getClassifica(String livello)
     {
@@ -110,8 +110,6 @@ public class DBManager
         {
             ResultSet resultSet = statement.executeQuery("select coins, time from Partite where username = '" + username + "' and livello = " + livello + "");
             resultSet.next();
-
-            System.out.println(coins + " vs " + resultSet.getInt("coins"));
 
             if (coins == resultSet.getInt("coins"))
             {

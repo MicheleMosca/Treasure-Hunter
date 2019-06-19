@@ -16,6 +16,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.game.AdventureGame;
 import com.game.User;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
+
+import java.io.IOException;
 
 public class RankingScreen extends ChangeListener implements Screen
 {
@@ -43,7 +49,7 @@ public class RankingScreen extends ChangeListener implements Screen
         Vector2 stageSize = new Vector2(1298 / 2, 952 / 2);
 
         // Texture del background
-        background = new Texture("menu/level_select/Sky.png");
+        background = new Texture("menu/background.png"); //menu/level_select/Sky.png
 
         Table table = new Table();
         table.setPosition(((float) Gdx.graphics.getWidth() /2) - (stageSize.x /2), ((float) Gdx.graphics.getHeight() /2) - (stageSize.y /2));
@@ -80,13 +86,39 @@ public class RankingScreen extends ChangeListener implements Screen
 
         // Aggiungo le label di testo al table
         tableScoreText.add(usernameTextLabel).padRight(50);
-        tableScoreText.add(coinsTextLabel).padRight(50);
+        tableScoreText.add(coinsTextLabel).padRight(75);
         tableScoreText.add(timeTextLabel);
+        tableScoreText.row();
+
+        // Aggiungo il table per visualzzare i record
+        Table recordTable = new Table();
+
+        // Prelevo i record dal server
+        JSONArray recordArray = getClassifica();
+
+        if (recordArray != null)
+        {
+            Label.LabelStyle labelStyleRecord = new Label.LabelStyle();
+            labelStyleRecord.font = game.createFont(25);
+            labelStyleRecord.fontColor = Color.WHITE;
+
+            for (Object record : recordArray)
+            {
+                JSONObject jsonObject = (JSONObject) record;
+
+                recordTable.row().padTop(5);
+                recordTable.add(new Label(jsonObject.getString("username"), labelStyleRecord)).padRight(100);
+                recordTable.add(new Label(jsonObject.getString("coins"), labelStyleRecord)).padRight(100);
+                recordTable.add(new Label(jsonObject.getString("time"), labelStyleRecord));
+                recordTable.row().padBottom(5);
+            }
+        }
 
         // Aggiungo il table dei testi al table principale
         table.top();
-        table.add(tableScoreText).padTop(100);
+        table.add(tableScoreText).padTop(100).left();
         table.row();
+        table.add(recordTable).padTop(30);
 
         stage.addActor(table);
         stage.addActor(exitButton);
@@ -101,6 +133,28 @@ public class RankingScreen extends ChangeListener implements Screen
 
         if (actor.getName().equals("exit"))
             game.setScreen(new RankingLevelScreen(game, userData));
+    }
+
+    private JSONArray getClassifica()
+    {
+        JSONArray jsonArray = null;
+        try
+        {
+            String reply = new ClientResource("http://" + AdventureGame.serverIP + ":4444/getClassifica?livello="
+                    + level + "").get().getText();
+
+            jsonArray = new JSONArray(reply);
+        }
+        catch (ResourceException e)
+        {
+            System.out.println("Errore: server non disponibile!");
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return jsonArray;
     }
 
     @Override
