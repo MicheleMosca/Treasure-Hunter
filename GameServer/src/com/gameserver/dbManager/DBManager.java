@@ -166,7 +166,7 @@ public class DBManager
 
         try
         {
-            statement.executeUpdate("insert into Utenti values ('" + username + "', " + password + ")");
+            statement.executeUpdate("insert into Utenti values ('" + username + "', '" + password + "')");
         } catch (SQLException e)
         {
             System.out.println("Errore: inserimento di un nuovo utente");

@@ -1,6 +1,7 @@
 package com.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -110,51 +111,53 @@ public class SignupScreen extends ChangeListener implements Screen
     public void changed(ChangeEvent event, Actor actor)
     {
         if(actor.getName().equals("signup"))
-        {
-            if(usernameField.getText().equals("") || passwordField.getText().equals(""))
-            {
-                warningLabel.setText("Username e Password non validi!");
-                return;
-            }
-
-            String reply = null;
-            try
-            {
-                reply = new ClientResource("http://" + AdventureGame.serverIP + ":4444/checkUser?username=" + usernameField.getText() +
-                        "").get().getText();
-
-                if (reply.equals("true"))
-                {
-                    // Username disponibile
-                    reply = new ClientResource("http://" + AdventureGame.serverIP + ":4444/addUser?username=" + usernameField.getText() +
-                            "&password=" + passwordField.getText() + "").get().getText();
-
-                    if (reply.equals("true"))
-                    {
-                        dispose();
-                        game.setScreen(new LoginScreen(game));
-                    }
-                    else
-                        warningLabel.setText("Errore inserimento del nuovo utente");
-                }
-                else
-                    warningLabel.setText("Username non disponibile");
-            } catch (ResourceException e)
-            {
-                warningLabel.setText("Server non disponibile, riprovare piu' tardi");
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-
-        }
+            sendToServer();
         else if (actor.getName().equals("exit"))
             Gdx.app.exit();
         else if (actor.getName().equals("back"))
         {
             dispose();
             game.setScreen(new LoginScreen(game));
+        }
+    }
+
+    private void sendToServer()
+    {
+        if(usernameField.getText().equals("") || passwordField.getText().equals(""))
+        {
+            warningLabel.setText("Username e Password non validi!");
+            return;
+        }
+
+        String reply = null;
+        try
+        {
+            reply = new ClientResource("http://" + AdventureGame.serverIP + ":4444/checkUser?username=" + usernameField.getText() +
+                    "").get().getText();
+
+            if (reply.equals("true"))
+            {
+                // Username disponibile
+                reply = new ClientResource("http://" + AdventureGame.serverIP + ":4444/addUser?username=" + usernameField.getText() +
+                        "&password=" + passwordField.getText() + "").get().getText();
+
+                if (reply.equals("true"))
+                {
+                    dispose();
+                    game.setScreen(new LoginScreen(game));
+                }
+                else
+                    warningLabel.setText("Errore inserimento del nuovo utente");
+            }
+            else
+                warningLabel.setText("Username non disponibile");
+        } catch (ResourceException e)
+        {
+            warningLabel.setText("Server non disponibile, riprovare piu' tardi");
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -177,6 +180,10 @@ public class SignupScreen extends ChangeListener implements Screen
         stage.getBatch().end();
 
         stage.draw();
+
+        // Se si preme invio nella sezionione di SIGNUP allora automaticamente sarà rilevato il tasto di signup
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
+            sendToServer();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -19,6 +20,7 @@ import org.json.JSONObject;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
+import java.awt.event.KeyListener;
 import java.io.IOException;
 
 /**
@@ -112,40 +114,7 @@ public class LoginScreen extends ChangeListener implements Screen
     public void changed(ChangeEvent event, Actor actor)
     {
         if (actor.getName().equals(loginButton.getName()))
-        {
-            if(usernameField.getText().equals("") || passwordField.getText().equals(""))
-            {
-                warningLabel.setText("Username e Password non validi!");
-                return;
-            }
-
-            String reply = null;
-            try
-            {
-                reply = new ClientResource("http://" + AdventureGame.serverIP + ":4444/checkUser?username=" + usernameField.getText() +
-                        "&password=" + passwordField.getText() + "").get().getText();
-
-                if (reply.equals("true"))
-                {
-                    // effettuare il check dei livelli dell'utente e poi creare l'oggetto utente
-                    reply = new ClientResource("http://" + AdventureGame.serverIP + ":4444/getLastLevel?username=" + usernameField.getText() +
-                            "").get().getText();
-
-                    dispose();
-                    game.setScreen(new MainMenuScreen(game, new User(usernameField.getText(), Integer.valueOf(reply))));
-                }
-                else
-                    warningLabel.setText("Username e Password non validi!");
-            }
-            catch (ResourceException e)
-            {
-                warningLabel.setText("Server non disponibile, riprovare piu' tardi");
-            }
-            catch (IOException e)
-            {
-                warningLabel.setText("Server non disponibile, riprovare più tardi");
-            }
-        }
+            sendToServer();
         else if(actor.getName().equals(signupButton.getName()))
         {
             dispose();
@@ -153,6 +122,42 @@ public class LoginScreen extends ChangeListener implements Screen
         }
         else  if (actor.getName().equals("exit"))
             Gdx.app.exit();
+    }
+
+    private void sendToServer()
+    {
+        if(usernameField.getText().equals("") || passwordField.getText().equals(""))
+        {
+            warningLabel.setText("Username e Password non validi!");
+            return;
+        }
+
+        String reply = null;
+        try
+        {
+            reply = new ClientResource("http://" + AdventureGame.serverIP + ":4444/checkUser?username=" + usernameField.getText() +
+                    "&password=" + passwordField.getText() + "").get().getText();
+
+            if (reply.equals("true"))
+            {
+                // effettuare il check dei livelli dell'utente e poi creare l'oggetto utente
+                reply = new ClientResource("http://" + AdventureGame.serverIP + ":4444/getLastLevel?username=" + usernameField.getText() +
+                        "").get().getText();
+
+                dispose();
+                game.setScreen(new MainMenuScreen(game, new User(usernameField.getText(), Integer.valueOf(reply))));
+            }
+            else
+                warningLabel.setText("Username e Password non validi!");
+        }
+        catch (ResourceException e)
+        {
+            warningLabel.setText("Server non disponibile, riprovare piu' tardi");
+        }
+        catch (IOException e)
+        {
+            warningLabel.setText("Server non disponibile, riprovare più tardi");
+        }
     }
 
     @Override
@@ -174,6 +179,10 @@ public class LoginScreen extends ChangeListener implements Screen
         stage.getBatch().end();
 
         stage.draw();
+
+        // Se si preme invio nella sezionione di LOGIN allora automaticamente sarà rilevato il tasto di login
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
+            sendToServer();
     }
 
     @Override

@@ -1,11 +1,15 @@
 package com.game.graphics.panels;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -13,8 +17,10 @@ import com.game.AdventureGame;
 import com.game.User;
 import com.game.screens.LevelScreen;
 import com.game.screens.PlayScreen;
+import org.restlet.resource.ClientResource;
 
 import javax.jws.soap.SOAPBinding;
+import java.io.IOException;
 import java.util.List;
 
 public class Victory extends ChangeListener
@@ -23,6 +29,8 @@ public class Victory extends ChangeListener
     private static boolean visible;
     private AdventureGame game;
     private PlayScreen playScreen;
+    private Label coinLabel;
+    private Label timeLabel;
 
     private User userData;
 
@@ -55,12 +63,43 @@ public class Victory extends ChangeListener
         exitButton.setName("exit");
         exitButton.addListener(this);
 
+        Table tableScore = new Table();
+
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        labelStyle.font = createFont();
+        labelStyle.fontColor = Color.WHITE;
+
+        Label coinTextLabel = new Label("Coins: ", labelStyle);
+        coinLabel = new Label("0", labelStyle);
+
+        Label timeTextLabel = new Label("Time: ", labelStyle);
+        timeLabel = new Label("0:0", labelStyle);
+
+        tableScore.add(coinTextLabel).padRight(20);
+        tableScore.add(coinLabel).padRight(80);
+        tableScore.add(timeTextLabel).padRight(20);
+        tableScore.add(timeLabel);
+
         table.bottom();
-        table.add(playagainButton).size(1298 / 6,952 / 9).padBottom(20);
+        table.add(tableScore).padBottom(40);
         table.row();
-        table.add(exitButton).size(1298 / 6,952 / 9).padBottom(90);
+        table.add(playagainButton).size(1298 / 7,952 / 11).padBottom(20);
+        table.row();
+        table.add(exitButton).size(1298 / 7,952 / 11).padBottom(90);
 
         stage.addActor(table);
+    }
+
+    private BitmapFont createFont()
+    {
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/SHOWG.TTF"));
+        FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        fontParameter.size = 25;
+        fontParameter.color = Color.WHITE;
+        BitmapFont font = generator.generateFont(fontParameter);
+        generator.dispose();
+
+        return font;
     }
 
     public static void setVisible(boolean state)
@@ -73,7 +112,23 @@ public class Victory extends ChangeListener
 
     public void sendRecord(int scoreCoins, List<Integer> scoreTime)
     {
-        System.out.println(scoreCoins + " " + scoreTime.get(0) + ":" + scoreTime.get(1));
+        coinLabel.setText(scoreCoins);
+        timeLabel.setText(scoreTime.get(0) + ":" + scoreTime.get(1));
+
+        try
+        {
+            String reply = new ClientResource("http://" + AdventureGame.serverIP +
+                    ":4444/updateRecord?username=" + userData.getUsername() +
+                    "&livello=" + userData.getLevelSelected() + "&coins=" + scoreCoins +
+                    "&time=" + scoreTime.get(0) + ":" + scoreTime.get(1) + "").get().getText();
+
+            if (!Boolean.valueOf(reply))
+                System.out.println("Errore: Update fallito!");  //TEMPORANEO
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
         userData.addNewLevel(userData.getLevelSelected());
     }
 
