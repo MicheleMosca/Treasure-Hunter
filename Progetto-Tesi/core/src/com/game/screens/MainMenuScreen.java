@@ -40,37 +40,49 @@ public class MainMenuScreen extends ChangeListener implements Screen
 	{
 		this.game = game;
 		this.userData = userData;
+
+		drawUI();
+	}
+
+	private void drawUI()
+	{
 		Vector2 stageSize = new Vector2(1298 / 2, 952 / 2);
-		
-		//texture del background
+
+		// Texture del background
 		background = new Texture("menu/background.png");
-		
-		//carico l'immagine del pulsante EXIT
-	    Button ExitButton = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/exit.png"))));
-	    ExitButton.setName("exit");
-	    ExitButton.addListener(this);
-	    
-	    //caruco l'immagine del pulsante PLAY
-	    Button PlayButton = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/play.png"))));
-	    PlayButton.setName("play");
-	    PlayButton.addListener(this);
-	    
-	    Table table= new Table();
-	    table.setPosition(((float) Gdx.graphics.getWidth() /2) - (stageSize.x /2), ((float) Gdx.graphics.getHeight() /2) - (stageSize.y /2));
-        table.setSize(stageSize.x, stageSize.y);
-        table.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/login/table.png"))));
-	    
-	    table.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/table2.png"))));
-	    
-	    table.add(PlayButton).size(180,100).pad(20);
-	    table.row();
-	    table.add(ExitButton).size(180,100).pad(20);
-	    
-	    stage=new Stage(); 
-	    stage.addActor(table);
 
-	    Gdx.input.setInputProcessor(stage);
+		// Carico l'immagine del pulsante EXIT
+		Button ExitButton = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/exit.png"))));
+		ExitButton.setName("exit");
+		ExitButton.addListener(this);
 
+		// Carico l'immagine del pulsante PLAY
+		Button PlayButton = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/play.png"))));
+		PlayButton.setName("play");
+		PlayButton.addListener(this);
+
+		// Definisco il pulsante per raggiugere la schermata di selezione del livello per mostrare la relativa classifica
+		Button rankingButton = new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/ranking.png"))));
+		rankingButton.setName("ranking");
+		rankingButton.addListener(this);
+
+		Table table= new Table();
+		table.setPosition(((float) Gdx.graphics.getWidth() /2) - (stageSize.x /2), ((float) Gdx.graphics.getHeight() /2) - (stageSize.y /2));
+		table.setSize(stageSize.x, stageSize.y);
+		table.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/login/table.png"))));
+
+		table.background(new TextureRegionDrawable(new TextureRegion(new Texture("menu/main/table2.png"))));
+
+		table.add(PlayButton).size(1298 / 7,952 / 11).padBottom(20);
+		table.row();
+		table.add(rankingButton).size(1298 / 7,952 / 11).padBottom(20);
+		table.row();
+		table.add(ExitButton).size(1298 / 7,952 / 11);
+
+		stage=new Stage();
+		stage.addActor(table);
+
+		Gdx.input.setInputProcessor(stage);
 	}
 
 	@Override
@@ -80,6 +92,11 @@ public class MainMenuScreen extends ChangeListener implements Screen
 		{
 			dispose();
 			game.setScreen(new LevelScreen(game, userData));
+		}
+		else if (actor.getName().equals("ranking"))
+		{
+			dispose();
+			game.setScreen(new RankingLevelScreen(game, userData));
 		}
 		else if (actor.getName().equals("exit"))
 			Gdx.app.exit();

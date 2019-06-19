@@ -87,7 +87,7 @@ public class PlayScreen implements Screen
 		world.setContactListener(new CollisionDetector(this));
 
 		// Inizializzo l'hud di gioco
-		hud = new Hud();
+		hud = new Hud(game);
 
 		// Inizializzo gli elementi che costituiscono il punteggio e il tempo che in giocatore impiega
 		currentTime = 0;

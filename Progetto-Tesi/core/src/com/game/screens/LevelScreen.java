@@ -33,8 +33,8 @@ public class LevelScreen extends ChangeListener implements Screen
 	private Stage stage;
 	private Texture background;
 
-	private User userData;
-	private AdventureGame game;
+	protected User userData;
+	protected AdventureGame game;
 
 	public LevelScreen (final AdventureGame game, User userData)
 	{

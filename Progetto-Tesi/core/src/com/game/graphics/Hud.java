@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.game.AdventureGame;
+import sun.font.TrueTypeFont;
 
 /**
  * 
@@ -19,19 +20,28 @@ import com.game.AdventureGame;
 
 public class Hud extends Stage
 {
+    private AdventureGame game;
+
 	private Label countdownlabel;
 	private Label scorevaluelabel;
 	
-    public Hud()
+    public Hud(AdventureGame game)
     {
         super();
 
+        this.game = game;
+
+        drawUI();
+    }
+
+    private void drawUI()
+    {
         Table table = new Table();
         table.top();
         table.setFillParent(true);
 
         Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = createFont();
+        labelStyle.font = game.defaultFont;
         labelStyle.fontColor = Color.WHITE;
 
         Texture texture = new Texture("sprites/Coin/Coin.png");
@@ -47,18 +57,6 @@ public class Hud extends Stage
         table.add(scorevaluelabel);
 
         addActor(table);
-    }
-
-    private BitmapFont createFont()
-    {
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/SHOWG.TTF"));
-        FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        fontParameter.size = 25;
-        fontParameter.color = Color.WHITE;
-        BitmapFont font = generator.generateFont(fontParameter);
-        generator.dispose();
-
-        return font;
     }
     
     public void setcountdownlabel(String countdown)
