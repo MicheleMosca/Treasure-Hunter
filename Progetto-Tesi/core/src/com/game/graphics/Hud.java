@@ -45,7 +45,7 @@ public class Hud extends Stage
         labelStyle.fontColor = Color.WHITE;
 
         Texture texture = new Texture("sprites/Coin/Coin.png");
-        Label timelabel = new Label("TIMER: ", labelStyle);
+        Label timelabel = new Label("Timer", labelStyle);
         countdownlabel= new Label("0:0", labelStyle);
         Image coin=new Image(texture);
         scorevaluelabel = new Label("0", labelStyle);

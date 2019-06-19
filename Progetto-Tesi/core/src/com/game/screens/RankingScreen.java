@@ -66,7 +66,7 @@ public class RankingScreen extends ChangeListener implements Screen
 
         // Definisco lo style che devono avere le label
         Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = game.createFont(30);
+        labelStyle.font = game.defaultFont;
         labelStyle.fontColor = Color.WHITE;
 
         // Label per il testo username
