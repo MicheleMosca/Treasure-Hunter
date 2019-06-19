@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ca5ff812-8a21-42d6-b039-3250831762f0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameServer/com/gameserver/dbManager/DBManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameServer/com/gameserver/dbManager/DBManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/AdventureGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/AdventureGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/CameraObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/CameraObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/Hud.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/Hud.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/panels/Victory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/panels/Victory.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -25,7 +21,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="621">
+            <state relative-caret-position="1326">
               <caret line="89" column="40" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -37,8 +33,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="692">
-              <caret line="172" column="25" lean-forward="true" selection-start-line="172" selection-start-column="25" selection-end-line="172" selection-end-column="25" />
+            <state relative-caret-position="621">
+              <caret line="172" column="25" selection-start-line="172" selection-start-column="25" selection-end-line="172" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -69,7 +65,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="85" />
     <option name="y" value="25" />
     <option name="width" value="1750" />
@@ -81,8 +77,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -227,10 +223,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29060403" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29865772" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -269,7 +265,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/gameserver/main/Main.java" />
     <entry file="file://$PROJECT_DIR$/src/com/gameserver/restserver/RestServerResource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
+        <state relative-caret-position="1326">
           <caret line="89" column="40" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -279,8 +275,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/gameserver/dbManager/DBManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="692">
-          <caret line="172" column="25" lean-forward="true" selection-start-line="172" selection-start-column="25" selection-end-line="172" selection-end-column="25" />
+        <state relative-caret-position="621">
+          <caret line="172" column="25" selection-start-line="172" selection-start-column="25" selection-end-line="172" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
