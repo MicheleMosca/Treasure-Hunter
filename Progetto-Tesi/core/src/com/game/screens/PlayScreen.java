@@ -10,7 +10,11 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.game.AdventureGame;
+import com.game.Enum.AnimationState;
 import com.game.User;
 import com.game.graphics.CameraObject;
 import com.game.graphics.CollisionDetector;
@@ -55,6 +59,9 @@ public class PlayScreen implements Screen
 	private GameOver gameOverScreen;
 	private Victory victoryScreen;
 	private Pause pauseScreen;
+
+	private Stage tutorialStage;
+	private AnimationState tutorialState;
 
 	private boolean gameOnPause;
 
@@ -111,6 +118,13 @@ public class PlayScreen implements Screen
 
 		// Inizializzo il Pause screen
 		pauseScreen = new Pause(game, this, userData);
+
+		// Inizializzo nulle la label e la texture del tutorial
+		tutorialStage = null;
+
+		// Se e' il tutorial aggiungo come muoversi all'inizio
+		if (userData.getLevelSelected() == 0)
+			initTutorial("To move use", "A or D", AnimationState.Idle);
 
 		// Imposto come input processor null per togliere i comandi di imput agli screen
 		// (le azioni di input a livello di schermo non sono previste per il gioco, solo input da tastiera)
@@ -193,6 +207,10 @@ public class PlayScreen implements Screen
 		// Disegno tutti i componenti dell'hud
 		hud.draw();
 
+		// mostro il tutorial se e' presente
+		if (tutorialStage != null)
+			tutorialStage.draw();
+
 		// Inizio i desegni sulla camera
 		game.batch.begin();
 
@@ -210,6 +228,38 @@ public class PlayScreen implements Screen
 			GameOver.stage.draw();
 		else if (victoryScreen.isVisible())
 			Victory.stage.draw();
+	}
+
+	public void initTutorial(String text, String command, AnimationState tutorialState)
+	{
+		tutorialStage = new Stage();
+		this.tutorialState = tutorialState;
+
+		Table table = new Table();
+		table.top().padTop(200);
+		table.setFillParent(true);
+
+		Label.LabelStyle labelStyle = new Label.LabelStyle();
+		labelStyle.font = game.createFont(50);
+
+		Label textLabel = new Label(text, labelStyle);
+		Label commandLabel = new Label(command, labelStyle);
+
+		table.add(textLabel);
+		table.row();
+		table.add(commandLabel).padTop(10);
+
+		tutorialStage.addActor(table);
+	}
+
+	public AnimationState getTutorialState()
+	{
+		return tutorialState;
+	}
+
+	public void setTutorialStageNull()
+	{
+		tutorialStage = null;
 	}
 
 	public void removeBodyFromWorld(AnimatedEntity entity)

@@ -104,7 +104,12 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_9))
             isAlive = false;
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (getVelocity().y == 0) && getState() != AnimationState.Slide)
+        {
+            if (playScreen.getTutorialState() == AnimationState.Jump)
+                playScreen.setTutorialStageNull();
+
             moveUp();
+        }
 
         if (getVelocity().x == 0 && isSliding)
         {
@@ -115,15 +120,28 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
         if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT) && getVelocity().x != 0
                 && getState() != AnimationState.Jump && !isSliding)
         {
+            if (playScreen.getTutorialState() == AnimationState.Slide)
+                playScreen.setTutorialStageNull();
+
             isSliding = true;
             sliderTimer = new Timer(1600, this);
             sliderTimer.start();
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.D))
+        {
+            if (playScreen.getTutorialState() == AnimationState.Idle)
+                playScreen.setTutorialStageNull();
+
             moveRight();
+        }
         else if (Gdx.input.isKeyPressed(Input.Keys.A))
+        {
+            if (playScreen.getTutorialState() == AnimationState.Idle)
+                playScreen.setTutorialStageNull();
+
             moveLeft();
+        }
         else
             body.setLinearVelocity(0, getVelocity().y);
     }

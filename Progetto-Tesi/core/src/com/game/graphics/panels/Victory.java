@@ -137,25 +137,24 @@ public class Victory extends ChangeListener
         coinLabel.setText(scoreCoins);
         timeLabel.setText(scoreTime.get(0) + ":" + scoreTime.get(1));
 
-        try
+        if (userData.getLevelSelected() != 0)
         {
-            String reply = new ClientResource("http://" + AdventureGame.serverIP +
-                    ":4444/updateRecord?username=" + userData.getUsername() +
-                    "&livello=" + userData.getLevelSelected() + "&coins=" + scoreCoins +
-                    "&time=" + scoreTime.get(0) + ":" + scoreTime.get(1) + "").get().getText();
+            try
+            {
+                String reply = new ClientResource("http://" + AdventureGame.serverIP + ":4444/updateRecord?username=" + userData.getUsername() + "&livello=" + userData.getLevelSelected() + "&coins=" + scoreCoins + "&time=" + scoreTime.get(0) + ":" + scoreTime.get(1) + "").get().getText();
 
-            if (!Boolean.valueOf(reply))
-                System.out.println("Errore: Update fallito!");  //TEMPORANEO
+                if (!Boolean.valueOf(reply))
+                    System.out.println("Errore: Update fallito!");  //TEMPORANEO
+            } catch (ResourceException e)
+            {
+                System.out.println("Server non disponibile!");
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
+            userData.addNewLevel(userData.getLevelSelected());
         }
-        catch (ResourceException e)
-        {
-            System.out.println("Server non disponibile!");
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        userData.addNewLevel(userData.getLevelSelected());
     }
 
     /**
@@ -182,6 +181,6 @@ public class Victory extends ChangeListener
             game.setScreen(new PlayScreen(game, userData));
 
         else if (actor.getName().equals("exit"))
-            game.setScreen(new LevelScreen(game, userData));
+            game.setScreen(new LevelScreen(game, userData, true));
     }
 }

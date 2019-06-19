@@ -36,7 +36,7 @@ public class LevelScreen extends ChangeListener implements Screen
 	protected User userData;
 	protected AdventureGame game;
 
-	public LevelScreen (final AdventureGame game, User userData)
+	public LevelScreen (final AdventureGame game, User userData, boolean allowTutorialButton)
 	{
 		this.userData = userData;
 		this.game = game;
@@ -83,9 +83,21 @@ public class LevelScreen extends ChangeListener implements Screen
 	    
 	    table1.row();
 	    table1.add(PrewButton).size(80,80).left();
-        
+
 	    stage=new Stage();
 	    stage.addActor(table1);
+
+		if (allowTutorialButton)
+		{
+			Button tutorialButton = new Button(new TextureRegionDrawable(new TextureRegion(
+					new Texture("menu/level_select/tutorial.png"))));
+			tutorialButton.setName("tutorial");
+			tutorialButton.addListener(this);
+			tutorialButton.setSize(1298 / 9,952 / 11);
+			tutorialButton.setPosition(table1.getX() + (table1.getWidth() / 3),
+					table1.getY() + 37);
+			stage.addActor(tutorialButton);
+		}
 
 	    Gdx.input.setInputProcessor(stage);
 	}
@@ -103,6 +115,11 @@ public class LevelScreen extends ChangeListener implements Screen
 		else if (actor.getName().equals("level2"))
 		{
 			userData.selectLevel(2);
+			game.setScreen(new PlayScreen(game, userData));
+		}
+		else if (actor.getName().equals("tutorial"))
+		{
+			userData.selectLevel(0);
 			game.setScreen(new PlayScreen(game, userData));
 		}
 		else if (actor.getName().equals("prew"))

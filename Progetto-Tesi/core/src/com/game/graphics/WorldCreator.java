@@ -1,9 +1,11 @@
 package com.game.graphics;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.game.Enum.AnimationState;
 import com.game.graphics.entities.AnimatedEntity;
 import com.game.graphics.entities.Chest;
 import com.game.graphics.entities.Coin;
@@ -52,6 +54,22 @@ public class WorldCreator
         {
             if (mapObject.getName().equals("finishSpawn"))
                 gameObjects.add(new Chest(world, mapObject, playScreen));
+        }
+
+        // Inserisco nel mondo i trigger per il tutorial
+        for (MapObject mapObject : tiledMap.getLayers().get("Spawn").getObjects())
+        {
+            if (mapObject.getName().equals("spaceSpawn"))
+                new TutorialObject(world, mapObject, BodyDef.BodyType.StaticBody, playScreen,
+                        "To jump press", "Space", AnimationState.Jump);
+
+            else if (mapObject.getName().equals("ctrlSpawn"))
+                new TutorialObject(world, mapObject, BodyDef.BodyType.StaticBody, playScreen,
+                        "To slide press", "ctrl", AnimationState.Slide);
+
+            else if (mapObject.getName().equals("endSpawn"))
+                new TutorialObject(world, mapObject, BodyDef.BodyType.StaticBody, playScreen,
+                        "Take the chest", "", AnimationState.Run);
         }
 
         // Inserisco nel mondo il player in uso con il relativo spawn point

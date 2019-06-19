@@ -83,6 +83,6 @@ public class GameOver extends ChangeListener
             game.setScreen(new PlayScreen(game, userData));
 
         else if (actor.getName().equals("exit"))
-            game.setScreen(new LevelScreen(game, userData));
+            game.setScreen(new LevelScreen(game, userData, true));
     }
 }

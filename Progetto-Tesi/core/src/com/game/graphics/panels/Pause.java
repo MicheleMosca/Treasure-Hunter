@@ -87,7 +87,7 @@ public class Pause extends ChangeListener
         {
             stage.dispose();
             playScreen.dispose();
-            game.setScreen(new LevelScreen(game, userData));
+            game.setScreen(new LevelScreen(game, userData, true));
         }
     }
 }

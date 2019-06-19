@@ -31,14 +31,18 @@ public class CollisionDetector implements ContactListener
         if (receiver instanceof Enemy && sender instanceof Player)
             ((Enemy) receiver).hit((Player) sender);
 
-        if (receiver instanceof Coin && sender instanceof Player)
+        else if (receiver instanceof Coin && sender instanceof Player)
         {
             game.addCoin();
             game.removeBodyFromWorld((Coin) receiver);
         }
 
-        if (receiver instanceof Chest && sender instanceof Player)
+        else if (receiver instanceof Chest && sender instanceof Player)
             ((Chest) receiver).endLevel();
+
+        else if (receiver instanceof TutorialObject && sender instanceof Player)
+            if (!((TutorialObject) receiver).isVisualized())
+                ((TutorialObject) receiver).showTutorial();
     }
 
     @Override

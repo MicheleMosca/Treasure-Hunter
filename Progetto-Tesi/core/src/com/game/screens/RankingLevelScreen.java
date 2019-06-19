@@ -12,7 +12,7 @@ public class RankingLevelScreen extends LevelScreen
 {
     public RankingLevelScreen(AdventureGame game, User userData)
     {
-        super(game, userData);
+        super(game, userData, false);
     }
 
     @Override

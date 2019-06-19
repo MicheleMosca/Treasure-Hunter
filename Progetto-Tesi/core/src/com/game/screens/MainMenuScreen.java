@@ -104,7 +104,7 @@ public class MainMenuScreen extends ChangeListener implements Screen
 		dispose();
 
 		if (actor.getName().equals("play"))
-			game.setScreen(new LevelScreen(game, userData));
+			game.setScreen(new LevelScreen(game, userData, true));
 		else if (actor.getName().equals("ranking"))
 			game.setScreen(new RankingLevelScreen(game, userData));
 		else if (actor.getName().equals("logout"))
