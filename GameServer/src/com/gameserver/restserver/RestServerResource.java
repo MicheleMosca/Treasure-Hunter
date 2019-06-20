@@ -32,7 +32,7 @@ public class RestServerResource extends ServerResource
         JSONArray jarr = new JSONArray();
         while (resultSet.next())
         {
-            HashMap<String, String> row = new HashMap<String, String>();
+            HashMap<String, String> row = new HashMap<>();
             for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++)
                 row.put(resultSet.getMetaData().getColumnName(i), String.valueOf(resultSet.getObject(i)));
             jarr.put(row);
@@ -50,32 +50,25 @@ public class RestServerResource extends ServerResource
         String response = null;
         try
         {
-            if (getReference().getLastSegment().equals("getClassifica"))
+            switch (getReference().getLastSegment())
             {
-                response = resultset_to_json(dbManager.getClassifica(getQuery().getValues("livello")));
-            }
-            else if (getReference().getLastSegment().equals("checkUser"))
-            {
-                response = String.valueOf(dbManager.checkUser(getQuery().getValues("username"), getQuery().getValues("password")));
-            }
-            else if (getReference().getLastSegment().equals("updateRecord"))
-            {
-                response = String.valueOf(dbManager.updateRecord(getQuery().getValues("username"),
-                        getQuery().getValues("livello"), Integer.parseInt(getQuery().getValues("coins")),
-                        getQuery().getValues("time")));
-            }
-            else if (getReference().getLastSegment().equals("getLastLevel"))
-            {
-                response = String.valueOf(dbManager.getLastLevel(getQuery().getValues("username")));
-            }
-            else if (getReference().getLastSegment().equals("addUser"))
-            {
-                response = String.valueOf(dbManager.addUser(getQuery().getValues("username"),
-                        getQuery().getValues("password")));
-            }
-            else
-            {
-                throw new ResourceException(new Status(Status.SERVER_ERROR_NOT_IMPLEMENTED, ""));
+                case "getClassifica":
+                    response = resultset_to_json(dbManager.getClassifica(getQuery().getValues("livello")));
+                    break;
+                case "checkUser":
+                    response = String.valueOf(dbManager.checkUser(getQuery().getValues("username"), getQuery().getValues("password")));
+                    break;
+                case "updateRecord":
+                    response = String.valueOf(dbManager.updateRecord(getQuery().getValues("username"), getQuery().getValues("livello"), Integer.parseInt(getQuery().getValues("coins")), getQuery().getValues("time")));
+                    break;
+                case "getLastLevel":
+                    response = String.valueOf(dbManager.getLastLevel(getQuery().getValues("username")));
+                    break;
+                case "addUser":
+                    response = String.valueOf(dbManager.addUser(getQuery().getValues("username"), getQuery().getValues("password")));
+                    break;
+                default:
+                    throw new ResourceException(new Status(Status.SERVER_ERROR_NOT_IMPLEMENTED, ""));
             }
         } catch (Exception e)
         {
@@ -84,9 +77,15 @@ public class RestServerResource extends ServerResource
         return response;
     }
 
-    public static void main(String[] args) throws Exception
+    public static void main(String[] args)
     {
         dbManager = new DBManager();
-        new Server(Protocol.HTTP, 4444, RestServerResource.class).start();
+        try
+        {
+            new Server(Protocol.HTTP, 4444, RestServerResource.class).start();
+        } catch (Exception e)
+        {
+            System.out.println("Errore: impossibile avviare il server");
+        }
     }
 }

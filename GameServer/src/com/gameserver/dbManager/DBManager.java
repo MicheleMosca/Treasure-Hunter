@@ -9,8 +9,10 @@ import java.util.StringTokenizer;
 
 public class DBManager
 {
-    public static final String JDBCDriverMySQL = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    public static final String JDBCURLMySQL = "jdbc:sqlserver://localhost;databaseName=gamecloud;user=user;password=miokmiok";
+    private static final String JDBCDriverSQLServer = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+    private static final String JDBCURLSQLServer = "jdbc:sqlserver://localhost;databaseName=gamecloud;user=user;password=miokmiok";
+    //private static final String JDBCDriverMySQL = "com.mysql.jdbc.Driver";
+    //private static final String JDBCURLMySQL = "jdbc:mysql://localhost:3306/gamecloud?user=user&password=miokmiok";
     private Statement statement;
 
     public DBManager()
@@ -18,7 +20,7 @@ public class DBManager
         System.out.println("Server game started...");
         try
         {
-            Class.forName(JDBCDriverMySQL);
+            Class.forName(JDBCDriverSQLServer);
         }
         catch (ClassNotFoundException e)
         {
@@ -27,7 +29,7 @@ public class DBManager
 
         try
         {
-            Connection connection = DriverManager.getConnection(JDBCURLMySQL);
+            Connection connection = DriverManager.getConnection(JDBCURLSQLServer);
             statement = connection.createStatement();
             statement.setQueryTimeout(30);
 
@@ -141,8 +143,8 @@ public class DBManager
 
     public int getLastLevel(String username)
     {
-        ResultSet resultSet = null;
-        int livello = 0;
+        ResultSet resultSet;
+        int livello;
         try
         {
             resultSet = statement.executeQuery("select livello from Partite as P where username = '" + username +
