@@ -101,8 +101,6 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
 
     private void inputHandler()
     {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_9))
-            isAlive = false;
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (getVelocity().y == 0) && getState() != AnimationState.Slide)
         {
             if (playScreen.getTutorialState() == AnimationState.Jump)

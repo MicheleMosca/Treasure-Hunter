@@ -133,14 +133,6 @@ public class PlayScreen implements Screen
 
 	private void handleInput(float deltaTime)
 	{
-		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1))
-		{
-			if (Gdx.graphics.isFullscreen())
-				Gdx.graphics.setWindowedMode(Gdx.graphics.getDisplayMode().width, Gdx.graphics.getDisplayMode().height);
-			else
-				Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
-		}
-
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
 		{
 			gameOnPause = true;
@@ -298,8 +290,7 @@ public class PlayScreen implements Screen
 	@Override
 	public void pause()
 	{
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

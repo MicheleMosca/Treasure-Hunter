@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.game.screens.LoginScreen;
 import com.game.screens.MainMenuScreen;
 import com.game.screens.PlayScreen;
+import com.game.screens.SplashScreen;
 
 /**
  * 
@@ -21,7 +22,7 @@ public class AdventureGame extends Game
 	public static final int worldWidth = 1920; //1280
 	public static final int worldHeight = 1080;	//720
 	public static final float pixelPerMeter = 100;
-	public static final boolean fullScreenOnStart = true;
+	public static final boolean fullScreenOnStart = false;
 	public static final String serverIP = "localhost";
 
 	public SpriteBatch batch;
@@ -35,7 +36,7 @@ public class AdventureGame extends Game
 		batch = new SpriteBatch();
 		defaultFont = createFont(30);
 
-		setScreen(new LoginScreen(this)); //, new User("pippo", 0))); //LoginScreen
+		setScreen(new SplashScreen(this)); //, new User("pippo", 0))); //LoginScreen
 	}
 
 	public BitmapFont createFont(int size)
