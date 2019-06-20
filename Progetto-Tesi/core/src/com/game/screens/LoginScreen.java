@@ -16,11 +16,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.game.AdventureGame;
 import com.game.User;
-import org.json.JSONObject;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
-import java.awt.event.KeyListener;
 import java.io.IOException;
 
 /**
@@ -40,10 +38,17 @@ public class LoginScreen extends ChangeListener implements Screen
     private TextField usernameField;
     private TextField passwordField;
 
-    public LoginScreen(final AdventureGame game)
+    LoginScreen(AdventureGame game)
     {
         this.game = game;
+        drawUI();
+    }
 
+    /**
+     * Metodo chiamato dal costruttore per disegnare L'interfaccia utente del login
+     */
+    private void drawUI()
+    {
         stage = new Stage();
         Vector2 stageSize = new Vector2(1298 / 2, 952 / 2);
 
@@ -113,6 +118,11 @@ public class LoginScreen extends ChangeListener implements Screen
         Gdx.input.setInputProcessor(stage);
     }
 
+    /**
+     * Metodo per ricevere gli eventi di tipo ChangeEvent usati dai pulsanti
+     * @param event ChangeEvent
+     * @param actor Actor che ha generato l'evento
+     */
     @Override
     public void changed(ChangeEvent event, Actor actor)
     {
@@ -127,6 +137,9 @@ public class LoginScreen extends ChangeListener implements Screen
             Gdx.app.exit();
     }
 
+    /**
+     * Metodo per mandare le informazioni al server e se tutto va bene passa al MainMenuScreen
+     */
     private void sendToServer()
     {
         if(usernameField.getText().equals("") || passwordField.getText().equals(""))
@@ -135,7 +148,7 @@ public class LoginScreen extends ChangeListener implements Screen
             return;
         }
 
-        String reply = null;
+        String reply;
         try
         {
             reply = new ClientResource("http://" + AdventureGame.serverIP + ":4444/checkUser?username=" + usernameField.getText() +
@@ -164,12 +177,6 @@ public class LoginScreen extends ChangeListener implements Screen
     }
 
     @Override
-    public void show()
-    {
-
-    }
-
-    @Override
     public void render(float delta)
     {
         // Pulisco il buffer dello schermo
@@ -186,6 +193,12 @@ public class LoginScreen extends ChangeListener implements Screen
         // Se si preme invio nella sezionione di LOGIN allora automaticamente sarà rilevato il tasto di login
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
             sendToServer();
+    }
+
+    @Override
+    public void show()
+    {
+
     }
 
     @Override

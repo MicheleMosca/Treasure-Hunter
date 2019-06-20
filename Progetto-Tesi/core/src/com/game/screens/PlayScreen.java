@@ -65,12 +65,9 @@ public class PlayScreen implements Screen
 
 	private boolean gameOnPause;
 
-	private User userData;
-
 	public PlayScreen(AdventureGame game, User userData)
 	{
 		this.game = game;
-		this.userData = userData;
 
 		gameOnPause = false;
 		// Carico la mappa
@@ -131,7 +128,10 @@ public class PlayScreen implements Screen
 		Gdx.input.setInputProcessor(null);
 	}
 
-	private void handleInput(float deltaTime)
+	/**
+	 * Metodo per controllare gli input dell'utente
+	 */
+	private void handleInput()
 	{
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
 		{
@@ -140,6 +140,10 @@ public class PlayScreen implements Screen
 		}
 	}
 
+	/**
+	 * Metodo per contare quanto tempo (in secondi) e' trascorso dall'inizio del livello
+	 * @param deltatime tempo trascorso tra un frame ed un altro
+	 */
 	private void timerCount(float deltatime)
 	{
 		currentTime += deltatime;
@@ -155,13 +159,17 @@ public class PlayScreen implements Screen
 				scoreTime.add(1 , scoreTime.get(1) + 1);
 			currentTime = 0;
 			
-			hud.setcountdownlabel(scoreTime.get(0) + ":" + scoreTime.get(1));
+			hud.setTimeValueLabel(scoreTime.get(0) + ":" + scoreTime.get(1));
 		}
 	}
-	
+
+	/**
+	 * Metodo per aggiornare gli oggetti in scena
+	 * @param deltaTime tempo trascorso tra un frame ed un altro
+	 */
 	private void update(float deltaTime)
 	{
-		handleInput(deltaTime);
+		handleInput();
 
 		timerCount(deltaTime);
 
@@ -222,6 +230,13 @@ public class PlayScreen implements Screen
 			Victory.stage.draw();
 	}
 
+	/**
+	 * Metodo per inserire una scritta di suggerimento per l'utente (usato per il tutorial)
+	 * @param text Scritta che indica cosa fare
+	 * @param command Scritta che indica il comando da usare
+	 * @param tutorialState AnimationState che indica a quale stato mi sto riferendo
+	 *                         (serve per controllare se l'azione e' stata svolta)
+	 */
 	public void initTutorial(String text, String command, AnimationState tutorialState)
 	{
 		tutorialStage = new Stage();
@@ -244,16 +259,27 @@ public class PlayScreen implements Screen
 		tutorialStage.addActor(table);
 	}
 
+	/**
+	 * Metodo per ottenere l'azione che si ci aspetta che l'utente svolga per togliere il suggerimento (usato nel tutorial)
+	 * @return AnimationState indicante lo stato dell'azione
+	 */
 	public AnimationState getTutorialState()
 	{
 		return tutorialState;
 	}
 
+	/**
+	 * Metodo per disabilitare il suggerimento inerente all'azione da svolgere (usato nel tutorial)
+	 */
 	public void setTutorialStageNull()
 	{
 		tutorialStage = null;
 	}
 
+	/**
+	 * Metodo per eliminare un oggetto dal mondo di gioco (es. coin)
+	 * @param entity Entita' da eliminare
+	 */
 	public void removeBodyFromWorld(AnimatedEntity entity)
 	{
 		entity.getSprite().getTexture().dispose();
@@ -262,17 +288,19 @@ public class PlayScreen implements Screen
 		gameObjects.remove(entity);
 	}
 
+	/**
+	 * Metodo per aggiungere un coin al punteggio
+	 */
 	public void addCoin()
 	{
 		scoreCoins++;
-		hud.setscorevaluelabel(""+scoreCoins);
+		hud.setScoreValueLabel("" + scoreCoins);
 	}
 
-	public boolean isGameOnPause()
-	{
-		return gameOnPause;
-	}
-
+	/**
+	 * Metodo per mettere il gioco in pausa o toglierlo dalla pausa
+	 * @param gameOnPause True se in pausa, False altrimenti
+	 */
 	public void setGameOnPause(boolean gameOnPause)
 	{
 		this.gameOnPause = gameOnPause;

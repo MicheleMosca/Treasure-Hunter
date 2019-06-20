@@ -12,5 +12,5 @@ public interface Enemy
      * Funzione per colpire un determinato target
      * @param target Oggetto da colpire
      */
-    public void hit(Player target);
+    void hit(Player target);
 }

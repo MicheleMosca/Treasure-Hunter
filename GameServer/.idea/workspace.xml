@@ -2,15 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca5ff812-8a21-42d6-b039-3250831762f0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/maps/level0/tutorial/ctrl.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/maps/level0/tutorial/ctrl1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/maps/level0/tutorial/space.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/maps/level0/tutorial/space1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/maps/level0/tutorial/wad.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/menu/header.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/menu/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/menu/logo1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/AdventureGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/AdventureGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/Enum/AnimationState.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/Enum/AnimationState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/CameraObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/CameraObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/Hud.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/Hud.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/TutorialObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/TutorialObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/WorldCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/WorldCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/panels/Pause.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/panels/Pause.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/panels/Victory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/panels/Victory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/interfaces/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/interfaces/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/interfaces/Follower.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/interfaces/Follower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/interfaces/Movable.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/interfaces/Movable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/LevelScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/LevelScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/LoginScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/LoginScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/MainMenuScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/MainMenuScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/PlayScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/PlayScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/RankingLevelScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/RankingLevelScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/RankingScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/RankingScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/SignupScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/SignupScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/SplashScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/SplashScreen.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -76,7 +87,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="85" />
     <option name="y" value="25" />
     <option name="width" value="1750" />
@@ -255,7 +266,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3067114" />

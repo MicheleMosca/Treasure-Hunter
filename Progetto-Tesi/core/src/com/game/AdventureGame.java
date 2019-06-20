@@ -6,27 +6,22 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.game.screens.LoginScreen;
-import com.game.screens.MainMenuScreen;
-import com.game.screens.PlayScreen;
 import com.game.screens.SplashScreen;
 
 /**
- * 
  * Classe principale del gioco, la prima ad essere instanziata e quella che decide quale screen avviare
- *
  */
 
 public class AdventureGame extends Game
 {
-	public static final int worldWidth = 1920; //1280
-	public static final int worldHeight = 1080;	//720
+	public static final String gameTitle = "Treasure Hunter";
+	public static final int worldWidth = 1920;
+	public static final int worldHeight = 1080;
 	public static final float pixelPerMeter = 100;
 	public static final boolean fullScreenOnStart = true;
 	public static final String serverIP = "localhost";
 
 	public SpriteBatch batch;
-	private User user;
 
 	public BitmapFont defaultFont;
 
@@ -36,9 +31,14 @@ public class AdventureGame extends Game
 		batch = new SpriteBatch();
 		defaultFont = createFont(30);
 
-		setScreen(new SplashScreen(this)); //, new User("pippo", 0))); //LoginScreen
+		setScreen(new SplashScreen(this));
 	}
 
+	/**
+	 * Metodo per creare un nuovo font con il tema del gioco
+	 * @param size Stabilisce la grandezza del font
+	 * @return Ritorna una BitmapFont
+	 */
 	public BitmapFont createFont(int size)
 	{
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/SHOWG.TTF"));

@@ -17,7 +17,7 @@ public class DesktopLauncher
 	{
 		LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
 		
-		configuration.title = "Adventure Game";
+		configuration.title = AdventureGame.gameTitle;
 		configuration.width = AdventureGame.worldWidth;
 		configuration.height = AdventureGame.worldHeight;
 		configuration.foregroundFPS = 60;

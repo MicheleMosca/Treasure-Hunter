@@ -14,6 +14,10 @@ import com.game.User;
 import com.game.screens.LevelScreen;
 import com.game.screens.PlayScreen;
 
+/**
+ * Classe per la creazione di un menu di pausa
+ */
+
 public class Pause extends ChangeListener
 {
     public static Stage stage;
@@ -32,6 +36,15 @@ public class Pause extends ChangeListener
         this.playScreen = playScreen;
         this.userData = userData;
 
+        drawUI();
+    }
+
+    /**
+     * Metodo chiamato dal costruttore per disegnare L'interfaccia utente del login
+     */
+    private void drawUI()
+    {
+        // Creo lo stage dove inserire tutti gli oggetti del menu
         stage = new Stage();
         Vector2 stageSize = new Vector2(1298 / 2, 952 / 2);
 

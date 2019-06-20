@@ -1,6 +1,5 @@
 package com.game.graphics;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -17,6 +16,11 @@ import com.game.screens.PlayScreen;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Classe che server per creare gli oggetti del mondo di gioco in base ad una TiledMap data in input
+ * (Non fa altro che cercare all'interno della mappa oggetti con determinati nomi per poi instanziare le loro rispettive classi)
+ */
+
 public class WorldCreator
 {
     private PlayScreen playScreen;
@@ -26,6 +30,12 @@ public class WorldCreator
         this.playScreen = playScreen;
     }
 
+    /**
+     * Metodo per inizializzare il mondo di gioco
+     * @param tiledMap TiledMap da cui pendere gli oggetti di gioco
+     * @param world Mondo su cui inserirli
+     * @return Lista di AnimatedEntity contenente tutti gli oggetti di gioco
+     */
     public List<AnimatedEntity> initWorld(TiledMap tiledMap, World world)
     {
         List<AnimatedEntity> gameObjects = new LinkedList<AnimatedEntity>();

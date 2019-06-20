@@ -35,10 +35,17 @@ public class SignupScreen extends ChangeListener implements Screen
     private TextField usernameField;
     private TextField passwordField;
 
-    public SignupScreen(final AdventureGame game)
+    SignupScreen(final AdventureGame game)
     {
         this.game = game;
+        drawUI();
+    }
 
+    /**
+     * Metodo chiamato dal costruttore per disegnare L'interfaccia utente del login
+     */
+    private void drawUI()
+    {
         stage = new Stage();
         Vector2 stageSize = new Vector2(1298 / 2, 952 / 2);
 
@@ -110,6 +117,11 @@ public class SignupScreen extends ChangeListener implements Screen
         Gdx.input.setInputProcessor(stage);
     }
 
+    /**
+     * Metodo per ricevere gli eventi di tipo ChangeEvent usati dai pulsanti
+     * @param event ChangeEvent
+     * @param actor Actor che ha generato l'evento
+     */
     @Override
     public void changed(ChangeEvent event, Actor actor)
     {
@@ -124,6 +136,9 @@ public class SignupScreen extends ChangeListener implements Screen
         }
     }
 
+    /**
+     * Metodo per mandare le informazioni al server e se tutto va bene passa al LoginScreen
+     */
     private void sendToServer()
     {
         if(usernameField.getText().equals("") || passwordField.getText().equals(""))
@@ -132,7 +147,7 @@ public class SignupScreen extends ChangeListener implements Screen
             return;
         }
 
-        String reply = null;
+        String reply;
         try
         {
             reply = new ClientResource("http://" + AdventureGame.serverIP + ":4444/checkUser?username=" + usernameField.getText() +
@@ -165,12 +180,6 @@ public class SignupScreen extends ChangeListener implements Screen
     }
 
     @Override
-    public void show()
-    {
-
-    }
-
-    @Override
     public void render(float delta)
     {
         // Pulisco il buffer dello schermo
@@ -187,6 +196,12 @@ public class SignupScreen extends ChangeListener implements Screen
         // Se si preme invio nella sezionione di SIGNUP allora automaticamente sarà rilevato il tasto di signup
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
             sendToServer();
+    }
+
+    @Override
+    public void show()
+    {
+
     }
 
     @Override

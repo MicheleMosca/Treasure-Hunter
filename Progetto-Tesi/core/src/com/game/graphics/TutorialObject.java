@@ -1,6 +1,5 @@
 package com.game.graphics;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
@@ -8,7 +7,11 @@ import com.game.Enum.AnimationState;
 import com.game.graphics.entities.Entity;
 import com.game.screens.PlayScreen;
 
-public class TutorialObject extends Entity
+/**
+ * Classe che instazia un trigger per mostrare un suggerimento durante il tutorial
+ */
+
+class TutorialObject extends Entity
 {
     private PlayScreen playScreen;
     private String text;
@@ -16,7 +19,7 @@ public class TutorialObject extends Entity
     private AnimationState tutorialState;
     private boolean visualized;
 
-    public TutorialObject(World world, MapObject mapObject, BodyDef.BodyType bodyType,
+    TutorialObject(World world, MapObject mapObject, BodyDef.BodyType bodyType,
                           PlayScreen playScreen, String text, String command, AnimationState tutorialState)
     {
         super(world, mapObject, bodyType);
@@ -30,12 +33,19 @@ public class TutorialObject extends Entity
         body.getFixtureList().get(0).setSensor(true);   // tolgo tutte le collisioni standard
     }
 
-    public boolean isVisualized()
+    /**
+     * Metodo per controllare se e' stato visualizzato
+     * @return True se e' stato visualizzato
+     */
+    boolean isVisualized()
     {
         return visualized;
     }
 
-    public void showTutorial()
+    /**
+     * Metodo per visualizzare il suggerimento
+     */
+    void showTutorial()
     {
         visualized = true;
         playScreen.initTutorial(text, command, tutorialState);

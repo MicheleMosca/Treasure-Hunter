@@ -10,11 +10,16 @@ import com.game.User;
 
 public class RankingLevelScreen extends LevelScreen
 {
-    public RankingLevelScreen(AdventureGame game, User userData)
+    RankingLevelScreen(AdventureGame game, User userData)
     {
         super(game, userData, false);
     }
 
+    /**
+     * Metodo per ricevere gli eventi di tipo ChangeEvent usati dai pulsanti
+     * @param event ChangeEvent
+     * @param actor Actor che ha generato l'evento
+     */
     @Override
     public void changed(ChangeEvent event, Actor actor)
     {

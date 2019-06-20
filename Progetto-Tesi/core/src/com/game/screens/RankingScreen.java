@@ -33,7 +33,7 @@ public class RankingScreen extends ChangeListener implements Screen
 
     private int level;
 
-    public RankingScreen(AdventureGame game, User userData, int level)
+    RankingScreen(AdventureGame game, User userData, int level)
     {
         this.game = game;
         this.userData = userData;
@@ -42,6 +42,9 @@ public class RankingScreen extends ChangeListener implements Screen
         drawUI();
     }
 
+    /**
+     * Metodo chiamato dal costruttore per disegnare L'interfaccia utente del login
+     */
     private void drawUI()
     {
         // Creo uno stage e le dimensioni di tale stage
@@ -126,6 +129,11 @@ public class RankingScreen extends ChangeListener implements Screen
         Gdx.input.setInputProcessor(stage);
     }
 
+    /**
+     * Metodo per ricevere gli eventi di tipo ChangeEvent usati dai pulsanti
+     * @param event ChangeEvent
+     * @param actor Actor che ha generato l'evento
+     */
     @Override
     public void changed(ChangeEvent event, Actor actor)
     {
@@ -135,6 +143,10 @@ public class RankingScreen extends ChangeListener implements Screen
             game.setScreen(new RankingLevelScreen(game, userData));
     }
 
+    /**
+     * Metodo che effettua un interrogazione al server per ottenere la classifica del gioco
+     * @return JSONArray contenente tutti i giocatori in ordine prima di coins e poi di time
+     */
     private JSONArray getClassifica()
     {
         JSONArray jsonArray = null;
@@ -158,12 +170,6 @@ public class RankingScreen extends ChangeListener implements Screen
     }
 
     @Override
-    public void show()
-    {
-
-    }
-
-    @Override
     public void render(float delta)
     {
         // Pulisco il buffer dello schermo
@@ -176,6 +182,12 @@ public class RankingScreen extends ChangeListener implements Screen
         stage.getBatch().end();
 
         stage.draw();
+    }
+
+    @Override
+    public void show()
+    {
+
     }
 
     @Override

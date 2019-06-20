@@ -23,20 +23,13 @@ import com.game.User;
 
 public class MainMenuScreen extends ChangeListener implements Screen
 {
-	private static final int Width = 200; //80
-	private static final int Height = 100;
-	private static final int PlayPositionX = 500;
-	private static final int PlayPositionY = 400;
-	private static final int ExitPositionX = 500;
-	private static final int ExitPositionY = 200;
-
 	private AdventureGame game;
 	private User userData;
 
 	private Stage stage;
 	private Texture background;
 	
-	public MainMenuScreen(AdventureGame game, User userData)
+	MainMenuScreen(AdventureGame game, User userData)
 	{
 		this.game = game;
 		this.userData = userData;
@@ -44,6 +37,9 @@ public class MainMenuScreen extends ChangeListener implements Screen
 		drawUI();
 	}
 
+	/**
+	 * Metodo chiamato dal costruttore per disegnare L'interfaccia utente del login
+	 */
 	private void drawUI()
 	{
 		stage = new Stage();
@@ -92,6 +88,11 @@ public class MainMenuScreen extends ChangeListener implements Screen
 		Gdx.input.setInputProcessor(stage);
 	}
 
+	/**
+	 * Metodo per ricevere gli eventi di tipo ChangeEvent usati dai pulsanti
+	 * @param event ChangeEvent
+	 * @param actor Actor che ha generato l'evento
+	 */
 	@Override
 	public void changed(ChangeEvent event, Actor actor)
 	{
@@ -110,12 +111,6 @@ public class MainMenuScreen extends ChangeListener implements Screen
 		else if (actor.getName().equals("logout"))
 			game.setScreen(new LoginScreen(game));
 	}
-	
-	@Override
-	public void show()
-	{
-		// TODO Auto-generated method stub
-	}
 
 	@Override
 	public void render(float delta)
@@ -133,31 +128,33 @@ public class MainMenuScreen extends ChangeListener implements Screen
 	}
 
 	@Override
+	public void show()
+	{
+		// TODO Auto-generated method stub
+	}
+
+	@Override
 	public void resize(int width, int height)
 	{
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void pause()
 	{
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void resume()
 	{
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void hide()
 	{
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

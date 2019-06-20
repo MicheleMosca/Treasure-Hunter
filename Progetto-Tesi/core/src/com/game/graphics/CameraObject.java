@@ -75,30 +75,6 @@ public class CameraObject extends OrthographicCamera implements Movable, Followe
 				((position.y + (mapPixelHeight / AdventureGame.pixelPerMeter)) - (AdventureGame.worldHeight / AdventureGame.pixelPerMeter)));
 	}
 
-	public TiledMap getTiledMap()
-	{
-		return tiledMap;
-	}
-
-	public void setTiledMap(TiledMap tiledMap)
-	{
-		this.tiledMap = tiledMap;
-	}
-
-	/**
-	 * Metodo che serve per definire di quanto la camera si può spostare autonomamente
-	 * @param shift spostamento
-	 */
-	public void setVelocity(float shift)
-	{
-		this.shift = shift;
-	}
-
-	public Viewport getViewport()
-	{
-		return viewport;
-	}
-
 	@Override
 	public Vector2 getPosition()
 	{

@@ -11,15 +11,20 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe per la creazione di uno SplashScreen (a fine animazione passera' alla schermata di login)
+ */
+
 public class SplashScreen implements Screen, ActionListener
 {
     private AdventureGame game;
     private Sprite logo;
     private float time;
     private float alphaValue;
-    private boolean reverseTime;
-    private boolean reverseLock;
-    private Timer reverseTimer;
+
+    private boolean reverseTime;    // se True inizia la dissolvenza
+    private boolean reverseLock;    // se True il logo non inizia la dissolvenza
+    private Timer reverseTimer;     // timer che mi stabilesce per quanto tempo il logo deve rimanere fermo
 
     public SplashScreen(AdventureGame game)
     {
@@ -27,9 +32,9 @@ public class SplashScreen implements Screen, ActionListener
 
         logo = new Sprite(new Texture("menu/logo2.png"));
         logo.setAlpha(0f);
-        //logo.setScale(0.3f);
         logo.setPosition(((float) Gdx.graphics.getWidth() / 2) - logo.getWidth()/2,
                 ((float) Gdx.graphics.getHeight() / 2) - logo.getHeight()/2);
+
         time = 0;
         alphaValue = 0;
         reverseTime = false;
@@ -42,6 +47,10 @@ public class SplashScreen implements Screen, ActionListener
 
     }
 
+    /**
+     * Metodo per aggiornare gli oggetti in scena
+     * @param delta tempo trascorso tra un frame ed un altro
+     */
     private void update(float delta)
     {
         time += delta;
@@ -72,12 +81,20 @@ public class SplashScreen implements Screen, ActionListener
         }
     }
 
+    /**
+     * Metodo chiamato dalla funzione update quando bisogna iniziare il timer prima che il logo
+     * entri in dissolvenza
+     */
     private void waitBeforeReverse()
     {
         reverseTimer = new Timer(1500, this);
         reverseTimer.start();
     }
 
+    /**
+     * Metodo che mi riceve gli eventi di tipo ActionEvent, non appena il timer finisce inizio la dissolvenza
+     * @param e ActionEvent
+     */
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -99,8 +116,7 @@ public class SplashScreen implements Screen, ActionListener
 
         game.batch.begin();
 
-        //game.batch.draw(background, 0,0);
-        logo.draw(game.batch);
+        logo.draw(game.batch);  // disegno il logo
 
         game.batch.end();
     }

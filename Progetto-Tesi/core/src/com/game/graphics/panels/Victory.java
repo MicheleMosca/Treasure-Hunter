@@ -3,9 +3,7 @@ package com.game.graphics.panels;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -117,7 +115,7 @@ public class Victory extends ChangeListener
 
     /**
      * Metodo per settare in modo statico la visibilità del menu di vittoria
-     * @param state
+     * @param state True per mostrare il menu di vittoria, False altrimenti
      */
     public static void setVisible(boolean state)
     {
@@ -129,8 +127,8 @@ public class Victory extends ChangeListener
 
     /**
      * Metodo per spedire al server i dati del record appena ottenuto
-     * @param scoreCoins
-     * @param scoreTime
+     * @param scoreCoins Numero di coin ottenuti
+     * @param scoreTime Tempo di gioco impiegato per terminare il livello
      */
     public void sendRecord(int scoreCoins, List<Integer> scoreTime)
     {
@@ -159,7 +157,7 @@ public class Victory extends ChangeListener
 
     /**
      * Metodo per controllare la visibilità del menu di vittoria
-     * @return
+     * @return True se il menu di vittoria e' visibile a schermo, False altrimenti
      */
     public boolean isVisible()
     {
@@ -168,8 +166,8 @@ public class Victory extends ChangeListener
 
     /**
      * Metodo per ricevere gli eventi dai bottoni
-     * @param event
-     * @param actor
+     * @param event Evento ricevuto
+     * @param actor Actor che ha inviato l'evento
      */
     @Override
     public void changed(ChangeEvent event, Actor actor)
