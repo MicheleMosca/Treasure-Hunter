@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 public class SplashScreen implements Screen, ActionListener
 {
     private AdventureGame game;
-    private Texture background;
     private Sprite logo;
     private float time;
     private float alphaValue;
@@ -26,10 +25,9 @@ public class SplashScreen implements Screen, ActionListener
     {
         this.game = game;
 
-        background = new Texture("menu/background.png");
-        logo = new Sprite(new Texture("menu/logo.png"));
+        logo = new Sprite(new Texture("menu/logo2.png"));
         logo.setAlpha(0f);
-        logo.setScale(0.3f);
+        //logo.setScale(0.3f);
         logo.setPosition(((float) Gdx.graphics.getWidth() / 2) - logo.getWidth()/2,
                 ((float) Gdx.graphics.getHeight() / 2) - logo.getHeight()/2);
         time = 0;
@@ -96,12 +94,12 @@ public class SplashScreen implements Screen, ActionListener
         update(delta);
 
         // Pulisco il buffer dello schermo
-        Gdx.gl.glClearColor(0, 0, 0, 1);	//Red, gree, blue, alpha(0 = trasparete, 1 = opaco)
+        Gdx.gl.glClearColor(255, 255, 255, 1);	//Red, gree, blue, alpha(0 = trasparete, 1 = opaco)
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();
 
-        game.batch.draw(background, 0,0);
+        //game.batch.draw(background, 0,0);
         logo.draw(game.batch);
 
         game.batch.end();
@@ -134,7 +132,6 @@ public class SplashScreen implements Screen, ActionListener
     @Override
     public void dispose()
     {
-        background.dispose();
         logo.getTexture().dispose();
     }
 

@@ -22,7 +22,7 @@ public class AdventureGame extends Game
 	public static final int worldWidth = 1920; //1280
 	public static final int worldHeight = 1080;	//720
 	public static final float pixelPerMeter = 100;
-	public static final boolean fullScreenOnStart = false;
+	public static final boolean fullScreenOnStart = true;
 	public static final String serverIP = "localhost";
 
 	public SpriteBatch batch;
