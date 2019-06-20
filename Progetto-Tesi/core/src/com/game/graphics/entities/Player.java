@@ -49,7 +49,7 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
 
     /**
      * Mostra lo stato di salute del player
-     * @return Ritorna True se il playe è ancora vivo
+     * @return Ritorna True se il playe e' ancora vivo
      */
     public boolean isAlive()
     {
@@ -57,8 +57,8 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
     }
 
     /**
-     * Indica se il player è in fase di sliding
-     * @return Ritorna True se è in stato di sliding
+     * Indica se il player e' in fase di sliding
+     * @return Ritorna True se e' in stato di sliding
      */
     public boolean isSliding()
     {
