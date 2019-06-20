@@ -3,9 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="ca5ff812-8a21-42d6-b039-3250831762f0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/maps/level1/level1.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/maps/level1/level1.tmx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/AdventureGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/AdventureGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/SplashScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/SplashScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/maps/level0/tutorial/ctrl.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/maps/level0/tutorial/ctrl1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/maps/level0/tutorial/space.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/maps/level0/tutorial/space1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/maps/level0/tutorial/wad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/menu/header.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/menu/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/assets/menu/logo1.png" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -71,7 +76,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="85" />
     <option name="y" value="25" />
     <option name="width" value="1750" />
