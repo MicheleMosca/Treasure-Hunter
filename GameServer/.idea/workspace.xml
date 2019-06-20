@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ca5ff812-8a21-42d6-b039-3250831762f0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/SplashScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/AdventureGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/AdventureGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/graphics/entities/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/PlayScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto-Tesi/core/src/com/game/screens/PlayScreen.java" afterDir="false" />
-    </list>
+    <list default="true" id="ca5ff812-8a21-42d6-b039-3250831762f0" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
