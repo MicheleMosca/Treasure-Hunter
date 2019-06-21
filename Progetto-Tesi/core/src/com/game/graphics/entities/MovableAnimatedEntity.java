@@ -9,25 +9,29 @@ import com.game.interfaces.Movable;
 
 /**
  * Classe che definisce un elemento del gioco avente una texture un corpo con collisioni e metodi per muoversi all'interno del mondo di gioco
- * @author Michele
- *
  */
 
 public class MovableAnimatedEntity extends AnimatedEntity implements Movable
 {
-
-	public MovableAnimatedEntity(World world, MapObject mapObject, BodyType bodyType, String textureAtlasPath,
-								 String textureRegionName, Vector2 textureDimension)
+	MovableAnimatedEntity(World world, MapObject mapObject, BodyType bodyType, String textureAtlasPath, String textureRegionName, Vector2 textureDimension)
 	{
 		super(world, mapObject, bodyType, textureAtlasPath, textureRegionName, textureDimension, AnimationState.Idle);
 	}
 
+	/**
+	 * Metodo per ottenere la posizione dell'oggetto animato in gioco
+	 * @return Vetcor2 contenente le coordinate (x,y)
+	 */
 	@Override
 	public Vector2 getPosition()
 	{
 		return body.getPosition();
 	}
 
+	/**
+	 * Metodo per ottenere il vettore velocita' dell'oggetto animato
+	 * @return Vector2 contenente le coordianate del vettore velocita' (x,y)
+	 */
 	@Override
 	public Vector2 getVelocity()
 	{

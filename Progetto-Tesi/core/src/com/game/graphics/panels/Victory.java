@@ -49,7 +49,7 @@ public class Victory extends ChangeListener
     }
 
     /**
-     * Metodo che serve al costruttore per disegnare la user interface
+     * Metodo che serve al costruttore per disegnare l' interfaccia utente
      */
     private void drawUI()
     {

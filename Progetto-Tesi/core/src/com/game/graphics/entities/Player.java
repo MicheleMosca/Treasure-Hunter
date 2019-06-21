@@ -14,7 +14,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 /**
  * Classe che deinisce la struttura dell'entità giocabile
  * @author Michele
@@ -74,6 +73,10 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
         isSliding = sliding;
     }
 
+    /**
+     * Metodo che rileva gli eventi di tipo ActionEvent, serve per ottenere gli eventi dei Timer
+     * @param e ActionEvent
+     */
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -90,6 +93,10 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
         }
     }
 
+    /**
+     * Metodo per aggiornare l'immagine del Player
+     * @param deltaTime tempo trascorso tra un frame ed un altro
+     */
     @Override
     public void update(float deltaTime)
     {
@@ -99,6 +106,9 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
             getSprite().setFlip(true, false);
     }
 
+    /**
+     * Metodo per gestire gli input dell'utente
+     */
     private void inputHandler()
     {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (getVelocity().y == 0) && getState() != AnimationState.Slide)
@@ -144,6 +154,10 @@ public abstract class Player extends MovableAnimatedEntity implements ActionList
             body.setLinearVelocity(0, getVelocity().y);
     }
 
+    /**
+     * Metodo per ricavare l'azione che il Player sta compiendo
+     * @return AnimationState che indica l'azione
+     */
     @Override
     protected AnimationState getState()
     {
