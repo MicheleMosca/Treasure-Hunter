@@ -62,7 +62,6 @@ public class MovableAnimatedEntity extends AnimatedEntity implements Movable
 	public void moveDown()
 	{
 		// TODO Auto-generated method stub
-		
 	}
 
 }
