@@ -22,6 +22,10 @@ public class Spike extends Entity implements Enemy
         body.getFixtureList().get(0).setSensor(true);   // tolgo tutte le collisioni standard
     }
 
+    /**
+     * Funzione per colpire un determinato target
+     * @param target Oggetto da colpire
+     */
     @Override
     public void hit(Player target)
     {

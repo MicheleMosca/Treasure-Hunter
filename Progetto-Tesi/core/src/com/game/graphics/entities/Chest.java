@@ -13,6 +13,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe che serve ad instanziare una chest di fine livello
+ */
+
 public class Chest extends AnimatedEntity implements ActionListener
 {
     // Inserisco i parametri che di default avrà il personaggio
@@ -34,18 +38,24 @@ public class Chest extends AnimatedEntity implements ActionListener
         animations.get(AnimationState.Idle).setPlayMode(Animation.PlayMode.NORMAL);
         body.getFixtureList().get(0).setSensor(true);   // tolgo tutte le collisioni standard
 
-        createAnimation(AnimationState.Open, "sprites/Chest/Open.atlas",
-                "Open0", new Vector2(128 / 2, 128 / 2), Animation.PlayMode.NORMAL);
+        createAnimation(AnimationState.Open, "sprites/Chest/Open.atlas", new Vector2(128 / 2, 128 / 2), Animation.PlayMode.NORMAL);
         animations.get(AnimationState.Open).setFrameDuration(0.3f);
         state = AnimationState.Idle;
     }
 
+    /**
+     * Ottendo l'azione attuale della chest
+     * @return AnimationState contenente lo state inerente all'azione svolta
+     */
     @Override
     protected AnimationState getState()
     {
         return state;
     }
 
+    /**
+     * Metodo per terminare il livello attuale
+     */
     public void endLevel()
     {
         state = AnimationState.Open;
@@ -53,6 +63,10 @@ public class Chest extends AnimatedEntity implements ActionListener
         openTimer.start();
     }
 
+    /**
+     * Metodo per ricevere gli eventi di tipo ActionEvent, serve per aspettare che la chest finisca l'animazione
+     * @param e ActionEvent che rappresenta l'evento
+     */
     @Override
     public void actionPerformed(ActionEvent e)
     {

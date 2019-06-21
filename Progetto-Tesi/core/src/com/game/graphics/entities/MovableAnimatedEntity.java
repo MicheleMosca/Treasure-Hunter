@@ -38,6 +38,9 @@ public class MovableAnimatedEntity extends AnimatedEntity implements Movable
 		return body.getLinearVelocity();
 	}
 
+	/**
+	 * Muove l'ggetto a destra
+	 */
 	@Override
 	public void moveRight()
 	{
@@ -45,6 +48,9 @@ public class MovableAnimatedEntity extends AnimatedEntity implements Movable
 			body.applyLinearImpulse(new Vector2(0.1f, 0), body.getWorldCenter(), true);
 	}
 
+	/**
+	 * Muove l'ggetto a sinistra
+	 */
 	@Override
 	public void moveLeft()
 	{
@@ -52,16 +58,22 @@ public class MovableAnimatedEntity extends AnimatedEntity implements Movable
 			body.applyLinearImpulse(new Vector2(-0.1f, 0), body.getWorldCenter(), true);
 	}
 
+	/**
+	 * Muove l'ggetto in alto
+	 */
 	@Override
 	public void moveUp()
 	{
 		body.applyLinearImpulse(new Vector2(0, 4f), body.getWorldCenter(), true);
 	}
 
+	/**
+	 * Muove l'ggetto in basso
+	 */
 	@Override
 	public void moveDown()
 	{
-		// TODO Auto-generated method stub
+		body.applyLinearImpulse(new Vector2(0, -4f), body.getWorldCenter(), true);
 	}
 
 }

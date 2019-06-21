@@ -10,6 +10,10 @@ import com.game.graphics.entities.Player;
 import com.game.interfaces.Enemy;
 import com.game.screens.PlayScreen;
 
+/**
+ * Classe per implementare un serpente nel gioco
+ */
+
 public class Snake extends AnimatedEntity implements Enemy
 {
 
@@ -29,6 +33,10 @@ public class Snake extends AnimatedEntity implements Enemy
 		 damage=1;
 	}
 
+	/**
+	 * Metodo per aggiornare la posizione del serprente in gioco
+	 * @param deltaTime tempo trascorso tra un frame ed un altro
+	 */
 	@Override
 	public void update(float deltaTime)
 	{
@@ -38,6 +46,10 @@ public class Snake extends AnimatedEntity implements Enemy
 			getSprite().setFlip(true, false);
 	}
 
+	/**
+	 * Funzione per colpire un determinato target
+	 * @param target Oggetto da colpire
+	 */
 	@Override
 	public void hit(Player target)
 	{

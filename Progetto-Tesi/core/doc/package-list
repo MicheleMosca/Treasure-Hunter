@@ -1,0 +1,9 @@
+com.game
+com.game.Enum
+com.game.graphics
+com.game.graphics.entities
+com.game.graphics.entities.enemies
+com.game.graphics.entities.players
+com.game.graphics.panels
+com.game.interfaces
+com.game.screens
