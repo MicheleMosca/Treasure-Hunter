@@ -40,7 +40,7 @@ public class Pause extends ChangeListener
     }
 
     /**
-     * Metodo chiamato dal costruttore per disegnare L'interfaccia utente del login
+     * Metodo chiamato dal costruttore per disegnare L'interfaccia utente
      */
     private void drawUI()
     {
