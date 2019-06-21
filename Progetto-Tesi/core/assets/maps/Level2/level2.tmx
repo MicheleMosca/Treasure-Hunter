@@ -117,7 +117,7 @@
   <object id="171" x="5893.17" y="504.667" width="39.6667" height="30.6667"/>
  </objectgroup>
  <objectgroup id="5" name="Spawn">
-  <object id="21" name="playerSpawn" x="97" y="412.333" width="14" height="15.3333"/>
+  <object id="21" name="playerSpawn" x="97" y="625.333" width="14" height="15.3333"/>
   <object id="22" name="coinSpawn" x="631.5" y="508.5" width="17" height="15"/>
   <object id="24" name="coinSpawn" x="951.5" y="959.167" width="17" height="15"/>
   <object id="29" name="coinSpawn" x="426.167" y="864.5" width="17" height="15"/>
