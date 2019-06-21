@@ -9,6 +9,7 @@ import com.game.graphics.entities.AnimatedEntity;
 import com.game.graphics.entities.Chest;
 import com.game.graphics.entities.Coin;
 import com.game.graphics.entities.Entity;
+import com.game.graphics.entities.enemies.Snake;
 import com.game.graphics.entities.enemies.Spike;
 import com.game.graphics.entities.players.Carl;
 import com.game.screens.PlayScreen;
@@ -50,6 +51,8 @@ public class WorldCreator
         {
             if (mapObject.getName().equals("spike"))
                 new Spike(world, mapObject, BodyDef.BodyType.StaticBody);
+            else if (mapObject.getName().equals("snake"))
+            	gameObjects.add(new Snake(world, mapObject, BodyDef.BodyType.StaticBody));
         }
 
         // Inserisco nel mondo i coin con i relativi spawn points
