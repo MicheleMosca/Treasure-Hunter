@@ -52,7 +52,7 @@ public class WorldCreator
             if (mapObject.getName().equals("spike"))
                 new Spike(world, mapObject, BodyDef.BodyType.StaticBody);
             else if (mapObject.getName().equals("snake"))
-            	gameObjects.add(new Snake(world, mapObject, BodyDef.BodyType.StaticBody));
+            	gameObjects.add(new Snake(world, mapObject, BodyDef.BodyType.StaticBody, playScreen));
         }
 
         // Inserisco nel mondo i coin con i relativi spawn points

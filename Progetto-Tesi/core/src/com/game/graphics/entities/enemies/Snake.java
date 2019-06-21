@@ -8,6 +8,7 @@ import com.game.Enum.AnimationState;
 import com.game.graphics.entities.AnimatedEntity;
 import com.game.graphics.entities.Player;
 import com.game.interfaces.Enemy;
+import com.game.screens.PlayScreen;
 
 public class Snake extends AnimatedEntity implements Enemy
 {
@@ -15,16 +16,26 @@ public class Snake extends AnimatedEntity implements Enemy
 	private static final String defaultTextureAtlasPath = "sprites/Snake/Idle/Idle.atlas";
 	private static final String defaultTextureRegionName = "Idle0";
 	private int damage;
-
+	private PlayScreen playScreen;
 	
-	public Snake(World world, MapObject spawnPoint, BodyType bodyType)
+	public Snake(World world, MapObject spawnPoint, BodyType bodyType, PlayScreen playScreen)
 	{
 		 super(world, spawnPoint, bodyType, defaultTextureAtlasPath, defaultTextureRegionName,
 	                new Vector2(64 , 98), AnimationState.Idle);
 		 
 		 body.getFixtureList().get(0).setSensor(true);
+		 this.playScreen = playScreen;
 		 
 		 damage=1;
+	}
+
+	@Override
+	public void update(float deltaTime)
+	{
+		super.update(deltaTime);
+
+		if (playScreen.getPlayer().getBody().getPosition().x > body.getPosition().x)
+			getSprite().setFlip(true, false);
 	}
 
 	@Override
