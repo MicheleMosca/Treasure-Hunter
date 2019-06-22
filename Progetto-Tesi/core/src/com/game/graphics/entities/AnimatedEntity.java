@@ -25,7 +25,7 @@ public class AnimatedEntity extends Entity
 	// attributi per la gestione delle animazioni
 	private AnimationState currentState;
 	private AnimationState previousState;
-	protected HashMap<AnimationState, Animation<TextureRegion>> animations;
+	HashMap<AnimationState, Animation<TextureRegion>> animations;
 
 	// dimensioni delle texture inerenti alle animazioni
 	private HashMap<AnimationState, Vector2> texturesDimension;
@@ -52,6 +52,12 @@ public class AnimatedEntity extends Entity
 		initSprite(textureRegionName, textureDimension, animationName);
 	}
 
+	/**
+	 * Metodo per inizializzare la sprite di un oggetto con la prima animazione
+	 * @param textureRegionName nome della prima immagine che compone l'animazione
+	 * @param textureDimension dimensione di tale immagine
+	 * @param animationName nome dell'animazione
+	 */
 	private void initSprite(String textureRegionName, Vector2 textureDimension, AnimationState animationName)
 	{
 		sprite.setTexture(textureAtlas.get(animationName).findRegion(textureRegionName).getTexture());
@@ -61,10 +67,17 @@ public class AnimatedEntity extends Entity
 				textureDimension.y / AdventureGame.pixelPerMeter);
 		sprite.setRegion(textureRegions.get(textureRegionName));
 
-		createAnimation(animationName, "" , textureRegionName, textureDimension, Animation.PlayMode.LOOP);
+		createAnimation(animationName, "" , textureDimension, Animation.PlayMode.LOOP);
 	}
 
-	protected void createAnimation(AnimationState animationName, String textureAtlasPath, String textureRegionName,
+	/**
+	 * Metodo per creare nuove animazioni
+	 * @param animationName nome dell'animazione
+	 * @param textureAtlasPath percorso dell'immagine dell'animazione
+	 * @param textureDimension dimensione della prima immagine
+	 * @param animationMode modalita' di animazione (NORMAL, LOOP)
+	 */
+	protected void createAnimation(AnimationState animationName, String textureAtlasPath,
 								   Vector2 textureDimension, Animation.PlayMode animationMode)
 	{
 		if (!textureAtlas.containsKey(animationName))
@@ -77,6 +90,11 @@ public class AnimatedEntity extends Entity
 				animationMode));
 	}
 
+	/**
+	 * Ottenere il frame dell'animazione in base al tempo trascorso
+	 * @param deltaTime tempo trascorso in gioco
+	 * @return TextureRegion contenente il frame
+	 */
 	private TextureRegion getFrame(float deltaTime)
 	{
 		currentState = getState();
@@ -106,17 +124,29 @@ public class AnimatedEntity extends Entity
 		return region;
 	}
 
+	/**
+	 * Stato attuale dell'animazione
+	 * @return AnimationState contenente l'azione svolta
+	 */
 	protected AnimationState getState()
 	{
 		return AnimationState.Idle;
 	}
 
+	/**
+	 * Metodo per aggiornare la posizione dell'animazione
+	 * @param deltaTime tempo trascorso in gioco
+	 */
 	public void update(float deltaTime)
 	{
 		sprite.setRegion(getFrame(deltaTime));
 		sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2 , body.getPosition(). y - sprite.getHeight() / 2);
 	}
 
+	/**
+	 * Metodo per ottenere la sprite dell'oggetto
+	 * @return Sprite
+	 */
 	public Sprite getSprite()
 	{
 		return sprite;

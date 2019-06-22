@@ -264,6 +264,15 @@ public class PlayScreen implements Screen
 	}
 
 	/**
+	 * Metodo per ottenere le informazioni del Player
+	 * @return AnimatedEntity player
+	 */
+	public AnimatedEntity getPlayer()
+	{
+		return player;
+	}
+
+	/**
 	 * Metodo per ottenere l'azione che si ci aspetta che l'utente svolga per togliere il suggerimento (usato nel tutorial)
 	 * @return AnimationState indicante lo stato dell'azione
 	 */
