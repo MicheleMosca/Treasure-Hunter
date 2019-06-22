@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.game.audio.Musiclauncher;
 import com.game.screens.SplashScreen;
 
 /**
@@ -25,12 +26,16 @@ public class AdventureGame extends Game
 
 	public BitmapFont defaultFont;
 
+	public Musiclauncher music;
+	
 	@Override
 	public void create ()
 	{
 		batch = new SpriteBatch();
 		defaultFont = createFont(30);
 
+		music=new Musiclauncher();
+		
 		setScreen(new SplashScreen(this));
 	}
 

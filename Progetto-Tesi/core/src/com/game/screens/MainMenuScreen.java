@@ -29,11 +29,15 @@ public class MainMenuScreen extends ChangeListener implements Screen
 	private Stage stage;
 	private Texture background;
 	
+	private Button muteButton;
+	
 	MainMenuScreen(AdventureGame game, User userData)
 	{
 		this.game = game;
 		this.userData = userData;
 
+		game.music.setCurrentTrack(0);
+        game.music.playMusic();
 		drawUI();
 	}
 
@@ -75,7 +79,19 @@ public class MainMenuScreen extends ChangeListener implements Screen
 		logoutButton.setSize(214 / 5, 215 / 5);
 		logoutButton.setPosition(table.getX() + logoutButton.getWidth(),
 				table.getY() + logoutButton.getHeight());
-
+		
+		// Definisco il pulsante per mettere muto
+		if (game.music.isMute())
+			muteButton=new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/sound_off.png"))));
+		else
+			muteButton=new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/sound.png"))));
+		
+		muteButton.setName("mute");
+		muteButton.addListener(this);
+		muteButton.setSize(214 / 5, 215 / 5);
+		muteButton.setPosition(table.getX() + table.getWidth() - muteButton.getWidth() * 2,
+				table.getY() + table.getHeight() - muteButton.getHeight() - 10);
+		
 		table.add(PlayButton).size(1298 / 7,952 / 11).padBottom(20);
 		table.row();
 		table.add(rankingButton).size(1298 / 7,952 / 11).padBottom(20);
@@ -84,6 +100,7 @@ public class MainMenuScreen extends ChangeListener implements Screen
 
 		stage.addActor(table);
 		stage.addActor(logoutButton);
+		stage.addActor(muteButton);
 
 		Gdx.input.setInputProcessor(stage);
 	}
@@ -99,6 +116,22 @@ public class MainMenuScreen extends ChangeListener implements Screen
 		if (actor.getName().equals("exit"))
 		{
 			Gdx.app.exit();
+			return;
+		}
+		
+		if (actor.getName().equals("mute"))
+		{
+			if(game.music.isMute())
+			{
+				game.music.setMute(false);
+				muteButton.getStyle().up = new TextureRegionDrawable(new TextureRegion(new Texture("menu/sound.png")));
+			}
+			else
+			{
+				game.music.setMute(true);
+				muteButton.getStyle().up = new TextureRegionDrawable(new TextureRegion(new Texture("menu/sound_off.png")));
+			}
+			
 			return;
 		}
 
@@ -125,6 +158,7 @@ public class MainMenuScreen extends ChangeListener implements Screen
 		stage.getBatch().end();
 
 		stage.draw();
+		
 	}
 
 	@Override

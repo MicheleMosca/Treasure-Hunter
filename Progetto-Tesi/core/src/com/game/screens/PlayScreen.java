@@ -122,6 +122,10 @@ public class PlayScreen implements Screen
 		// Se e' il tutorial aggiungo come muoversi all'inizio
 		if (userData.getLevelSelected() == 0)
 			initTutorial("To move use", "A or D", AnimationState.Idle);
+		
+		// Faccio paertire la musica del livello
+		game.music.setCurrentTrack(userData.getLevelSelected());
+        game.music.playMusic();
 
 		// Imposto come input processor null per togliere i comandi di imput agli screen
 		// (le azioni di input a livello di schermo non sono previste per il gioco, solo input da tastiera)

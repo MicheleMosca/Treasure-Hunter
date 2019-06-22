@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.game.AdventureGame;
 import com.game.User;
+
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
@@ -37,10 +38,12 @@ public class LoginScreen extends ChangeListener implements Screen
     private Button signupButton;
     private TextField usernameField;
     private TextField passwordField;
-
+    
     LoginScreen(AdventureGame game)
     {
         this.game = game;
+        
+        game.music.stopMusic();
         drawUI();
     }
 
@@ -193,6 +196,8 @@ public class LoginScreen extends ChangeListener implements Screen
         // Se si preme invio nella sezionione di LOGIN allora automaticamente sarà rilevato il tasto di login
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
             sendToServer();
+        
+        
     }
 
     @Override

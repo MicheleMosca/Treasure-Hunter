@@ -34,7 +34,9 @@ public class LevelScreen extends ChangeListener implements Screen
 
 		this.userData = userData;
 		this.game = game;
-
+		
+		game.music.setCurrentTrack(0);
+        game.music.playMusic();
 		drawUI(allowTutorialButton);
 	}
 

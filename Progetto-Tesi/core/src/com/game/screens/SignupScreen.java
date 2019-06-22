@@ -38,6 +38,8 @@ public class SignupScreen extends ChangeListener implements Screen
     SignupScreen(final AdventureGame game)
     {
         this.game = game;
+        
+        game.music.stopMusic();
         drawUI();
     }
 

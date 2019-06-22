@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -24,6 +25,7 @@ public class Pause extends ChangeListener
     private static boolean visible;
     private AdventureGame game;
     private PlayScreen playScreen;
+    private Button muteButton;
 
     private User userData;
 
@@ -65,6 +67,18 @@ public class Pause extends ChangeListener
         com.badlogic.gdx.scenes.scene2d.ui.Button exitButton = new com.badlogic.gdx.scenes.scene2d.ui.Button(new TextureRegionDrawable(new TextureRegion((exitTexture))));
         exitButton.setName("exit");
         exitButton.addListener(this);
+        
+        // Definisco il pulsante per mettere muto
+     	if (game.music.isMute())
+     		muteButton=new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/sound_off.png"))));
+     	else
+     		muteButton=new Button(new TextureRegionDrawable(new TextureRegion(new Texture("menu/sound.png"))));
+     		
+     	muteButton.setName("mute");
+     	muteButton.addListener(this);
+     	muteButton.setSize(214 / 5, 215 / 5);
+     	muteButton.setPosition(table.getX() + table.getWidth() - muteButton.getWidth() * 2,
+     			table.getY() + table.getHeight() - muteButton.getHeight() - 10);
 
         // Aggiungo i pulsanti al table
         table.bottom();
@@ -74,6 +88,7 @@ public class Pause extends ChangeListener
 
         // Aggiungo il table allo stage
         stage.addActor(table);
+        stage.addActor(muteButton);
     }
 
     /**
@@ -105,6 +120,22 @@ public class Pause extends ChangeListener
     @Override
     public void changed(ChangeEvent event, Actor actor)
     {
+    	if (actor.getName().equals("mute"))
+		{
+			if(game.music.isMute())
+			{
+				game.music.setMute(false);
+				muteButton.getStyle().up = new TextureRegionDrawable(new TextureRegion(new Texture("menu/sound.png")));
+			}
+			else
+			{
+				game.music.setMute(true);
+				muteButton.getStyle().up = new TextureRegionDrawable(new TextureRegion(new Texture("menu/sound_off.png")));
+			}
+			
+			return;
+		}
+    	
         if (actor.getName().equals("resume"))
         {
             setVisible(false);
