@@ -127,6 +127,9 @@ public class PlayScreen implements Screen
 		game.music.setCurrentTrack(userData.getLevelSelected());
         game.music.playMusic();
 
+        // Nascondo l'icona del mouse mentre sono in gioco
+        Gdx.input.setCursorCatched(true);
+
 		// Imposto come input processor null per togliere i comandi di imput agli screen
 		// (le azioni di input a livello di schermo non sono previste per il gioco, solo input da tastiera)
 		Gdx.input.setInputProcessor(null);
@@ -139,7 +142,7 @@ public class PlayScreen implements Screen
 	{
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
 		{
-			gameOnPause = true;
+			setGameOnPause(true);
 			Pause.setVisible(true);
 		}
 	}
@@ -317,6 +320,10 @@ public class PlayScreen implements Screen
 	public void setGameOnPause(boolean gameOnPause)
 	{
 		this.gameOnPause = gameOnPause;
+
+		// Mostro nuovamente l'icona del mouse
+		if (gameOnPause)
+			Gdx.input.setCursorCatched(false);
 
 		if (gameOnPause && victoryScreen.isVisible())
 			victoryScreen.sendRecord(scoreCoins, scoreTime);
