@@ -321,9 +321,11 @@ public class PlayScreen implements Screen
 	{
 		this.gameOnPause = gameOnPause;
 
-		// Mostro nuovamente l'icona del mouse
+		// Mostro nuovamente l'icona del mouse se siamo in pausa, altrimenti la nascondo
 		if (gameOnPause)
 			Gdx.input.setCursorCatched(false);
+		else
+			Gdx.input.setCursorCatched(true);
 
 		if (gameOnPause && victoryScreen.isVisible())
 			victoryScreen.sendRecord(scoreCoins, scoreTime);
