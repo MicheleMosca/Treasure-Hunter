@@ -14,7 +14,7 @@ import com.game.graphics.entities.enemies.Spike;
 import com.game.graphics.entities.players.Carl;
 import com.game.screens.PlayScreen;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,7 +39,7 @@ public class WorldCreator
      */
     public List<AnimatedEntity> initWorld(TiledMap tiledMap, World world)
     {
-        List<AnimatedEntity> gameObjects = new LinkedList<AnimatedEntity>();
+        List<AnimatedEntity> gameObjects = new ArrayList<AnimatedEntity>();
 
         // Inserisco nel mondo tutti gli oggetti di tipo ground della mappa con le rispettive collisioni,
         // ma non prelevo il loro riferimento

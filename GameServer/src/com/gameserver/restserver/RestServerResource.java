@@ -86,6 +86,7 @@ public class RestServerResource extends ServerResource
         } catch (Exception e)
         {
             System.out.println("Errore: impossibile avviare il server");
+            System.exit(1);
         }
     }
 }

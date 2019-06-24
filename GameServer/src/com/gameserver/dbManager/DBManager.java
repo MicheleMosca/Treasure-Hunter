@@ -25,6 +25,7 @@ public class DBManager
         catch (ClassNotFoundException e)
         {
             System.out.println("Lib not found!");
+            System.exit(1);
         }
 
         try
@@ -37,7 +38,8 @@ public class DBManager
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.out.println("Connessione al db fallita!");
+            System.exit(1);
         }
     }
 

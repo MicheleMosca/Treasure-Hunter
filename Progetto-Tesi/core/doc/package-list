@@ -1,5 +1,6 @@
 com.game
 com.game.Enum
+com.game.audio
 com.game.graphics
 com.game.graphics.entities
 com.game.graphics.entities.enemies
