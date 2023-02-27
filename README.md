@@ -7,7 +7,7 @@ Videogioco platform realizzato mediante il linguaggio ad oggetti `Java`, in cui 
 Il gioco ha un sistema di classifica `multigiocatore` per decretare il carcatore di tesori migliore.
 
 ## Galleria
-<img src="slide/Materiale/livello 1.png" width="30%"></img> <img src="slide/Materiale/livello 2.png" width="30%"></img> <img src="slide/Materiale/tutorial.png" width="30%">
+<img src="slide/Materiale/livello 1.png" width="32%"></img> <img src="slide/Materiale/livello 2.png" width="32%"></img> <img src="slide/Materiale/tutorial.png" width="34%">
 
 ## Presentazione
 La presentazione del videogioco è disponibile al seguente link: [Treasure Hunter Presentazione](slide/MOSCA%20MICHELE%20-%20CAGNINA%20GIANLUCA.pdf)
